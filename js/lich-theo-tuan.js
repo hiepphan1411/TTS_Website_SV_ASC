@@ -1,7 +1,7 @@
 // Data lịch học và lịch thi đầy đủ
 const scheduleData = {
     // Tuần 0: 1-5/1/2026 (Thứ 5-CN)
-    '2026-01-01': [
+    '2026-02-25': [
         {
             time: 'morning',
             category: 'study',
@@ -11,18 +11,20 @@ const scheduleData = {
             period: '1 - 3 (7:00 - 9:30)',
             room: 'A1.01',
             teacher: 'TS. Nguyễn Văn Z',
+            note: '',
         },
     ],
-    '2026-01-02': [
+    '2026-02-26': [
         {
             time: 'morning',
             category: 'study',
             type: 'practice',
-            title: 'Thực hành Lập trình C',
+            title: 'Lập trình C',
             code: 'DHKTPM18A - 42030002201',
             period: '4 - 6 (9:30 - 12:00)',
             room: 'B3.01',
             teacher: 'TS. Trần Thị Y',
+            note: '',
         },
         {
             time: 'afternoon',
@@ -33,21 +35,23 @@ const scheduleData = {
             period: '7 - 9 (12:30 - 15:00)',
             room: 'A1.02',
             teacher: 'TS. Lê Văn X',
+            note: '',
         },
     ],
-    '2026-01-03': [
+    '2026-02-27': [
         {
             time: 'morning',
             category: 'exam',
             type: 'exam',
-            title: 'Kiểm tra đầu kỳ - Nhập môn CNTT',
+            title: 'Nhập môn CNTT',
             code: 'DHKTPM18A - 42030004401',
             period: '1 - 3 (7:00 - 9:30)',
             room: 'A1.05',
             teacher: 'Ban Giám thị',
+            note: '',
         },
     ],
-    '2026-01-04': [
+    '2026-02-28': [
         {
             time: 'morning',
             category: 'study',
@@ -55,11 +59,12 @@ const scheduleData = {
             title: 'Tiếng Anh chuyên ngành',
             code: 'DHKTPM18A - 42030005501',
             period: '4 - 6 (9:30 - 12:00)',
-            room: 'Online',
+            room: 'Trực tuyến',
             teacher: 'ThS. Phạm Thị W',
+            note: 'Zoom FI30: 652 722 8922 / 123456',
         },
     ],
-    '2026-01-05': [
+    '2026-03-01': [
         {
             time: 'afternoon',
             category: 'study',
@@ -69,11 +74,12 @@ const scheduleData = {
             period: '7 - 9 (12:30 - 15:00)',
             room: 'Sân vận động',
             teacher: 'Võ Văn V',
+            note: '',
         },
     ],
 
     // Tuần 1: 6-12/1/2026
-    '2026-01-06': [
+    '2026-03-02': [
         {
             time: 'morning',
             category: 'study',
@@ -83,6 +89,7 @@ const scheduleData = {
             period: '10 - 12 (7:30 - 12:00)',
             room: 'A2.04',
             teacher: 'TS. Nguyễn Văn A',
+            note: '',
         },
         {
             time: 'afternoon',
@@ -93,9 +100,21 @@ const scheduleData = {
             period: '7 - 9 (12:30 - 15:00)',
             room: 'B3.01',
             teacher: 'TS. Trần Thị B',
+            note: '',
+        },
+        {
+            time: 'afternoon',
+            category: 'study',
+            type: 'practice',
+            title: 'Cơ sở dữ liệu',
+            code: 'DHKTPM18B - 42030013701',
+            period: '7 - 9 (12:30 - 15:00)',
+            room: 'B3.01',
+            teacher: 'TS. Trần Thị B',
+            note: '',
         },
     ],
-    '2026-01-07': [
+    '2026-03-03': [
         {
             time: 'morning',
             category: 'study',
@@ -105,6 +124,7 @@ const scheduleData = {
             period: '10 - 12 (7:30 - 12:00)',
             room: 'A2.04',
             teacher: 'TS. Hà Thị C',
+            note: '',
         },
         {
             time: 'noon',
@@ -113,8 +133,9 @@ const scheduleData = {
             title: 'Lập trình Web',
             code: 'DHKTPM18A - 42030018901',
             period: '10 - 12 (7:30 - 12:00)',
-            room: 'Online',
+            room: 'Trực tuyến',
             teacher: 'TS. Ngô Thị D',
+            note: 'Zoom FI30: 652 722 8922 / 123456',
         },
         {
             time: 'afternoon',
@@ -125,9 +146,10 @@ const scheduleData = {
             period: '7 - 9 (12:30 - 15:00)',
             room: 'A1.05',
             teacher: 'TS. Lê Văn E',
+            note: '',
         },
     ],
-    '2026-01-08': [
+    '2026-03-04': [
         {
             time: 'morning',
             category: 'study',
@@ -135,8 +157,9 @@ const scheduleData = {
             title: 'Kiến trúc và Thiết kế Phần mềm',
             code: 'DHKTPM18A - 42030015401',
             period: '10 - 12 (7:30 - 12:00)',
-            room: 'Online',
+            room: 'Trực tuyến',
             teacher: 'TS. Nguyễn Văn A',
+            note: 'Zoom FI30: 652 722 8922 / 123456',
         },
         {
             time: 'afternoon',
@@ -147,9 +170,10 @@ const scheduleData = {
             period: '10 - 12 (7:30 - 12:00)',
             room: 'A2.04',
             teacher: 'TS. Trần Văn E',
+            note: '',
         },
     ],
-    '2026-01-09': [
+    '2026-03-05': [
         {
             time: 'morning',
             category: 'study',
@@ -159,6 +183,7 @@ const scheduleData = {
             period: '1 - 3 (7:00 - 9:30)',
             room: 'A3.02',
             teacher: 'TS. Huỳnh Thị B',
+            note: '',
         },
         {
             time: 'afternoon',
@@ -169,9 +194,10 @@ const scheduleData = {
             period: '7 - 9 (12:30 - 15:00)',
             room: 'A1.01',
             teacher: 'Ban Giám thị',
+            note: '',
         },
     ],
-    '2026-01-10': [
+    '2026-03-06': [
         {
             time: 'morning',
             category: 'study',
@@ -181,19 +207,21 @@ const scheduleData = {
             period: '4 - 6 (9:30 - 12:00)',
             room: 'A2.05',
             teacher: 'TS. Phạm Văn F',
+            note: '',
         },
         {
             time: 'afternoon',
             category: 'exam',
             type: 'exam',
-            title: 'Thi cuối kỳ - Lập trình hướng đối tượng',
+            title: 'Lập trình hướng đối tượng',
             code: 'DHKTPM18A - 42030012801',
             period: '10 - 12 (7:30 - 12:00)',
             room: 'A1.02',
             teacher: 'Ban Giám thị',
+            note: '',
         },
     ],
-    '2026-01-11': [
+    '2026-03-07': [
         {
             time: 'morning',
             category: 'study',
@@ -203,9 +231,10 @@ const scheduleData = {
             period: '1 - 3 (7:00 - 9:30)',
             room: 'A3.01',
             teacher: 'TS. Võ Thị G',
+            note: '',
         },
     ],
-    '2026-01-12': [
+    '2026-03-08': [
         {
             time: 'morning',
             category: 'study',
@@ -215,521 +244,18 @@ const scheduleData = {
             period: '4 - 6 (9:30 - 12:00)',
             room: 'A2.03',
             teacher: 'TS. Đỗ Văn H',
-        },
-    ],
-
-    // Tuần 2: 13-19/1/2026
-    '2026-01-13': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành Cơ sở dữ liệu',
-            code: 'DHKTPM18B - 42030013701',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'B3.02',
-            teacher: 'TS. Nguyễn Thị I',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'theory',
-            title: 'Công nghệ phần mềm',
-            code: 'DHKTPM18A - 42030018201',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A2.06',
-            teacher: 'TS. Lý Văn J',
-        },
-    ],
-    '2026-01-14': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'online',
-            title: 'Lập trình di động',
-            code: 'DHKTPM18A - 42030021201',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'Online',
-            teacher: 'TS. Mai Thị K',
-        },
-        {
-            time: 'afternoon',
-            category: 'exam',
-            type: 'exam',
-            title: 'Kiểm tra - Kiến trúc và Thiết kế PM',
-            code: 'DHKTPM18A - 42030015401',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A1.03',
-            teacher: 'TS. Nguyễn Văn A',
-        },
-    ],
-    '2026-01-15': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Đồ án chuyên ngành',
-            code: 'DHKTPM18A - 42030022901',
-            period: '1 - 6 (7:00 - 12:00)',
-            room: 'A3.03',
-            teacher: 'TS. Vũ Văn L',
-        },
-    ],
-    '2026-01-16': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành Mạng máy tính',
-            code: 'DHKTPM18A - 42030016501',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.03',
-            teacher: 'TS. Bùi Thị M',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'suspended',
-            title: 'IoT và Ứng dụng (TẠM NGỪNG)',
-            code: 'DHKTPM18A - 42030023601',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A2.07',
-            teacher: 'TS. Hoàng Văn N',
-        },
-    ],
-    '2026-01-17': [
-        {
-            time: 'morning',
-            category: 'exam',
-            type: 'exam',
-            title: 'Thi cuối kỳ - Hệ quản trị CSDL',
-            code: 'DHKTPM18A - 42030024301',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A1.04',
-            teacher: 'Ban Giám thị',
-        },
-    ],
-    '2026-01-18': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Kinh tế vi mô',
-            code: 'DHKTPM18A - 42030035101',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A2.11',
-            teacher: 'TS. Hà Văn Y',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành Photoshop',
-            code: 'DHKTPM18A - 42030036201',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.08',
-            teacher: 'ThS. Mai Thị Z',
-        },
-    ],
-    '2026-01-19': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'online',
-            title: 'Digital Marketing',
-            code: 'DHKTPM18A - 42030037301',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'Online',
-            teacher: 'TS. Lâm Văn AA',
-        },
-    ],
-
-    // Tuần 3: 20-26/1/2026
-    '2026-01-20': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Blockchain và Ứng dụng',
-            code: 'DHKTPM18A - 42030025001',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A3.04',
-            teacher: 'TS. Phan Văn O',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành Cloud Computing',
-            code: 'DHKTPM18A - 42030026701',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.04',
-            teacher: 'TS. Đinh Thị P',
-        },
-    ],
-    '2026-01-21': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'online',
-            title: 'Machine Learning cơ bản',
-            code: 'DHKTPM18A - 42030027401',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'Online',
-            teacher: 'TS. Trương Văn Q',
-        },
-    ],
-    '2026-01-22': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Phát triển ứng dụng Web',
-            code: 'DHKTPM18A - 42030028101',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A2.08',
-            teacher: 'TS. Lâm Thị R',
-        },
-        {
-            time: 'afternoon',
-            category: 'exam',
-            type: 'exam',
-            title: 'Kiểm tra giữa kỳ - An toàn thông tin',
-            code: 'DHKTPM18A - 42030020501',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A1.05',
-            teacher: 'TS. Võ Thị G',
-        },
-    ],
-    '2026-01-23': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Lab Trí tuệ nhân tạo',
-            code: 'DHKTPM18A - 42030019801',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.05',
-            teacher: 'TS. Phạm Văn F',
-        },
-    ],
-    '2026-01-24': [
-        {
-            time: 'morning',
-            category: 'exam',
-            type: 'exam',
-            title: 'Thi cuối kỳ - Mạng máy tính',
-            code: 'DHKTPM18A - 42030016501',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A1.01',
-            teacher: 'Ban Giám thị',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'theory',
-            title: 'Quản lý dự án phần mềm',
-            code: 'DHKTPM18A - 42030029801',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A2.09',
-            teacher: 'TS. Cao Văn S',
-        },
-    ],
-    '2026-01-25': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Phát triển Game',
-            code: 'DHKTPM18A - 42030038401',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A3.06',
-            teacher: 'TS. Phan Văn BB',
-        },
-    ],
-    '2026-01-26': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành Unity',
-            code: 'DHKTPM18A - 42030039501',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.09',
-            teacher: 'ThS. Đinh Thị CC',
-        },
-        {
-            time: 'afternoon',
-            category: 'exam',
-            type: 'exam',
-            title: 'Kiểm tra cuối kỳ - Blockchain',
-            code: 'DHKTPM18A - 42030025001',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A1.06',
-            teacher: 'TS. Phan Văn O',
-        },
-    ],
-
-    // Tuần 4: 27/1 - 2/2/2026
-    '2026-01-27': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Xử lý ảnh và thị giác máy',
-            code: 'DHKTPM18A - 42030030501',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A3.05',
-            teacher: 'TS. Tôn Thị T',
-        },
-        {
-            time: 'noon',
-            category: 'study',
-            type: 'online',
-            title: 'Học máy nâng cao',
-            code: 'DHKTPM18A - 42030040101',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'Online',
-            teacher: 'TS. Đỗ Văn DD',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành TensorFlow',
-            code: 'DHKTPM18A - 42030041201',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.10',
-            teacher: 'ThS. Ngô Thị EE',
-        },
-    ],
-    '2026-01-28': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành DevOps',
-            code: 'DHKTPM18A - 42030031201',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.06',
-            teacher: 'TS. Đặng Văn U',
-        },
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Cloud Native Architecture',
-            code: 'DHKTPM18A - 42030042301',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A2.12',
-            teacher: 'TS. Lê Thị FF',
-        },
-        {
-            time: 'noon',
-            category: 'exam',
-            type: 'exam',
-            title: 'Kiểm tra giữa kỳ - Xử lý ảnh',
-            code: 'DHKTPM18A - 42030030501',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'A1.07',
-            teacher: 'TS. Tôn Thị T',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'online',
-            title: 'Microservices Architecture',
-            code: 'DHKTPM18A - 42030032901',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'Online',
-            teacher: 'TS. Hồ Thị V',
-        },
-    ],
-    '2026-01-29': [
-        {
-            time: 'morning',
-            category: 'exam',
-            type: 'exam',
-            title: 'Thi cuối kỳ - Công nghệ phần mềm',
-            code: 'DHKTPM18A - 42030018201',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A1.02',
-            teacher: 'Ban Giám thị',
-        },
-        {
-            time: 'noon',
-            category: 'study',
-            type: 'theory',
-            title: 'Kiến trúc hệ thống phân tán',
-            code: 'DHKTPM18A - 42030043401',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'A2.13',
-            teacher: 'TS. Vũ Văn GG',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Lab Kubernetes',
-            code: 'DHKTPM18A - 42030044501',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.11',
-            teacher: 'ThS. Cao Thị HH',
-        },
-    ],
-    '2026-01-30': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Big Data và Phân tích dữ liệu',
-            code: 'DHKTPM18A - 42030033601',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'A2.10',
-            teacher: 'TS. Dương Văn W',
-        },
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'online',
-            title: 'Data Visualization',
-            code: 'DHKTPM18A - 42030045601',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'Online',
-            teacher: 'TS. Mai Văn II',
-        },
-        {
-            time: 'noon',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành Apache Spark',
-            code: 'DHKTPM18A - 42030046701',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.12',
-            teacher: 'ThS. Trần Thị JJ',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'suspended',
-            title: 'Thực tập doanh nghiệp (TẠM NGỪNG)',
-            code: 'DHKTPM18A - 42030034301',
-            period: '7 - 12 (12:30 - 17:00)',
-            room: 'Công ty',
-            teacher: 'TS. Lương Thị X',
-        },
-    ],
-    '2026-01-31': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Lab Machine Learning',
-            code: 'DHKTPM18A - 42030027401',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'B3.07',
-            teacher: 'TS. Trương Văn Q',
-        },
-        {
-            time: 'noon',
-            category: 'study',
-            type: 'theory',
-            title: 'Deep Learning cơ bản',
-            code: 'DHKTPM18A - 42030047801',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'A3.07',
-            teacher: 'TS. Hoàng Văn KK',
-        },
-        {
-            time: 'afternoon',
-            category: 'exam',
-            type: 'exam',
-            title: 'Thi cuối kỳ - Machine Learning',
-            code: 'DHKTPM18A - 42030027401',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A1.08',
-            teacher: 'Ban Giám thị',
-        },
-    ],
-    '2026-02-01': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Natural Language Processing',
-            code: 'DHKTPM18A - 42030048901',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A2.14',
-            teacher: 'TS. Phan Thị LL',
-        },
-        {
-            time: 'noon',
-            category: 'study',
-            type: 'online',
-            title: 'Computer Vision',
-            code: 'DHKTPM18A - 42030049101',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'Online',
-            teacher: 'TS. Lý Văn MM',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Thực hành OpenCV',
-            code: 'DHKTPM18A - 42030050201',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.13',
-            teacher: 'ThS. Võ Thị NN',
-        },
-    ],
-    '2026-02-02': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Reinforcement Learning',
-            code: 'DHKTPM18A - 42030051301',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A3.08',
-            teacher: 'TS. Bùi Văn OO',
-        },
-        {
-            time: 'noon',
-            category: 'study',
-            type: 'practice',
-            title: 'Lab PyTorch',
-            code: 'DHKTPM18A - 42030052401',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.14',
-            teacher: 'ThS. Đỗ Thị PP',
-        },
-        {
-            time: 'afternoon',
-            category: 'exam',
-            type: 'exam',
-            title: 'Tổng kết học kỳ - AI & ML',
-            code: 'DHKTPM18A - 42030053501',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A1.09',
-            teacher: 'Ban Giám thị',
+            note: '',
         },
     ],
 };
 
-// ==============================================
-// GLOBAL VARIABLES
-// ==============================================
-const TODAY = new Date(); // Ngày hôm nay - không thay đổi
+const TODAY = new Date();
 let currentMonth = TODAY.getMonth();
 let currentYear = TODAY.getFullYear();
-let selectedDate = null; // Ngày được CHỌN BỞI USER (click vào mini calendar) - null = không chọn
-let viewDate = new Date(TODAY); // Tuần đang XEM (dùng cho navigation)
-let activeFilter = 'all'; // 'all', 'study', 'exam'
+let selectedDate = null;
+let viewDate = new Date(TODAY);
+let activeFilter = 'all';
 
-// ==============================================
-// CONSTANTS
-// ==============================================
 const MONTH_NAMES = [
     'Tháng 1',
     'Tháng 2',
@@ -757,9 +283,6 @@ const DAY_NAMES = [
 const TIME_PERIODS = ['Sáng', 'Trưa', 'Chiều'];
 const TIME_KEYS = ['morning', 'noon', 'afternoon'];
 
-// ==============================================
-// INITIALIZATION
-// ==============================================
 $(document).ready(function () {
     initializeCalendar();
     setupEventHandlers();
@@ -767,7 +290,7 @@ $(document).ready(function () {
 
 function initializeCalendar() {
     renderMiniCalendar(currentMonth, currentYear);
-    renderWeekCalendar(viewDate); // Dùng viewDate thay vì selectedDate
+    renderWeekCalendar(viewDate);
     $('.button-schedule').first().addClass('active');
 }
 
@@ -777,41 +300,29 @@ function setupEventHandlers() {
     setupMonthNavigation();
     setupTodayButton();
     setupPrintButton();
-    setupMiniCalendarClick(); // Thêm handler cho mini calendar
+    setupMiniCalendarClick();
 }
 
-// ==============================================
-// FILTER BUTTONS
-// ==============================================
 function setupFilterButtons() {
     $('.button-schedule').click(function () {
-        // Đánh dấu button được chọn
         $('.button-schedule').removeClass('active');
         $(this).addClass('active');
 
-        // Lấy text và chuẩn hóa (loại bỏ khoảng trắng thừa)
         const filterText = $(this).find('p').text().trim().replace(/\s+/g, ' ');
 
-        // Map text sang filter type
         const filterMap = {
-            'Tất cả': 'all', // Hiển thị cả lịch học và lịch thi
-            'Lịch học': 'study', // Chỉ hiển thị lịch học (category: 'study')
-            'Lịch thi': 'exam', // Chỉ hiển thị lịch thi (category: 'exam')
+            'Tất cả': 'all',
+            'Lịch học': 'study',
+            'Lịch thi': 'exam',
         };
 
         activeFilter = filterMap[filterText] || 'all';
 
-        // Render lại tuần hiện tại với filter mới
-        // viewDate giữ nguyên => không đổi tuần đang xem
         renderWeekCalendar(viewDate);
     });
 }
 
-// ==============================================
-// NAVIGATION BUTTONS
-// ==============================================
 function setupNavigationButtons() {
-    // Previous week - Nút mũi tên trái (dùng class cụ thể)
     $('.btn-prev-week').click(function () {
         const newDate = new Date(viewDate);
         newDate.setDate(newDate.getDate() - 7);
@@ -823,12 +334,10 @@ function setupNavigationButtons() {
         renderMiniCalendar(currentMonth, currentYear);
         renderWeekCalendar(viewDate);
 
-        // XÓA selection vì user KHÔNG chọn ngày, chỉ đổi tuần
         selectedDate = null;
-        updateMiniCalendarSelection(); // Sẽ không tô đậm gì
+        updateMiniCalendarSelection();
     });
 
-    // Next week - Nút mũi tên phải (dùng class cụ thể)
     $('.btn-next-week').click(function () {
         const newDate = new Date(viewDate);
         newDate.setDate(newDate.getDate() + 7);
@@ -840,29 +349,26 @@ function setupNavigationButtons() {
         renderMiniCalendar(currentMonth, currentYear);
         renderWeekCalendar(viewDate);
 
-        // XÓA selection vì user KHÔNG chọn ngày, chỉ đổi tuần
         selectedDate = null;
-        updateMiniCalendarSelection(); // Sẽ không tô đậm gì
+        updateMiniCalendarSelection();
     });
 }
 
 function setupTodayButton() {
-    // Nút "Hôm nay" - Quay về tuần hiện tại và CHỌN ngày hôm nay
     $('.navbar-brand').click(function () {
-        selectedDate = new Date(TODAY); // CHỌN ngày hôm nay
-        viewDate = new Date(TODAY); // Xem tuần hiện tại
+        selectedDate = new Date(TODAY);
+        viewDate = new Date(TODAY);
 
         currentMonth = TODAY.getMonth();
         currentYear = TODAY.getFullYear();
 
         renderMiniCalendar(currentMonth, currentYear);
         renderWeekCalendar(viewDate);
-        updateMiniCalendarSelection(); // Sẽ tô đậm ngày hôm nay
+        updateMiniCalendarSelection();
     });
 }
 
 function setupMonthNavigation() {
-    // Previous month
     $('.month-selector button:first-child').click(function () {
         currentMonth--;
         if (currentMonth < 0) {
@@ -889,9 +395,6 @@ function setupPrintButton() {
     });
 }
 
-// ==============================================
-// RENDER MINI CALENDAR
-// ==============================================
 function renderMiniCalendar(month, year) {
     $('.month-text').text(`${MONTH_NAMES[month]}, ${year}`);
 
@@ -903,23 +406,18 @@ function renderMiniCalendar(month, year) {
     let dayCount = 1;
     let nextMonthDay = 1;
 
-    // Generate calendar grid
     for (let i = 0; i < 6; i++) {
         html += '<tr>';
         for (let j = 0; j < 7; j++) {
             if (i === 0 && j < firstDay) {
-                // Previous month days
                 const prevDay = daysInPrevMonth - firstDay + j + 1;
                 html += `<td class="other-month" data-date="${year}-${month}-${prevDay}">${prevDay}</td>`;
             } else if (dayCount > daysInMonth) {
-                // Next month days
                 html += `<td class="other-month" data-date="${year}-${month + 2}-${nextMonthDay}">${nextMonthDay}</td>`;
                 nextMonthDay++;
             } else {
-                // Current month days
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayCount).padStart(2, '0')}`;
 
-                // Kiểm tra xem có phải ngày hôm nay không (dùng TODAY thay vì currentDate)
                 const isToday =
                     dayCount === TODAY.getDate() &&
                     month === TODAY.getMonth() &&
@@ -936,18 +434,13 @@ function renderMiniCalendar(month, year) {
     $('.mini-calendar tbody').html(html);
 }
 
-// ==============================================
-// MINI CALENDAR CLICK HANDLER
-// ==============================================
 function setupMiniCalendarClick() {
-    // Sử dụng event delegation để tránh bind nhiều lần
     $('.mini-calendar tbody')
         .off('click', 'td:not(.other-month)')
         .on('click', 'td:not(.other-month)', function () {
             const dateStr = $(this).data('date');
             const dateParts = dateStr.split('-');
 
-            // User CHỌN ngày → set cả 2 biến
             selectedDate = new Date(
                 dateParts[0],
                 dateParts[1] - 1,
@@ -955,32 +448,23 @@ function setupMiniCalendarClick() {
             );
             viewDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
 
-            // Tô đậm ngày được chọn
             $('.mini-calendar td').removeClass('selected');
             $(this).addClass('selected');
 
-            // Render tuần chứa ngày được chọn
             renderWeekCalendar(viewDate);
         });
 }
 
-// ==============================================
-// UTILITY FUNCTIONS
-// ==============================================
 function updateMiniCalendarSelection() {
-    // Xóa tất cả selection trước
     $('.mini-calendar td').removeClass('selected');
 
-    // Nếu KHÔNG có ngày được chọn → không tô đậm gì
     if (!selectedDate) return;
 
-    // Có ngày được chọn → tô đậm ngày đó
     const dateStr = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
     $(`.mini-calendar td[data-date="${dateStr}"]`).addClass('selected');
 }
 
 function getMonday(date) {
-    // Tạo bản sao hoàn toàn mới để không mutate date gốc
     const d = new Date(date.getTime());
     const day = d.getDay();
     const diff = d.getDate() - day + (day === 0 ? -6 : 1);
@@ -992,9 +476,6 @@ function formatDate(date) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
 
-// ==============================================
-// RENDER WEEK CALENDAR
-// ==============================================
 function renderWeekCalendar(date) {
     const monday = getMonday(date);
 
@@ -1012,7 +493,6 @@ function renderWeekHeader(monday) {
         currentDay.setDate(monday.getDate() + i);
         const dayNum = currentDay.getDate();
 
-        // So sánh với TODAY (ngày hôm nay) chứ không phải currentDate
         const isToday = currentDay.toDateString() === TODAY.toDateString();
         const todayClass = isToday ? ' today-column' : '';
 
@@ -1030,30 +510,23 @@ function renderWeekHeader(monday) {
 function renderWeekBody(monday) {
     let bodyHtml = '';
 
-    // Duyệt qua 3 ca: Sáng, Trưa, Chiều
     for (let t = 0; t < TIME_PERIODS.length; t++) {
         bodyHtml += '<div class="time-row">';
         bodyHtml += `<div class="time-slot">${TIME_PERIODS[t]}</div>`;
 
-        // Duyệt qua 7 ngày trong tuần (Thứ 2 -> Chủ nhật)
         for (let i = 0; i < 7; i++) {
             const currentDay = new Date(monday);
             currentDay.setDate(monday.getDate() + i);
             const dateStr = formatDate(currentDay);
 
-            // So sánh với TODAY (ngày hôm nay) chứ không phải currentDate
             const isToday = currentDay.toDateString() === TODAY.toDateString();
             const todayClass = isToday ? ' today-column' : '';
 
-            // Lấy tất cả lịch của ngày này
             const daySchedule = scheduleData[dateStr] || [];
 
-            // Lọc theo ca và theo filter (Tất cả/Lịch học/Lịch thi)
             const timeEvents = daySchedule.filter((e) => {
-                // Chỉ lấy events của ca hiện tại (morning/noon/afternoon)
                 if (e.time !== TIME_KEYS[t]) return false;
 
-                // Áp dụng filter: 'all' = tất cả, 'study' = lịch học, 'exam' = lịch thi
                 if (activeFilter === 'all') return true;
                 return e.category === activeFilter;
             });
@@ -1067,17 +540,18 @@ function renderWeekBody(monday) {
 }
 
 function attachEventHandlers() {
-    $('.event').click(function () {
-        const title = $(this).find('.event-title').text();
-        const code = $(this).find('.event-code').text();
-        const teacher = $(this).find('.event-teacher').text();
-        alert(`${title}\n${code}\n${teacher}`);
+    $('.btn-join').click(function () {
+        const eventContainer = $(this).closest('.event');
+
+        // Tìm các element trong parent container
+        const code = eventContainer.find('.event-code').text();
+        const noteElement = eventContainer.find('.event-note');
+
+        let note = noteElement.text().replace('Ghi chú:', '').trim();
+        alert(`${code}\nOpen with ${note}`);
     });
 }
 
-// ==============================================
-// RENDER EVENTS
-// ==============================================
 function renderEvents(events) {
     if (events.length === 0) return '';
 
@@ -1099,6 +573,13 @@ function renderEvents(events) {
                 <span class="label-teacher">GV:</span>
                 ${event.teacher}
             </div>
+            ${
+                event.room === 'Trực tuyến'
+                    ? `<div class="event-note"><span class="label-note">Ghi chú:</span> ${event.note}</div>
+            <input type='button' class="btn-join" value="Tham gia">`
+                    : ''
+            }
+
         </div>
     `,
         )

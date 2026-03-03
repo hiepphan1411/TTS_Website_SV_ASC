@@ -38,8 +38,8 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 12px 20px;
-  color: #666;
+  padding: 10px 16px;
+  color: #555;
   text-decoration: none;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
@@ -48,23 +48,43 @@
 }
 
 .nav-parent:hover {
-  background-color: #f8f9fa;
-  color: #0066cc;
-  border-left-color: #0066cc;
+  background-color: #f0f5ff;
+  color: #3a74f0;
+  border-left-color: #3a74f0;
 }
 
 .nav-parent.active {
-  background-color: #e3f2fd;
-  color: #0066cc;
-  border-left-color: #0066cc;
+  background-color: #e8f0fe;
+  color: #3a74f0;
+  border-left-color: #3a74f0;
   font-weight: 600;
 }
 
 .nav-parent i:first-child {
-  width: 20px;
-  min-width: 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  font-size: 1rem;
+  color: #3a74f0;
+  background: rgba(58, 116, 240, 0.1);
+  border-radius: 10px;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-parent:hover i:first-child {
+  background: rgba(58, 116, 240, 0.18);
+  color: #3a74f0;
+  transform: scale(1.08);
+}
+
+.nav-parent.active i:first-child {
+  background: #3a74f0;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(58, 116, 240, 0.35);
 }
 
 .nav-parent > span {
@@ -79,6 +99,12 @@
   min-width: 16px;
   text-align: center;
   flex-shrink: 0;
+  color: #aab;
+}
+
+.nav-parent:hover .dropdown-icon,
+.nav-parent.active .dropdown-icon {
+  color: #3a74f0;
 }
 
 .nav-parent.active .dropdown-icon {
@@ -93,30 +119,50 @@
 }
 
 .nav-group.open .nav-submenu {
-  max-height: 600px;
+  max-height: 700px;
 }
 
 .nav-subitem {
   display: flex;
   align-items: center;
-  padding: 10px 20px 10px 52px;
+  padding: 9px 20px 9px 58px;
   color: #666;
   text-decoration: none;
   transition: all 0.2s ease;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   border-left: 3px solid transparent;
+  position: relative;
+}
+
+/* .nav-subitem::before {
+  content: "";
+  position: absolute;
+  left: 42px;
+  width: 5px;
+  height: 5px;
+  background: #c8d0e0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+} */
+
+.nav-subitem:hover::before {
+  background: #3a74f0;
+}
+
+.nav-subitem.active::before {
+  background: #3a74f0;
 }
 
 .nav-subitem:hover {
-  background-color: #e9ecef;
-  color: #0066cc;
-  border-left-color: #0066cc;
+  background-color: #f0f5ff;
+  color: #3a74f0;
+  border-left-color: #3a74f0;
 }
 
 .nav-subitem.active {
-  background-color: #e3f2fd;
-  color: #0066cc;
-  border-left-color: #0066cc;
+  background-color: #e8f0fe;
+  color: #3a74f0;
+  border-left-color: #3a74f0;
   font-weight: 500;
 }
 
@@ -371,6 +417,7 @@
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  background-color: #f5f5f5;
 }
 .section-content-main {
   flex: 1;

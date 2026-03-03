@@ -1,9 +1,9 @@
 const courses = [
     {
         id: 1,
-        code: 'THCS101',
-        name: 'Lập trình hướng đối tượng',
-        credits: 4,
+        code: 'LOG101',
+        name: 'Nhập môn Logistics',
+        credits: 3,
         required: true,
         condition: null,
         prerequisiteId: null,
@@ -12,8 +12,8 @@ const courses = [
 
     {
         id: 2,
-        code: 'THCS102',
-        name: 'Cấu trúc dữ liệu và giải thuật',
+        code: 'LOG102',
+        name: 'Quản trị chuỗi cung ứng',
         credits: 4,
         required: true,
         condition: null,
@@ -23,41 +23,41 @@ const courses = [
 
     {
         id: 3,
-        code: 'THCS201',
-        name: 'Cơ sở dữ liệu',
+        code: 'LOG201',
+        name: 'Quản lý kho vận',
         credits: 3,
         required: true,
         condition: 'A', // Học trước - Chưa học môn tiên quyết
-        prerequisiteId: 1, // Cần học Lập trình hướng đối tượng
+        prerequisiteId: 1, // Cần học Nhập môn Logistics
         type: 'new',
     },
 
     {
         id: 4,
-        code: 'THCS202',
-        name: 'Lập trình Web',
+        code: 'LOG202',
+        name: 'Vận tải và phân phối',
         credits: 4,
         required: true,
         condition: 'B', // Tiên quyết đã hoàn thành
-        prerequisiteId: 1, // Đã học Lập trình hướng đối tượng
+        prerequisiteId: 1, // Đã học Nhập môn Logistics
         type: 'new',
     },
 
     {
         id: 5,
-        code: 'THCS203',
-        name: 'Hệ điều hành',
+        code: 'LOG203',
+        name: 'Quản trị mua hàng',
         credits: 3,
         required: true,
         condition: 'C', // Song hành
-        prerequisiteId: 2, // Có thể học cùng với Cấu trúc dữ liệu
+        prerequisiteId: 2, // Có thể học cùng với Quản trị chuỗi cung ứng
         type: 'new',
     },
 
     {
         id: 6,
-        code: 'THCS204',
-        name: 'Mạng máy tính',
+        code: 'LOG204',
+        name: 'Logistics quốc tế',
         credits: 3,
         required: false,
         condition: null,
@@ -67,80 +67,84 @@ const courses = [
 
     {
         id: 7,
-        code: 'THCS301',
-        name: 'Công nghệ phần mềm',
+        code: 'LOG301',
+        name: 'Tối ưu hóa logistics',
         credits: 3,
         required: true,
         condition: 'B', // Tiên quyết đã hoàn thành
-        prerequisiteId: 3, // Đã học Cơ sở dữ liệu
+        prerequisiteId: 3, // Đã học Quản lý kho vận
         type: 'new',
     },
 
     {
         id: 8,
-        code: 'THCS302',
-        name: 'Phát triển ứng dụng di động',
+        code: 'LOG302',
+        name: 'E-logistics và công nghệ',
         credits: 4,
         required: false,
         condition: 'A', // Học trước - Chưa học môn tiên quyết
-        prerequisiteId: 4, // Cần học Lập trình Web
+        prerequisiteId: 4, // Cần học Vận tải và phân phối
         type: 'new',
     },
 
     {
         id: 9,
-        code: 'THCS303',
-        name: 'Trí tuệ nhân tạo',
+        code: 'LOG303',
+        name: 'Logistics xanh và bền vững',
         credits: 3,
         required: false,
         condition: 'C', // Song hành
-        prerequisiteId: 2, // Có thể học cùng với Cấu trúc dữ liệu
+        prerequisiteId: 2, // Có thể học cùng với Quản trị chuỗi cung ứng
         type: 'new',
     },
 
     {
         id: 10,
-        code: 'THCS304',
-        name: 'An toàn thông tin',
+        code: 'LOG304',
+        name: 'Quản lý rủi ro chuỗi cung ứng',
         credits: 3,
         required: true,
         condition: 'A', // Học trước - Chưa học môn tiên quyết
-        prerequisiteId: 6, // Cần học Mạng máy tính
+        prerequisiteId: 6, // Cần học Logistics quốc tế
         type: 'new',
     },
 
     {
         id: 11,
-        code: 'THCS401',
-        name: 'Thực tập dự án',
+        code: 'LOG401',
+        name: 'Thực tập Logistics',
         credits: 4,
         required: true,
         condition: 'B', // Tiên quyết đã hoàn thành
-        prerequisiteId: 7, // Đã học Công nghệ phần mềm
+        prerequisiteId: 7, // Đã học Tối ưu hóa logistics
         type: 'new',
     },
 
     {
         id: 12,
-        code: 'THCS402',
-        name: 'Phân tích dữ liệu lớn',
+        code: 'LOG402',
+        name: 'Phân tích dữ liệu trong Logistics',
         credits: 3,
         required: false,
         condition: 'B', // Tiên quyết đã hoàn thành
-        prerequisiteId: 3, // Đã học Cơ sở dữ liệu
+        prerequisiteId: 3, // Đã học Quản lý kho vận
         type: 'new',
     },
 ];
 
 // Data lớp học phần
+// Trạng thái:
+// - Chờ sinh viên đăng ký: registered < 50% slots
+// - Đang lên kế hoạch: 50% <= registered < 100% slots
+// - Đã khóa: registered >= slots
 const classes = {
     1: [
-        // Lớp 01 - Chờ sinh viên đăng ký (30/100)
+        // Lớp 01 - Chờ sinh viên đăng ký (30/100 = 30%)
         {
             id: '01',
-            courseCode: 'THCS101',
-            courseName: 'Lập trình hướng đối tượng',
-            credits: 4,
+            courseCode: 'LOG101',
+            courseName: 'Nhập môn Logistics',
+            credits: 3,
             slots: 100,
             registered: 30,
             registered: 30,
@@ -185,12 +189,12 @@ const classes = {
                 },
             ],
         },
-        // Lớp 02 - Đang lên kế hoạch (65/100)
+        // Lớp 02 - Đang lên kế hoạch (65/100 = 65%)
         {
             id: '02',
-            courseCode: 'THCS101',
-            courseName: 'Lập trình hướng đối tượng',
-            credits: 4,
+            courseCode: 'LOG101',
+            courseName: 'Nhập môn Logistics',
+            credits: 3,
             slots: 100,
             registered: 65,
             theoryClasses: [
@@ -234,12 +238,12 @@ const classes = {
                 },
             ],
         },
-        // Lớp 03 - Đã khóa (80/80)
+        // Lớp 03 - Đã khóa (80/80 = 100%)
         {
             id: '03',
-            courseCode: 'THCS101',
-            courseName: 'Lập trình hướng đối tượng',
-            credits: 4,
+            courseCode: 'LOG101',
+            courseName: 'Nhập môn Logistics',
+            credits: 3,
             slots: 80,
             registered: 80,
             theoryClasses: [
@@ -260,13 +264,13 @@ const classes = {
         },
     ],
 
-    // Môn 2: Cấu trúc dữ liệu và giải thuật - THCS102
+    // Môn 2: Quản trị chuỗi cung ứng - LOG102
     2: [
-        // Lớp 01 - Chờ sinh viên đăng ký (25/100)
+        // Lớp 01 - Chờ sinh viên đăng ký (25/100 = 25%)
         {
             id: '01',
-            courseCode: 'THCS102',
-            courseName: 'Cấu trúc dữ liệu và giải thuật',
+            courseCode: 'LOG102',
+            courseName: 'Quản trị chuỗi cung ứng',
             credits: 4,
             slots: 100,
             registered: 25,
@@ -299,11 +303,11 @@ const classes = {
                 },
             ],
         },
-        // Lớp 02 - Đang lên kế hoạch (70/90)
+        // Lớp 02 - Đang lên kế hoạch (70/90 = 78%)
         {
             id: '02',
-            courseCode: 'THCS102',
-            courseName: 'Cấu trúc dữ liệu và giải thuật',
+            courseCode: 'LOG102',
+            courseName: 'Quản trị chuỗi cung ứng',
             credits: 4,
             slots: 90,
             registered: 70,
@@ -323,11 +327,11 @@ const classes = {
             ],
             practiceClasses: [],
         },
-        // Lớp 03 - Đã khóa (100/100)
+        // Lớp 03 - Đã khóa (100/100 = 100%)
         {
             id: '03',
-            courseCode: 'THCS102',
-            courseName: 'Cấu trúc dữ liệu và giải thuật',
+            courseCode: 'LOG102',
+            courseName: 'Quản trị chuỗi cung ứng',
             credits: 4,
             slots: 100,
             registered: 100,
@@ -362,13 +366,13 @@ const classes = {
         },
     ],
 
-    // Môn 3: Cơ sở dữ liệu - THCS201
+    // Môn 3: Quản lý kho vận - LOG201
     3: [
-        // Lớp 01 - Chờ sinh viên đăng ký (35/120)
+        // Lớp 01 - Chờ sinh viên đăng ký (35/120 = 29%)
         {
             id: '01',
-            courseCode: 'THCS201',
-            courseName: 'Cơ sở dữ liệu',
+            courseCode: 'LOG201',
+            courseName: 'Quản lý kho vận',
             credits: 3,
             slots: 120,
             registered: 35,
@@ -413,11 +417,11 @@ const classes = {
                 },
             ],
         },
-        // Lớp 02 - Đang lên kế hoạch (85/110)
+        // Lớp 02 - Đang lên kế hoạch (85/110 = 77%)
         {
             id: '02',
-            courseCode: 'THCS201',
-            courseName: 'Cơ sở dữ liệu',
+            courseCode: 'LOG201',
+            courseName: 'Quản lý kho vận',
             credits: 3,
             slots: 110,
             registered: 85,
@@ -450,11 +454,11 @@ const classes = {
                 },
             ],
         },
-        // Lớp 03 - Đã khóa (90/90)
+        // Lớp 03 - Đã khóa (90/90 = 100%)
         {
             id: '03',
-            courseCode: 'THCS201',
-            courseName: 'Cơ sở dữ liệu',
+            courseCode: 'LOG201',
+            courseName: 'Quản lý kho vận',
             credits: 3,
             slots: 90,
             registered: 90,
@@ -494,8 +498,8 @@ const classes = {
     4: [
         {
             id: '01',
-            courseCode: 'THCS202',
-            courseName: 'Lập trình Web',
+            courseCode: 'LOG202',
+            courseName: 'Vận tải và phân phối',
             credits: 4,
             slots: 100,
             registered: 40,
@@ -1385,7 +1389,7 @@ function init() {
     attachEventHandlers();
 }
 
-// table course
+//bảng môn học
 function renderCourseTable() {
     const searchText = $('#searchCourse').val().toLowerCase();
     const activeTab = $('.tab-item.active').data('tab');
@@ -1425,7 +1429,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN TIÊN QUYẾT</div>
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC TIÊN QUYẾT (B)</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1442,7 +1446,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #28a745; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN HỌC TRƯỚC</div>
+                        <div style="color: #28a745; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC TIÊN QUYẾT (B)</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1459,7 +1463,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #1976d2; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN SONG HÀNH</div>
+                        <div style="color: #1976d2; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC SONG HÀNH</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1485,7 +1489,7 @@ function renderCourseTable() {
         let rowClass = '';
         if (course.condition === 'A' && prerequisite) {
             rowClass = 'not-eligible';
-            rowTooltipContent = conditionTooltip; // Sử dụng lại tooltip
+            rowTooltipContent = conditionTooltip; // Sử dụng lại tooltip đã tạo
         }
 
         const row = $(`
@@ -1501,14 +1505,13 @@ function renderCourseTable() {
                     </tr>
                 `);
 
-        // Chỉ cho phép click nếu đủ điều kiện
+        // Chỉ cho phép click nếu không phải dòng không đủ điều kiện
         if (course.condition !== 'A') {
             row.on('click', function () {
                 selectCourse(course);
             });
-            row.css('cursor', 'pointer');
         } else {
-            row.css('pointer-events', 'auto'); // Cho phép hover xem tooltip
+            row.css('pointer-events', 'auto'); // Cho phép hover để xem tooltip
             row.css('cursor', 'not-allowed');
         }
 
@@ -1524,6 +1527,7 @@ function renderCourseTable() {
 
             if (!tooltipContent) return;
 
+            // Tooltip
             const $tooltip = $('<div class="tooltip"></div>').html(
                 tooltipContent,
             );
@@ -1551,7 +1555,7 @@ function renderCourseTable() {
             setTimeout(() => $('.tooltip').remove(), 200);
         });
 
-    // tooltip cho dòng chưa đủ điều kiện
+    // Xử lý tooltip cho dòng chưa đủ điều kiện
     $('.table-courses tbody tr.not-eligible')
         .off('mouseenter mouseleave')
         .on('mouseenter', function (e) {
@@ -1560,12 +1564,13 @@ function renderCourseTable() {
 
             if (!tooltipContent) return;
 
+            // Tạo tooltip giống như tooltip cột điều kiện
             const $tooltip = $('<div class="tooltip row-tooltip"></div>').html(
                 tooltipContent,
             );
             $('body').append($tooltip);
 
-            // hiển thị giữa dòng
+            // Tính vị trí - hiển thị giữa dòng (phía trên hoặc dưới)
             const rowRect = this.getBoundingClientRect();
             const tooltipWidth = 260;
             const tooltipHeight = $tooltip.outerHeight();
@@ -1574,7 +1579,7 @@ function renderCourseTable() {
             const tooltipLeft =
                 rowRect.left + rowRect.width / 2 - tooltipWidth / 2;
 
-            // Kiểm tra vị trí hiển thị (trên || dưới)
+            // Kiểm tra vị trí hiển thị (trên hoặc dưới)
             const spaceAbove = rowRect.top;
             const spaceBelow = $(window).height() - rowRect.bottom;
 
@@ -1630,7 +1635,7 @@ function selectCourse(course) {
                 </div>
             `);
 
-    // Scroll xuống lớp học phần chờ đăng ký
+    // Scroll xuống phần lớp học phần
     setTimeout(() => {
         const waitingSection = $('.two-column');
         if (waitingSection.length) {
@@ -1673,11 +1678,11 @@ function renderWaitingClasses(courseId) {
         if (available <= 0) {
             statusClass = 'disabled';
             statusText = 'Đã khóa';
-            canRegister = false;
+            canRegister = false; // Không cho phép đăng ký
         } else if (cls.registered > cls.slots * 0.5) {
             statusClass = 'waiting';
             statusText = 'Đang lên kế hoạch';
-            canRegister = false;
+            canRegister = false; // Không cho phép đăng ký
         }
 
         cls.statusClass = statusClass;
@@ -1867,7 +1872,7 @@ function renderClassDetail(courseId, cls) {
 
     $('#classDetailContainer').html(html);
 
-    // event radio cập nhật số nhóm
+    // event radio buttons cập nhật số nhóm
     $('input[name="practice"]').on('change', function () {
         const selectedIndex = $(this).val();
         const selectedPractice = cls.practiceClasses[selectedIndex];
@@ -1973,6 +1978,7 @@ function renderRegisteredTable() {
     tbody.empty();
 
     registeredClasses.forEach((reg, index) => {
+        const theorySchedule = reg.class.theoryClasses[reg.theoryChoice];
         const practiceSchedule =
             reg.practiceChoice !== null
                 ? reg.class.practiceClasses[reg.practiceChoice]
@@ -1993,7 +1999,7 @@ function renderRegisteredTable() {
                         <td>3,380,000</td>
                         <td>30/05/2025</td>
                         <td>Đã thu</td>
-                        <td><span class="status-label ready">Chờ sinh viên đăng ký</span></td>
+                        <td>Chưa xóa</td>
                         <td>
                             <span class="action-icon view" onclick="viewRegistered(${index})" title="Xem"><i class="fa-solid fa-eye"></i></span>
                             <span class="action-icon delete" onclick="deleteRegistered(${index})" title="Xóa"><i class="fa-solid fa-trash"></i></span>
@@ -2018,6 +2024,12 @@ function deleteRegistered(index) {
 
 function viewRegistered(index) {
     const reg = registeredClasses[index];
+    const theorySchedule =
+        reg.class.theoryClasses.length > 0 ? reg.class.theoryClasses[0] : null;
+    const practiceSchedule =
+        reg.practiceChoice !== null
+            ? reg.class.practiceClasses[reg.practiceChoice]
+            : null;
 
     // Thông tin chung - layout ngang theo ảnh
     let modalHtml = `
@@ -2116,7 +2128,7 @@ function viewRegistered(index) {
     openDetailModal('Chi tiết lớp học phần', modalHtml);
 }
 
-// mở modal
+// Mở modal
 function openDetailModal(title, content) {
     const html = `
         <div class="modal-overlay" onclick="closeDetailModal(event)">
@@ -2130,7 +2142,6 @@ function openDetailModal(title, content) {
                 </div>
             </div>
         </div>
-
     `;
 
     $('.modal-overlay').remove();

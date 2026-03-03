@@ -519,7 +519,6 @@ function renderSemesterTabs() {
 
   tabsContainer.innerHTML = html;
 
-  // Add event listeners
   document.querySelectorAll(".semester-tab").forEach((tab) => {
     tab.addEventListener("click", function () {
       document
@@ -531,13 +530,12 @@ function renderSemesterTabs() {
         currentView = "all";
         currentSelectedSemesterIndex = null;
         renderAllSemesters();
-        // Update chart to show latest semester when viewing all
+
         const latestIndex = academicResultsData.length - 1;
         createGradeComparisonChart(latestIndex);
       } else {
         currentView = parseInt(this.dataset.semester);
         renderSemester(currentView);
-        // Update chart to match selected semester
         createGradeComparisonChart(currentView);
       }
     });
@@ -551,11 +549,11 @@ function resetTableStructure() {
     <div class="table-header">
       <h3>Bảng điểm chi tiết</h3>
       <div class="table-actions">
-        <button class="action-btn active">
+        <button class="action-btn active" hidden>
           <i class="fas fa-check-circle"></i>
           Tất cả
         </button>
-        <button class="action-btn">
+        <button class="action-btn" hidden>
           <i class="fa-solid fa-triangle-exclamation"></i>
           Cần cải thiện
         </button>
@@ -595,7 +593,7 @@ function renderSemester(index) {
 
   renderTable(semester);
 
-  scrollToTable();
+  // scrollToTable();
 }
 
 function renderAllSemesters() {
@@ -612,17 +610,16 @@ function renderAllSemesters() {
   statsCards[3].querySelector(".stat-number").textContent =
     overallInfo.diemTrungBinhHe10;
 
-  // Replace table section with multiple tables
   const tableSection = document.querySelector(".table-section");
   let html = `
     <div class="table-header" style="margin-bottom: 24px;">
       <h3>Bảng điểm chi tiết - Tất cả học kỳ</h3>
       <div class="table-actions">
-        <button class="action-btn active">
+        <button class="action-btn active" hidden>
           <i class="fas fa-check-circle"></i>
           Tất cả
         </button>
-        <button class="action-btn">
+        <button class="action-btn" hidden>
           <i class="fa-solid fa-triangle-exclamation"></i>
           Cần cải thiện
         </button>
@@ -635,7 +632,6 @@ function renderAllSemesters() {
   academicResultsData.forEach((semester, semesterIndex) => {
     const { maxThuongXuyen, maxThucHanh } = getMaxColumns(semester);
 
-    // Kiểm tra xem có môn nào hiển thị trong học kỳ này không
     let hasVisibleSubjects = false;
     if (currentFilter === "all") {
       hasVisibleSubjects = true;
@@ -643,7 +639,6 @@ function renderAllSemesters() {
       hasVisibleSubjects = semester.monHoc.some((mon) => mon.diem.diemTK < 7);
     }
 
-    // Chỉ render nếu có môn hiển thị
     if (hasVisibleSubjects) {
       html += `
         <div class="semester-table-wrapper">
@@ -687,7 +682,7 @@ function renderAllSemesters() {
 
   tableSection.innerHTML = html;
 
-  scrollToTable();
+  // scrollToTable();
 }
 
 function getMaxColumns(data) {
@@ -769,15 +764,18 @@ function renderTable(semester) {
     }
   });
 
-  // Hiển thị thông báo nếu không có môn nào
   if (visibleCount === 0) {
-    html += `
+    html = `
+    <table class="results-table">
+    <tbody>
       <tr>
         <td colspan="${12 + maxThuongXuyen + maxThucHanh}" style="text-align: center; padding: 40px; color: #666;">
           <i class="fas fa-check-circle" style="font-size: 48px; color: var(--success-color); margin-bottom: 16px;"></i>
           <p style="font-size: 16px; margin: 0;">Không có môn nào cần cải thiện</p>
         </td>
       </tr>
+    </tbody>
+  </table>
     `;
   }
 
@@ -858,7 +856,6 @@ function renderTableRow(mon, stt, maxThuongXuyen = 3, maxThucHanh = 3) {
 
 // Render hàng tổng kết
 function renderSummaryRow(semester, totalCols = 17) {
-  // Xác định class xếp loại
   const getRankingClass = (xepLoai) => {
     const ranking = xepLoai.toLowerCase();
     if (ranking.includes("xuất sắc")) return "excellent";
@@ -867,7 +864,7 @@ function renderSummaryRow(semester, totalCols = 17) {
     if (ranking.includes("tb yếu")) return "below-average";
     if (ranking.includes("tb")) return "average";
     if (ranking.includes("yếu") || ranking.includes("kém")) return "poor";
-    return "fair"; // default
+    return "fair";
   };
 
   const rankingClass = getRankingClass(semester.tongKetHocKy.xepLoaiHocKy);
@@ -1341,7 +1338,6 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// Xử lý responsive cho biểu đồ
 let resizeTimer;
 window.addEventListener("resize", function () {
   clearTimeout(resizeTimer);

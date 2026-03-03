@@ -5,7 +5,7 @@ const notesData = [
         startDate: '16/01/2026',
         endDate: '19/01/2026',
         uploadTime: '2 giờ trước',
-        status: 'new', // 'new', 'active', 'expired'
+        status: 'new', 
         content: [
             'Căn cứ Quy chế đào tạo hiện hành và kế hoạch đào tạo của Nhà trường, Nhà trường thông báo về việc đề xuất hoãn xét tốt nghiệp và xét tốt nghiệp cho sinh viên.',
             'Sinh viên đủ điều kiện xét tốt nghiệp theo quy định sẽ được Nhà trường tổng hợp danh sách để thực hiện xét tốt nghiệp theo kế hoạch.',
@@ -20,7 +20,7 @@ const notesData = [
         startDate: '10/03/2024',
         endDate: '15/04/2024',
         uploadTime: '3 tháng trước',
-        status: 'active', // Sẽ tự động đổi thành 'expired' vì endDate đã qua
+        status: 'active', 
         content: [
             'Căn cứ Quy chế đào tạo hiện hành và kế hoạch đào tạo của Nhà trường, Nhà trường thông báo về việc đề xuất hoãn xét tốt nghiệp và xét tốt nghiệp cho sinh viên. Sinh viên đủ điều kiện xét tốt nghiệp theo quy định sẽ được Nhà trường tổng hợp danh sách để thực hiện xét tốt nghiệp theo kế hoạch. Trường hợp sinh viên có nhu cầu hoãn xét tốt nghiệp vì lý do học tập hoặc lý do cá nhân chính đáng thì thực hiện đề xuất hoãn xét theo quy định.',
             'Để nghị sinh viên chủ động kiểm tra kết quả học tập, chuẩn đầu ra và các điều kiện liên quan; đồng thời thực hiện nộp hồ sơ đề xuất hoãn xét tốt nghiệp (nếu có) đúng thời hạn và đúng hướng dẫn của Nhà trường. Sau thời hạn quy định, Nhà trường sẽ tiến hành xét tốt nghiệp theo danh sách tổng hợp, các trường hợp không thực hiện đúng thời gian sẽ không được giải quyết.',
@@ -32,7 +32,7 @@ const notesData = [
         startDate: '15/12/2025',
         endDate: '20/12/2025',
         uploadTime: '1 tháng trước',
-        status: 'active', // Sẽ tự động đổi thành 'expired' vì endDate đã qua
+        status: 'active',
         content: [
             'Phòng Đào tạo thông báo về việc đăng ký học phần học kỳ 2 năm học 2025-2026. Sinh viên đăng nhập vào hệ thống để đăng ký học phần theo lịch quy định.',
             'Thời gian đăng ký: Từ ngày 15/12/2025 đến hết ngày 20/12/2025. Sinh viên cần hoàn thành đăng ký đúng thời hạn để đảm bảo có lớp học.',
@@ -62,7 +62,7 @@ function parseDate(dateString) {
 
 function isExpired(endDate) {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset time để so sánh chỉ ngày
+    today.setHours(0, 0, 0, 0);
 
     const noteEndDate = parseDate(endDate);
     noteEndDate.setHours(0, 0, 0, 0);
@@ -72,7 +72,7 @@ function isExpired(endDate) {
 
 function updateNotesStatus() {
     notesData.forEach((note) => {
-        // Nếu đã hết hạn, set status = 'expired'
+        // hết hạn -> set status = expired
         if (isExpired(note.endDate) && note.status !== 'expired') {
             note.status = 'expired';
         }
@@ -97,13 +97,13 @@ function renderNotesAccordion(filter = 'all') {
     let html = '';
 
     filteredData.forEach((note, index) => {
-        const isExpanded = false; // Không expand item nào mặc định
+        const isExpanded = false; 
         const badgeHtml =
             note.status === 'new'
                 ? '<span class="badge bg-danger badge-pill">Mới</span>'
                 : '';
 
-        // Render content paragraphs
+        // content paragraphs
         const contentHtml = note.content
             .map((paragraph) => `<p>${paragraph}</p>`)
             .join('');
@@ -147,9 +147,8 @@ function renderNotesAccordion(filter = 'all') {
     addAccordionEventListeners();
 }
 
-/**
- * Update số lượng ghi chú
- */
+// số lượng ghi chú
+ 
 function updateCount(count) {
     const countElement = document.getElementById('totalCount');
     if (countElement) {

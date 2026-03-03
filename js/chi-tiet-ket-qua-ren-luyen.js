@@ -1,15 +1,11 @@
 const $ = window.jQuery;
 
 $(document).ready(function () {
-    console.log('[v0] Detail training page initialized');
-
     loadSemesterData();
 
     animateStatCards();
 
     initializeTableInteractions();
-
-    console.log('[v0] All components initialized');
 });
 
 function loadSemesterData() {
@@ -17,7 +13,6 @@ function loadSemesterData() {
 
     if (semesterData) {
         const data = JSON.parse(semesterData);
-        console.log('[v0] Loaded semester data:', data);
 
         $('#semesterTitle').text(
             `Chi tiết đánh giá rèn luyện ${data.semester}`,
@@ -69,7 +64,6 @@ function animateStatCards() {
 function initializeTableInteractions() {
     $('.detail-table tbody tr').on('click', function () {
         $(this).toggleClass('active');
-        console.log('[v0] Row clicked:', $(this).find('td').first().text());
     });
 
     $('.detail-table tbody tr').on('mouseenter', function () {
@@ -78,8 +72,6 @@ function initializeTableInteractions() {
 }
 
 function exportTableToCSV(filename = 'chi-tiet-ren-luyen.csv') {
-    console.log('[v0] Exporting table to CSV');
-
     const csv = [];
     const rows = document.querySelectorAll('.detail-table tr');
 
@@ -117,13 +109,9 @@ function downloadCSV(csv, filename) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    console.log('[v0] CSV file downloaded:', filename);
 }
 
 function printDetailPage() {
-    console.log('[v0] Printing page');
-
     window.print();
 }
 
@@ -131,7 +119,6 @@ function editTrainingRecord() {
     const semesterData = sessionStorage.getItem('selectedSemester');
     if (semesterData) {
         const data = JSON.parse(semesterData);
-        console.log('[v0] Edit training record for:', data.semester);
 
         alert(
             `Chỉnh sửa đánh giá rèn luyện ${data.semester}\n\nForm chỉnh sửa sẽ được mở trong trang tiếp theo.`,
@@ -166,12 +153,6 @@ function generateSummaryStats() {
     });
 
     const averageScore = rowCount > 0 ? (totalScore / rowCount).toFixed(2) : 0;
-    console.log(
-        '[v0] Summary stats - Total:',
-        totalScore,
-        'Average:',
-        averageScore,
-    );
 
     return {
         total: totalScore,
@@ -187,19 +168,15 @@ function highlightRows(criteria) {
             $(this).css('background-color', '#fffacd');
         }
     });
-
-    console.log('[v0] Highlighted rows matching:', criteria);
 }
 
 function expandAllRows() {
     $('.detail-table tbody tr').show();
-    console.log('[v0] All rows expanded');
 }
 
 function collapseAllRows() {
     $('.detail-table tbody tr').hide();
     $('.detail-table tbody tr:first-child').show();
-    console.log('[v0] Rows collapsed');
 }
 
 $(function () {
@@ -262,8 +239,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-console.log('[v0] Chi tiết rèn luyện script loaded successfully');
 
 const trainingDetailData = {
     categories: [
@@ -536,8 +511,6 @@ function renderTrainingDetailTable() {
             });
         }
     });
-
-    console.log('[v0] Training detail table rendered');
 }
 
 function createCategoryRow(category, isExpanded) {

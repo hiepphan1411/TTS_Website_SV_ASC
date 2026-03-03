@@ -8,15 +8,6 @@
 
     <link href="../lib/jquery-ui@1.14.1.css" rel="stylesheet" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/kendo-ui@2016.3.1118/styles/kendo.common.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/kendo-ui@2016.3.1118/styles/kendo.default.min.css"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/common.css" />
     <script
@@ -32,7 +23,7 @@
       <!-- Sidebar -->
       <div id="sidebar-container"></div>
       <!-- Details -->
-      <div class="dashboard-content">
+      <div class="section-content content-area">
         <!-- Highest priority -->
         <div class="container-fluid">
           <div class="row gap-3">
@@ -61,7 +52,10 @@
                 >
               </div>
 
-              <a href="#" class="fw-bold profile-link mt-3 d-inline-block">
+              <a
+                href="../html/thong-tin-sinh-vien.html"
+                class="fw-bold profile-link mt-3 d-inline-block"
+              >
                 Xem chi tiết hồ sơ
               </a>
             </div>
@@ -103,10 +97,12 @@
                   </div>
 
                   <div class="schedule-info">
-                    <p class="fw-semibold" style="color: #56a2e8">
+                    <p class="fw-bold" style="color: #2a4591">
                       DHKTPM18A-420300314705
                     </p>
-                    <div class="fw-semibold">Thực tập doanh nghiệp</div>
+                    <div class="fw-semibold" style="color: #2865eb">
+                      Thực tập doanh nghiệp
+                    </div>
                     <div class="meta">
                       <i class="fa-solid fa-clock"></i>
                       6h30 - 9h10 &nbsp; • &nbsp;
@@ -117,7 +113,7 @@
 
                   <div class="teacher align-items-center">
                     Giảng viên<br />
-                    <strong>TS. Nguyễn Thị Hạnh</strong>
+                    <strong>TS. Nguyễn Văn A</strong>
                   </div>
                 </div>
 
@@ -129,10 +125,12 @@
                   </div>
 
                   <div class="schedule-info">
-                    <p class="fw-semibold" style="color: #fbb522">
+                    <p class="fw-bold" style="color: #7c2d12">
                       DHKTPM18A-420300314705
                     </p>
-                    <div class="fw-semibold">Thực tập doanh nghiệp</div>
+                    <div class="fw-semibold" style="color: #fb933e">
+                      Thực tập doanh nghiệp
+                    </div>
                     <div class="meta">
                       <i class="fa-solid fa-clock"></i>
                       12h30 - 15h &nbsp; • &nbsp;
@@ -143,78 +141,100 @@
 
                   <div class="teacher">
                     Giảng viên<br />
-                    <strong>ThS. Trần Thế Trung</strong>
+                    <strong>ThS. Trần Văn B</strong>
                   </div>
                 </div>
               </div>
               <div class="text-end mt-auto">
-                <a href="#" class="profile-link course-code">Xem chi tiết </a>
+                <a
+                  href="../html/lich-theo-tuan.html"
+                  class="profile-link course-code"
+                  >Xem chi tiết
+                </a>
               </div>
             </div>
 
             <!-- RIGHT: SUMMARY -->
-
             <div class="col-xl-2 sumary">
-              <div class="summary-card blue">
-                <div class="summary-title-study">
-                  <i class="fas fa-book-open" style="font-size: 20px"></i>
-                  <p>HỌC TẬP</p>
+              <a
+                href="../html/lich-theo-tuan.html"
+                class="text-decoration-none"
+              >
+                <div class="summary-card blue">
+                  <div class="summary-title-study">
+                    <i class="fas fa-book-open" style="font-size: 20px"></i>
+                    <p>HỌC TẬP</p>
+                  </div>
+                  <div class="summary-desc-study blue">Lịch học trong tuần</div>
+                  <div style="display: flex">
+                    <p class="summary-value-study">2</p>
+                    <p
+                      style="
+                        font-size: 11px;
+                        color: var(--primary-blue);
+                        font-style: italic;
+                        margin-top: 14px;
+                      "
+                    >
+                      môn học
+                    </p>
+                  </div>
                 </div>
-                <div class="summary-desc-study blue">Lịch học trong tuần</div>
-                <div style="display: flex">
-                  <p class="summary-value-study">2</p>
-                  <p
-                    style="
-                      font-size: 11px;
-                      color: var(--primary-blue);
-                      font-style: italic;
-                      margin-top: 14px;
-                    "
-                  >
-                    môn học
-                  </p>
+              </a>
+              <a
+                href="../html/lich-theo-tuan.html"
+                class="text-decoration-none"
+              >
+                <div class="summary-card orange">
+                  <div class="summary-title-exam">
+                    <i
+                      class="fa-solid fa-pen-fancy"
+                      style="font-size: 20px"
+                    ></i>
+                    <p>KỲ THI</p>
+                  </div>
+
+                  <div class="summary-desc-exam orange">Lịch thi sắp tới</div>
+                  <div style="display: flex">
+                    <p class="summary-value-exam">1</p>
+                    <p
+                      style="
+                        font-size: 11px;
+                        color: var(--warning-orange);
+                        font-style: italic;
+                        margin-top: 14px;
+                      "
+                    >
+                      môn học
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div class="summary-card orange">
-                <div class="summary-title-exam">
-                  <i class="fa-solid fa-pen-fancy" style="font-size: 20px"></i>
-                  <p>KỲ THI</p>
+              </a>
+              <a
+                href="../html/ghi-chu-nhac-nho.html"
+                class="text-decoration-none"
+              >
+                <div class="summary-card gray">
+                  <div class="summary-title-remind">
+                    <i class="fa-solid fa-bell" style="font-size: 20px"></i>
+                    <p>NHẮC NHỞ</p>
+                  </div>
+                  <div class="summary-desc-remind gray">Nhắc nhở mới</div>
+                  <div style="display: flex">
+                    <p class="summary-value-exam">0</p>
+                    <p
+                      style="
+                        font-size: 11px;
+                        color: var(--primary-gray);
+                        font-style: italic;
+                        margin-top: 14px;
+                      "
+                    >
+                      chưa xem
+                    </p>
+                  </div>
                 </div>
-                <div class="summary-desc-exam orange">Lịch thi sắp tới</div>
-                <div style="display: flex">
-                  <p class="summary-value-exam">1</p>
-                  <p
-                    style="
-                      font-size: 11px;
-                      color: var(--warning-orange);
-                      font-style: italic;
-                      margin-top: 14px;
-                    "
-                  >
-                    môn học
-                  </p>
-                </div>
-              </div>
-              <div class="summary-card gray">
-                <div class="summary-title-remind">
-                  <i class="fa-solid fa-bell" style="font-size: 20px"></i>
-                  <p>NHẮC NHỞ</p>
-                </div>
-                <div class="summary-desc-remind gray">Nhắc nhở mới</div>
-                <div style="display: flex">
-                  <p class="summary-value-exam">0</p>
-                  <p
-                    style="
-                      font-size: 11px;
-                      color: var(--primary-gray);
-                      font-style: italic;
-                      margin-top: 14px;
-                    "
-                  >
-                    chưa xem
-                  </p>
-                </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -237,7 +257,12 @@
             <!-- Compact View -->
             <div id="quickAccessCompact" class="row g-3">
               <div class="col-2">
-                <div class="card-access-quick border-0 shadow-sm">
+                <button
+                  class="card-access-quick border-0 shadow-sm"
+                  onclick="
+                    window.location.href = '../html/ket-qua-hoc-tap.html'
+                  "
+                >
                   <div class="card-body p-3 d-flex align-items-center gap-3">
                     <div
                       class="quick-access-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
@@ -263,11 +288,16 @@
                       ></span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
 
               <div class="col-2">
-                <div class="card-access-quick border-0 shadow-sm">
+                <button
+                  class="card-access-quick border-0 shadow-sm"
+                  onclick="
+                    window.location.href = '../html/dang-ky-hoc-phan.html'
+                  "
+                >
                   <div class="card-body p-3 d-flex align-items-center gap-3">
                     <div
                       class="quick-access-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
@@ -293,11 +323,14 @@
                       ></span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
 
               <div class="col-2">
-                <div class="card-access-quick border-0 shadow-sm">
+                <button
+                  class="card-access-quick border-0 shadow-sm"
+                  onclick="window.location.href = '../html/lich-theo-tuan.html'"
+                >
                   <div class="card-body p-3 d-flex align-items-center gap-3">
                     <div
                       class="quick-access-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
@@ -323,11 +356,16 @@
                       ></span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
 
               <div class="col-2">
-                <div class="card-access-quick border-0 shadow-sm">
+                <button
+                  class="card-access-quick border-0 shadow-sm"
+                  onclick="
+                    window.location.href = '../html/tra-cuu-cong-no.html'
+                  "
+                >
                   <div class="card-body p-3 d-flex align-items-center gap-3">
                     <div
                       class="quick-access-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
@@ -353,11 +391,16 @@
                       ></span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
 
               <div class="col-2">
-                <div class="card-access-quick border-0 shadow-sm">
+                <button
+                  class="card-access-quick border-0 shadow-sm"
+                  onclick="
+                    window.location.href = '../html/khao-sat-su-kien.html'
+                  "
+                >
                   <div class="card-body p-3 d-flex align-items-center gap-3">
                     <div
                       class="quick-access-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
@@ -378,42 +421,70 @@
                       ></span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
             </div>
 
             <!-- Expanded View - Auto Grid Layout -->
             <div id="quickAccessExpanded" class="d-none">
               <div class="quick-access-grid">
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="window.location.href = '../html/lich-theo-tuan.html'"
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-calendar-alt"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Lịch theo tuần</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/dang-ky-hoc-phan.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-book"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Đăng ký học phần</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/ket-qua-hoc-tap.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-chart-line"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Kết quả học tập</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/tra-cuu-cong-no.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-credit-card"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Tra cứu công nợ</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/thanh-toan-truc-tuyen.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-check-circle"></i>
                   </div>
@@ -422,7 +493,13 @@
                   </h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/phieu-thu-tong-hop.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-clipboard-list"></i>
                   </div>
@@ -431,63 +508,109 @@
                   </h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/lich-theo-tien-do.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-list-check"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Lịch theo tiến độ</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="window.location.href = '../html/lich-theo-tuan.html'"
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-pencil-alt"></i>
                   </div>
-                  <h6 class="mb-0 small fw-semibold mt-2">Lịch thi</h6>
+                  <h6 class="mb-0 small fw-semibold mt-2">Lịch theo tuần</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/ghi-chu-nhac-nho.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-bell"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Nhắc nhở</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="window.location.href = '../html/khao-sat.html'"
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-id-card"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Khảo sát</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="window.location.href = '../html/ho-so-dien-tu.html'"
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-folder"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Hồ sơ điện tử</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="window.location.href = '../html/hoc-bong.html'"
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-trophy"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Học bổng</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/dang-ky-noi-tru.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-bed"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Đăng ký nội trú</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/de-xuat-bieu-mau.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-file-signature"></i>
                   </div>
                   <h6 class="mb-0 small fw-semibold mt-2">Đề xuất biểu mẫu</h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="
+                    window.location.href = '../html/thong-tin-sinh-vien.html'
+                  "
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-user-graduate"></i>
                   </div>
@@ -496,7 +619,11 @@
                   </h6>
                 </div>
 
-                <div class="quick-access-item-expanded" role="button">
+                <div
+                  class="quick-access-item-expanded"
+                  role="button"
+                  onclick="window.location.href = '../html/lien-he-gop-y.html'"
+                >
                   <div class="quick-access-icon-simple">
                     <i class="fas fa-comments"></i>
                   </div>
@@ -675,9 +802,8 @@
   </body>
   <!-- <script src="../js/main.js"></script> -->
   <script src="../js/common.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
-  <script src="https://cdn.jsdelivr.net/npm/kendo-ui@2016.3.1118/js/kendo.all.min.js"></script>
+  <script src="../lib/jquery@3.7.1.min.js"></script>
+  <script src="../lib/jquery-ui@1.14.1.css"></script>
+  <script src="../lib/chart@3.9.1.js"></script>
   <script src="../js/index.js"></script>
 </html>

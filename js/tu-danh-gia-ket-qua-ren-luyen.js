@@ -22,8 +22,9 @@ $(document).ready(function () {
         confirmAndSave();
     });
 
+    // Add event listener for score inputs to calculate hierarchical totals
     $(document).on('input', '.self-score-input', function () {
-        updateTotalScore();
+        calculateHierarchicalScores();
     });
 
     initializeTableInteractions();
@@ -218,7 +219,7 @@ const trainingDetailData = {
             title: 'ĐÁNH GIÁ VỀ Ý THỨC HỌC TẬP',
             minScore: 0,
             maxScore: 20,
-            selfScore: 15.0,
+            selfScore: 0,
             cvhtScore: 15.0,
             khoaScore: 15.0,
             pctsScore: 15.0,
@@ -228,7 +229,7 @@ const trainingDetailData = {
                     title: 'Sinh viên được đánh giá tối đa 20 điểm, nếu',
                     minScore: 0,
                     maxScore: 20,
-                    selfScore: 15.0,
+                    selfScore: 0,
                     cvhtScore: 15.0,
                     khoaScore: 15.0,
                     pctsScore: 15.0,
@@ -239,14 +240,14 @@ const trainingDetailData = {
                             title: 'Ý thức và thái độ trong học tập:',
                             minScore: 0,
                             maxScore: 6,
-                            selfScore: 6.0,
+                            selfScore: 0,
                             cvhtScore: 6.0,
                             khoaScore: 6.0,
                             pctsScore: 6.0,
                             isBold: false,
                             children: [
                                 {
-                                    id: '-',
+                                    id: 'I.1.1.a',
                                     title: 'Đi học đầy đủ và đúng giờ',
                                     minScore: 0,
                                     maxScore: 2,
@@ -260,7 +261,7 @@ const trainingDetailData = {
                                     hasNote: true,
                                 },
                                 {
-                                    id: '-',
+                                    id: 'I.1.1.b',
                                     title: 'Thực hiện đầy đủ, nghiêm túc các loại bài tập',
                                     minScore: 0,
                                     maxScore: 2,
@@ -280,14 +281,14 @@ const trainingDetailData = {
                             title: 'Ý thức và thái độ tham gia các kỳ thi, cuộc thi:',
                             minScore: 0,
                             maxScore: 3,
-                            selfScore: 2.0,
+                            selfScore: 0,
                             cvhtScore: 2.0,
                             khoaScore: 2.0,
                             pctsScore: 2.0,
                             isBold: false,
                             children: [
                                 {
-                                    id: '-',
+                                    id: 'I.1.2.a',
                                     title: 'Thực hiện đầy đủ, nghiêm túc các loại bài tập',
                                     minScore: 0,
                                     maxScore: 2,
@@ -316,7 +317,7 @@ const trainingDetailData = {
                     isBold: false,
                     children: [
                         {
-                            id: '-',
+                            id: 'I.2.a',
                             title: 'Sinh viên bỏ thì không có lí do',
                             minScore: -4,
                             maxScore: 0,
@@ -344,7 +345,7 @@ const trainingDetailData = {
             pctsScore: 15.0,
             children: [
                 {
-                    id: '-',
+                    id: 'II.a',
                     title: 'Sinh viên bỏ thì không có Ý định',
                     minScore: -4,
                     maxScore: 0,
@@ -370,7 +371,7 @@ const trainingDetailData = {
             pctsScore: 15.0,
             children: [
                 {
-                    id: '-',
+                    id: 'III.a',
                     title: 'Sinh viên bỏ thì không có Ý định',
                     minScore: -4,
                     maxScore: 0,
@@ -396,7 +397,7 @@ const trainingDetailData = {
             pctsScore: 15.0,
             children: [
                 {
-                    id: '-',
+                    id: 'IV.a',
                     title: 'Sinh viên bỏ thì không có Ý định',
                     minScore: -4,
                     maxScore: 0,
@@ -422,7 +423,7 @@ const trainingDetailData = {
             pctsScore: 15.0,
             children: [
                 {
-                    id: '-',
+                    id: 'V.a',
                     title: 'Sinh viên bỏ thì không có Ý định',
                     minScore: -4,
                     maxScore: 0,
@@ -448,7 +449,7 @@ const trainingDetailData = {
             pctsScore: 15.0,
             children: [
                 {
-                    id: '-',
+                    id: 'VI.a',
                     title: 'Sinh viên bỏ thì không có Ý định',
                     minScore: -4,
                     maxScore: 0,
@@ -466,6 +467,7 @@ const trainingDetailData = {
     ],
 };
 
+// tạo bảng chi tiết
 function renderTrainingDetailTable() {
     const tbody = document.querySelector('.detail-table tbody');
     if (!tbody) return;
@@ -484,6 +486,7 @@ function renderTrainingDetailTable() {
     });
 }
 
+// Tạo hàng danh mục
 function createCategoryRow(category, isExpanded) {
     const tr = document.createElement('tr');
     tr.className = `category-row ${isExpanded ? 'expanded' : ''}`;
@@ -506,6 +509,7 @@ function createCategoryRow(category, isExpanded) {
     return tr;
 }
 
+// tạo hàng con
 function renderChildRow(tbody, item, parentId, isVisible) {
     const tr = document.createElement('tr');
     tr.className = `child-row ${isVisible ? 'show' : ''}`;
@@ -513,23 +517,34 @@ function renderChildRow(tbody, item, parentId, isVisible) {
     if (!isVisible) tr.style.display = 'none';
 
     let dataLevel = '0';
-    if (item.id === '-') {
+    if (item.id.match(/^[IVX]+\.\d+\.\d+\.[a-z]$/)) {
+        // I.1.1.a
         dataLevel = '3';
-    } else if (item.id.match(/^[IVX]+\.\d+\.\d+/)) {
+    } else if (item.id.match(/^[IVX]+\.\d+\.[a-z]$/)) {
+        // I.2.a
+        dataLevel = '3';
+    } else if (item.id.match(/^[IVX]+\.[a-z]$/)) {
+        // II.a
+        dataLevel = '3';
+    } else if (item.id.match(/^[IVX]+\.\d+\.\d+$/)) {
+        // I.1.1
         dataLevel = '2';
     } else if (item.id.match(/^[IVX]+\.\d+$/)) {
+        // I.1
         dataLevel = '1';
     }
     tr.setAttribute('data-level', dataLevel);
 
+    const displayId = dataLevel === '3' ? '-' : item.id;
+
     if (item.hasNote) {
         tr.innerHTML = `
-            <td>${item.id}</td>
+            <td>${displayId}</td>
             <td class="text-start">${item.title}</td>
             <td>${item.minScore}</td>
             <td>${item.maxScore}</td>
-            <td><input type="text" class="form-control" /></td>
-            <td><input type="text" class="form-control" /></td>
+            <td><input type="text" class="form-control text-center" placeholder="Nhận xét" /></td>
+            <td><input type="text" class="form-control text-center self-score-input" placeholder="0" min="${item.minScore}" max="${item.maxScore}" data-item-id="${item.id}" /></td>
             <td>
                 <div class="custom-file-upload">
                     <input type="file" id="file-${parentId}-${item.id}" class="file-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
@@ -561,7 +576,7 @@ function renderChildRow(tbody, item, parentId, isVisible) {
         `;
     } else {
         tr.innerHTML = `
-            <td>${item.id}</td>
+            <td>${displayId}</td>
             <td class="text-start">${item.title}</td>
             <td>${item.minScore}</td>
             <td>${item.maxScore}</td>
@@ -583,6 +598,7 @@ function renderChildRow(tbody, item, parentId, isVisible) {
     }
 }
 
+// định dạng điểm
 function formatScore(score) {
     if (score === '-' || score === undefined || score === null) return '-';
     return typeof score === 'number' ? score.toFixed(2) : score;
@@ -596,6 +612,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fileUploads();
 });
 
+// tải lên tệp
 function fileUploads() {
     document.addEventListener('change', function (e) {
         if (e.target.classList.contains('file-input')) {
@@ -615,6 +632,7 @@ function fileUploads() {
     });
 }
 
+// sự kiện các hàng danh mục
 function initializeCategoryToggle() {
     const categoryRows = document.querySelectorAll('.category-row');
 
@@ -641,6 +659,180 @@ function initializeCategoryToggle() {
     });
 }
 
+// tính điểm số theo cấp bậc
+function calculateHierarchicalScores() {
+    const tbody = document.querySelector('.detail-table tbody');
+    if (!tbody) return;
+
+    trainingDetailData.categories.forEach((category) => {
+        updateCategoryScores(category);
+
+        // Tính tổng điểm cho từng cột
+        const totals = {
+            self: 0,
+            cvht: 0,
+            khoa: 0,
+            pcts: 0,
+        };
+
+        if (category.children) {
+            category.children.forEach((child) => {
+                const childTotals = calculateItemTotal(child);
+                totals.self += childTotals.self;
+                totals.cvht += childTotals.cvht;
+                totals.khoa += childTotals.khoa;
+                totals.pcts += childTotals.pcts;
+            });
+        }
+
+        // Cập nhật hiển thị hàng danh mục
+        const categoryRow = document.querySelector(
+            `tr.category-row[data-category="${category.id}"]`,
+        );
+        if (categoryRow) {
+            const cells = categoryRow.querySelectorAll('td');
+            if (cells[5]) {
+                cells[5].querySelector('strong').textContent =
+                    totals.self.toFixed(2);
+            }
+            if (cells[7]) {
+                cells[7].querySelector('strong').textContent =
+                    totals.cvht.toFixed(2);
+            }
+            if (cells[8]) {
+                cells[8].querySelector('strong').textContent =
+                    totals.khoa.toFixed(2);
+            }
+            if (cells[9]) {
+                cells[9].querySelector('strong').textContent =
+                    totals.pcts.toFixed(2);
+            }
+        }
+    });
+
+    updateGrandTotalScore();
+}
+
+// cập nhật điểm số cho từng mục
+function updateCategoryScores(item) {
+    if (item.hasNote) {
+        const input = document.querySelector(
+            `.self-score-input[data-item-id="${item.id}"]`,
+        );
+        if (input) {
+            item.selfScore = parseFloat(input.value) || 0;
+        }
+    }
+
+    if (item.children) {
+        item.children.forEach((child) => updateCategoryScores(child));
+    }
+}
+
+// tính tổng điểm cho từng mục
+function calculateItemTotal(item) {
+    const totals = {
+        self: 0,
+        cvht: 0,
+        khoa: 0,
+        pcts: 0,
+    };
+
+    if (item.hasNote) {
+        totals.self = item.selfScore || 0;
+        totals.cvht = item.cvhtScore || 0;
+        totals.khoa = item.khoaScore || 0;
+        totals.pcts = item.pctsScore || 0;
+    } else if (item.children) {
+        item.children.forEach((child) => {
+            const childTotals = calculateItemTotal(child);
+            totals.self += childTotals.self;
+            totals.cvht += childTotals.cvht;
+            totals.khoa += childTotals.khoa;
+            totals.pcts += childTotals.pcts;
+        });
+
+        const rows = document.querySelectorAll('tr.child-row');
+        rows.forEach((row) => {
+            const cells = row.querySelectorAll('td');
+            const rowId = cells[0]?.textContent?.trim();
+            if (rowId === item.id) {
+                if (cells[5]) {
+                    cells[5].textContent = totals.self.toFixed(2);
+                }
+                if (cells[7]) {
+                    cells[7].textContent = totals.cvht.toFixed(2);
+                }
+                if (cells[8]) {
+                    cells[8].textContent = totals.khoa.toFixed(2);
+                }
+                if (cells[9]) {
+                    cells[9].textContent = totals.pcts.toFixed(2);
+                }
+            }
+        });
+
+        item.selfScore = totals.self;
+        item.cvhtScore = totals.cvht;
+        item.khoaScore = totals.khoa;
+        item.pctsScore = totals.pcts;
+    }
+
+    return totals;
+}
+
+// total
+function updateGrandTotalScore() {
+    let totalSelfScore = 0;
+    let totalCvhtScore = 0;
+    let totalKhoaScore = 0;
+    let totalPctsScore = 0;
+
+    const categoryRows = document.querySelectorAll('.category-row');
+    categoryRows.forEach((categoryRow) => {
+        const cells = categoryRow.querySelectorAll('td');
+
+        // tự đánh giá
+        const selfScoreText = cells[5]?.querySelector('strong')?.textContent;
+        const selfScore = parseFloat(selfScoreText) || 0;
+        totalSelfScore += selfScore;
+
+        // CVHT
+        const cvhtScoreText = cells[7]?.querySelector('strong')?.textContent;
+        const cvhtScore = parseFloat(cvhtScoreText) || 0;
+        totalCvhtScore += cvhtScore;
+
+        // Khoa
+        const khoaScoreText = cells[8]?.querySelector('strong')?.textContent;
+        const khoaScore = parseFloat(khoaScoreText) || 0;
+        totalKhoaScore += khoaScore;
+
+        // PCTSV
+        const pctsScoreText = cells[9]?.querySelector('strong')?.textContent;
+        const pctsScore = parseFloat(pctsScoreText) || 0;
+        totalPctsScore += pctsScore;
+    });
+
+    const totalRow = document.querySelector('.total-row');
+    if (totalRow) {
+        const scoreCells = totalRow.querySelectorAll('td');
+
+        if (scoreCells[1]) {
+            scoreCells[1].textContent = totalSelfScore.toFixed(2);
+        }
+        if (scoreCells[3]) {
+            scoreCells[3].textContent = totalCvhtScore.toFixed(2);
+        }
+        if (scoreCells[4]) {
+            scoreCells[4].textContent = totalKhoaScore.toFixed(2);
+        }
+        if (scoreCells[5]) {
+            scoreCells[5].textContent = totalPctsScore.toFixed(2);
+        }
+    }
+}
+
+// cập nhật tổng điểm
 function updateTotalScore() {
     let totalSelfScore = 0;
 
@@ -658,6 +850,7 @@ function updateTotalScore() {
     }
 }
 
+// in
 function printAssessment() {
     const buttons = document.querySelectorAll('.btn-print, .btn-confirm');
     buttons.forEach((btn) => (btn.style.display = 'none'));
@@ -670,6 +863,7 @@ function printAssessment() {
     }, 100);
 }
 
+// xác nhận và lưu
 function confirmAndSave() {
     const allInputs = document.querySelectorAll('.self-score-input');
     let isValid = true;
@@ -733,6 +927,7 @@ function confirmAndSave() {
     $('.btn-confirm').text('Đã lưu').prop('disabled', true);
 }
 
+// Tải dữ liệu đã lưu
 function loadSavedAssessment() {
     const savedAssessments = JSON.parse(
         localStorage.getItem('selfAssessments') || '{}',

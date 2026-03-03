@@ -303,7 +303,6 @@ function toggleDetail(row) {
 function editRecord(element) {
     const row = element.closest('tr');
     const stt = row.querySelector('td:nth-child(2)').textContent;
-    console.log('Edit record clicked for STT:', stt);
 
     const data = reservationData.find((item) => item.stt == stt);
     if (data) {
@@ -346,8 +345,6 @@ function deleteRecord(element) {
         if (index > -1) {
             reservationData.splice(index, 1);
         }
-
-        console.log('Phiếu số ' + stt + ' đã được xóa!');
 
         if (typeof updateDeleteButtonState === 'function') {
             updateDeleteButtonState();
@@ -657,8 +654,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     item.soCho = parseInt(newReservation.soCho);
                     item.donVi = newReservation.thuocDonVi;
                     item.lyDo = newReservation.lyDoMuonPhong;
-
-                    console.log('Cập nhật phiếu số:', editId);
                 }
                 delete this.dataset.editId;
             } else {
@@ -711,7 +706,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Function to reset modal form
+    // reset modal form
     function resetModalForm() {
         document.getElementById('modalDot').selectedIndex = 0;
         document.getElementById('modalTuTiet').selectedIndex = 0;
@@ -730,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .getElementById('addReservationModal')
         .addEventListener('hidden.bs.modal', function () {
             resetModalForm();
-            // Clear edit ID if exists
+
             const btnSave = document.getElementById('btnSaveReservation');
             if (btnSave && btnSave.dataset.editId) {
                 delete btnSave.dataset.editId;
@@ -740,7 +735,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document
         .querySelector('.btn-search')
         .addEventListener('click', function () {
-            console.log('Tìm kiếm được kích hoạt');
             filterReservations();
         });
 
@@ -774,25 +768,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Handle refresh button
+    // refresh button
     document
         .querySelector('.btn-refresh')
         .addEventListener('click', function () {
-            console.log('Làm mới form');
-            // Reset all select to first option
             document
                 .querySelectorAll('.search-form select')
                 .forEach(function (select) {
                     select.selectedIndex = 0;
                 });
-            // Reset date inputs
+
             document.getElementById('startDate').value = '';
             document.getElementById('endDate').value = '';
-            // Show all data
+
             initializeTable();
         });
 
-    // Handle select all checkbox
+    // select all checkbox
     const selectAllCheckbox = document.getElementById('selectAllCheckbox');
     if (selectAllCheckbox) {
         selectAllCheckbox.addEventListener('change', function () {

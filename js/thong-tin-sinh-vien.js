@@ -1,4 +1,3 @@
-// Data
 const familyData = [
     {
         id: 1,
@@ -17,9 +16,6 @@ const familyData = [
     },
 ];
 
-/**
- * Render accordion cho quan hệ gia đình
- */
 function renderFamilyAccordion() {
     const accordion = document.getElementById('familyAccordion');
     if (!accordion) return;
@@ -27,7 +23,7 @@ function renderFamilyAccordion() {
     let html = '';
 
     familyData.forEach((member, index) => {
-        const isExpanded = index === 0; // Member đầu tiên mở mặc định
+        const isExpanded = index === 0;
         const hasData = member.relationship !== null;
 
         html += `
@@ -58,13 +54,9 @@ function renderFamilyAccordion() {
 
     accordion.innerHTML = html;
 
-    // Add event listeners cho toggle icon
     addAccordionToggleListeners();
 }
 
-/**
- * Render grid thông tin gia đình
- */
 function renderFamilyGrid(member) {
     return `
         <div class="family-info-grid">
@@ -137,9 +129,6 @@ function renderFamilyGrid(member) {
     `;
 }
 
-/**
- * Add event listeners cho accordion toggle icons
- */
 function addAccordionToggleListeners() {
     const buttons = document.querySelectorAll('.family-accordion-button');
 
@@ -148,7 +137,6 @@ function addAccordionToggleListeners() {
             const icon = this.querySelector('i');
             const isCollapsed = this.classList.contains('collapsed');
 
-            // Toggle icon
             if (isCollapsed) {
                 icon.classList.remove('fa-chevron-down');
                 icon.classList.add('fa-chevron-up');
@@ -158,7 +146,6 @@ function addAccordionToggleListeners() {
             }
         });
 
-        // Bootstrap collapse event
         const targetId = button.getAttribute('data-bs-target');
         const collapseElement = document.querySelector(targetId);
 
@@ -178,15 +165,10 @@ function addAccordionToggleListeners() {
     });
 }
 
-/**
- * Initialize trang thông tin sinh viên
- */
 function initStudentInfo() {
-    // Render family accordion
     renderFamilyAccordion();
 }
 
-// Run khi DOM ready
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(initStudentInfo, 100);
 });

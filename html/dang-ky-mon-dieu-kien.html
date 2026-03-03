@@ -44,29 +44,12 @@
             <!-- Details -->
             <div class="container-fluid">
                 <!-- Học phần đang mở -->
-                <div
-                    style="
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 20px;
-                        margin-bottom: 20px;
-                        align-items: stretch;
-                    "
-                >
+                <div class="class-open">
                     <!-- Học phần đang mở -->
                     <div class="section-header">
                         <h3 class="section-title fw-bold">Học phần đang mở</h3>
 
-                        <div
-                            style="
-                                display: flex;
-                                gap: 15px;
-                                width: 100%;
-                                align-items: center;
-                                margin-top: 15px;
-                                justify-content: space-between;
-                            "
-                        >
+                        <div class="header-class-open">
                             <div class="search-bar-dkhp">
                                 <i class="fa-solid fa-magnifying-glass"></i>
 
@@ -120,14 +103,7 @@
 
                         <div class="schedule-stats">
                             <div class="stat-item">
-                                <div
-                                    style="
-                                        font-size: 12px;
-                                        color: #2a4591;
-                                        font-weight: bold;
-                                        margin-top: 3px;
-                                    "
-                                >
+                                <div class="total_credit">
                                     Tổng tín chỉ đăng ký
                                 </div>
                                 <div class="d-flex">
@@ -138,16 +114,7 @@
                                 </div>
                             </div>
                             <div class="stat-item">
-                                <div
-                                    style="
-                                        font-size: 12px;
-                                        color: #2a4591;
-                                        font-weight: bold;
-                                        margin-top: 3px;
-                                    "
-                                >
-                                    Tổng môn đăng ký
-                                </div>
+                                <div class="total_credit">Tổng môn đăng ký</div>
                                 <div class="d-flex">
                                     <div class="stat-number" id="courseCount">
                                         0
@@ -219,10 +186,7 @@
                 <div class="two-column">
                     <!-- Lớp học phần chờ đăng ký -->
                     <div class="section-left">
-                        <h3
-                            class="section-title fw-bold"
-                            style="margin-bottom: 15px"
-                        >
+                        <h3 class="section-title fw-bold mb-3">
                             Lớp học phần chờ đăng ký
                         </h3>
                         <div class="section-label">
@@ -236,17 +200,14 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>THÔNG TIN LỚP HỌC PHẦN</th>
-                                    <th style="text-align: left; width: 180px">
-                                        TRẠNG THÁI
-                                    </th>
+                                    <th class="status-class">TRẠNG THÁI</th>
                                 </tr>
                             </thead>
                             <tbody id="waitingClassBody">
                                 <tr>
                                     <td
                                         colspan="3"
-                                        class="text-center text-muted"
-                                        style="padding: 30px"
+                                        class="text-center text-muted p-4"
                                     >
                                         Chọn một môn học để xem danh sách lớp
                                     </td>
@@ -257,21 +218,11 @@
 
                     <!-- Chi tiết lớp học phần -->
                     <div class="section-right">
-                        <div
-                            style="
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
-                                margin-bottom: 15px;
-                            "
-                        >
-                            <h3
-                                class="section-title fw-bold"
-                                style="margin-bottom: 0"
-                            >
+                        <div class="header-class-detail">
+                            <h3 class="section-title-detail fw-bold">
                                 Chi tiết lớp học phần
                             </h3>
-                            <a class="schedule-empty" href="#"
+                            <a class="schedule-empty mb-1" href="#"
                                 >Kiểm tra lịch trống</a
                             >
                         </div>
@@ -316,8 +267,7 @@
                             <tr>
                                 <td
                                     colspan="13"
-                                    class="text-center text-muted"
-                                    style="padding: 30px"
+                                    class="text-center text-muted p-4"
                                 >
                                     Chưa có lớp học phần đã đăng ký
                                 </td>

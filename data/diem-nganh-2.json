@@ -1,0 +1,439 @@
+{
+  "thongTinChung": {
+    "gpaTichLuy": 3.75,
+    "xepLoai": "Giỏi",
+    "tongTinChiHoanThanh": 142,
+    "tongTinChiYeuCau": 162,
+    "diemRenLuyen": 85,
+    "diemRenLuyenXepLoai": "Khá",
+    "diemTrungBinhHe10": 8.4,
+    "xepLoaiTichLuyHe10": "Giỏi",
+    "xepLoaiTichLuyHe10Sub": "Xuất sắc"
+  },
+  "cacHocKy": [
+    {
+      "hocKy": "HK1",
+      "namHoc": "2023-2024",
+      "gpa": 3.68,
+      "monHoc": [
+        {
+          "maLopHocPhan": "420300200901",
+          "tenMonHoc": "Triết học Mác - Lênin",
+          "soTinChi": 3,
+          "dichuyTich": 8.5,
+          "thuongKy": {
+            "btl": null,
+            "lan1": 8.0,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": null,
+            "ltHeSo1": 8.0,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.2,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 8.5
+          },
+          "diemTongKet": {
+            "lan1": 8.35,
+            "lan2": 8.35,
+            "lan3": 8.35
+          },
+          "thangDiem4": 3.5,
+          "diemChu": "B+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420300200902",
+          "tenMonHoc": "Kinh tế chính trị Mác - Lênin",
+          "soTinChi": 2,
+          "tichCuc": 9.0,
+          "thuongKy": {
+            "btl": 8.5,
+            "lan1": 9.0,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": null,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.8,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 9.0
+          },
+          "diemTongKet": {
+            "lan1": 8.9,
+            "lan2": 8.9,
+            "lan3": 8.9
+          },
+          "thangDiem4": 4.0,
+          "diemChu": "A",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420300200903",
+          "tenMonHoc": "Lịch sử Đảng Cộng sản Việt Nam",
+          "soTinChi": 2,
+          "tichCuc": 8.0,
+          "thuongKy": {
+            "btl": null,
+            "lan1": 7.5,
+            "ltHeSo1": 8.0,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": 7.8,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 7.8,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 8.2
+          },
+          "diemTongKet": {
+            "lan1": 8.0,
+            "lan2": 8.0,
+            "lan3": 8.0
+          },
+          "thangDiem4": 3.5,
+          "diemChu": "B+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        }
+      ],
+      "tongKet": {
+        "diemTrungBinhHK": 8.42,
+        "diemTrungBinhTichLuyHe10": 8.42,
+        "diemTrungBinhTichLuyHe4": 3.68,
+        "tinChiDangKy": 7,
+        "tinChiTichLuy": 7,
+        "xepLoaiHK": "Giỏi"
+      }
+    },
+    {
+      "hocKy": "HK2",
+      "namHoc": "2023-2024",
+      "gpa": 3.61,
+      "monHoc": [
+        {
+          "maLopHocPhan": "420300200904",
+          "tenMonHoc": "Tư tưởng Hồ Chí Minh",
+          "soTinChi": 2,
+          "tichCuc": 8.5,
+          "thuongKy": {
+            "btl": 8.0,
+            "lan1": 8.5,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": 8.2,
+            "ltHeSo1": 8.5,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.3,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 8.6
+          },
+          "diemTongKet": {
+            "lan1": 8.45,
+            "lan2": 8.45,
+            "lan3": 8.45
+          },
+          "thangDiem4": 3.5,
+          "diemChu": "B+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420300200905",
+          "tenMonHoc": "Pháp luật đại cương",
+          "soTinChi": 2,
+          "tichCuc": 9.0,
+          "thuongKy": {
+            "btl": null,
+            "lan1": 9.0,
+            "ltHeSo1": 8.8,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": null,
+            "ltHeSo1": null,
+            "tieuLuan": 8.5
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.8,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 9.0
+          },
+          "diemTongKet": {
+            "lan1": 8.9,
+            "lan2": 8.9,
+            "lan3": 8.9
+          },
+          "thangDiem4": 4.0,
+          "diemChu": "A",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        }
+      ],
+      "tongKet": {
+        "diemTrungBinhHK": 8.38,
+        "diemTrungBinhTichLuyHe10": 8.4,
+        "diemTrungBinhTichLuyHe4": 3.61,
+        "tinChiDangKy": 4,
+        "tinChiTichLuy": 11,
+        "xepLoaiHK": "Giỏi"
+      }
+    },
+    {
+      "hocKy": "HK1",
+      "namHoc": "2024-2025",
+      "gpa": 3.75,
+      "monHoc": [
+        {
+          "maLopHocPhan": "420300200906",
+          "tenMonHoc": "Tiếng Anh chuyên ngành",
+          "soTinChi": 3,
+          "tichCuc": 9.0,
+          "thuongKy": {
+            "btl": 8.5,
+            "lan1": 9.0,
+            "ltHeSo1": null,
+            "tieuLuan": 8.8
+          },
+          "tlBtl": {
+            "lan1": 9.0,
+            "ltHeSo1": 8.5,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.8,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 9.2
+          },
+          "diemTongKet": {
+            "lan1": 9.0,
+            "lan2": 9.0,
+            "lan3": 9.0
+          },
+          "thangDiem4": 4.0,
+          "diemChu": "A",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420300200907",
+          "tenMonHoc": "Cấu trúc dữ liệu và giải thuật",
+          "soTinChi": 3,
+          "tichCuc": 8.5,
+          "thuongKy": {
+            "btl": 8.0,
+            "lan1": 8.5,
+            "ltHeSo1": 8.3,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": 8.5,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.3,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 8.7
+          },
+          "diemTongKet": {
+            "lan1": 8.5,
+            "lan2": 8.5,
+            "lan3": 8.5
+          },
+          "thangDiem4": 3.5,
+          "diemChu": "B+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        }
+      ],
+      "tongKet": {
+        "diemTrungBinhHK": 8.75,
+        "diemTrungBinhTichLuyHe10": 8.52,
+        "diemTrungBinhTichLuyHe4": 3.75,
+        "tinChiDangKy": 6,
+        "tinChiTichLuy": 17,
+        "xepLoaiHK": "Giỏi"
+      }
+    },
+    {
+      "hocKy": "HK2",
+      "namHoc": "2024-2025",
+      "gpa": 3.75,
+      "hienTai": true,
+      "monHoc": [
+        {
+          "maLopHocPhan": "420300200907",
+          "tenMonHoc": "Nhập môn Tin học",
+          "soTinChi": 2,
+          "tichCuc": 8.5,
+          "thuongKy": {
+            "btl": null,
+            "lan1": 8.5,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": null,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.5,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 9.0
+          },
+          "diemTongKet": {
+            "lan1": 9.01,
+            "lan2": 9.01,
+            "lan3": 9.01
+          },
+          "thangDiem4": 4.0,
+          "diemChu": "A+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420301032589",
+          "tenMonHoc": "Kỹ năng giao tiếp chuyên ngành",
+          "soTinChi": 2,
+          "tichCuc": 8.5,
+          "thuongKy": {
+            "btl": 8.0,
+            "lan1": 8.5,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": 8.0,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.3,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 8.0
+          },
+          "diemTongKet": {
+            "lan1": 8.2,
+            "lan2": 7.9,
+            "lan3": 7.9
+          },
+          "thangDiem4": 3.0,
+          "diemChu": "B",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420300324383",
+          "tenMonHoc": "Giáo dục Quốc phòng và An ninh 1",
+          "soTinChi": 2,
+          "tichCuc": 8.5,
+          "thuongKy": {
+            "btl": 8.0,
+            "lan1": 8.5,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": null,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 8.3,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 9.0
+          },
+          "diemTongKet": {
+            "lan1": 8.65,
+            "lan2": 9.01,
+            "lan3": 9.01
+          },
+          "thangDiem4": 4.0,
+          "diemChu": "A+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        },
+        {
+          "maLopHocPhan": "420300323966",
+          "tenMonHoc": "Toán cao cấp 1",
+          "soTinChi": 2,
+          "tichCuc": 9.0,
+          "thuongKy": {
+            "btl": null,
+            "lan1": 10.0,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "tlBtl": {
+            "lan1": null,
+            "ltHeSo1": null,
+            "tieuLuan": null
+          },
+          "cuoiKy": {
+            "tbThuongKy": 9.5,
+            "duocDuThi": "Đạt",
+            "tieuLuan": 9.0
+          },
+          "diemTongKet": {
+            "lan1": 9.25,
+            "lan2": 9.1,
+            "lan3": 9.1
+          },
+          "thangDiem4": 4.0,
+          "diemChu": "A+",
+          "ghiChu": null,
+          "ghiChuXetDuThi": null,
+          "ghiChuTK": null,
+          "dat": "Đạt"
+        }
+      ],
+      "tongKet": {
+        "diemTrungBinhHK": 8.4,
+        "diemTrungBinhTichLuyHe10": 8.4,
+        "diemTrungBinhTichLuyHe4": 3.55,
+        "tinChiDangKy": 11,
+        "tinChiTichLuy": 11,
+        "xepLoaiHK": "Giỏi"
+      }
+    }
+  ]
+}

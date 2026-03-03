@@ -4,7 +4,7 @@ const scholarshipData = {
     {
       id: 1,
       title: "Học bổng Khuyến khích học tập - Loại B",
-      type: "Khuyến khích",
+      type: "Nội bộ",
       typeBadgeClass: "type-academic",
       status: "approved",
       statusText: "Đã duyệt",
@@ -92,7 +92,7 @@ const scholarshipData = {
       id: 1,
       title: "Học bổng Khuyến khích - Loại A",
       typeBadge: "Nội bộ",
-      typeBadgeClass: "type-internal",
+      typeBadgeClass: "type-academic",
       amount: "100% học phí",
       amountNote: "Bình quân học phí học kỳ",
       requirements: [
@@ -110,7 +110,7 @@ const scholarshipData = {
       id: 2,
       title: "Học bổng Khuyến khích - Loại B",
       typeBadge: "Nội bộ",
-      typeBadgeClass: "type-internal",
+      typeBadgeClass: "type-academic",
       amount: "70% học phí",
       amountNote: "Bình quân học phí học kỳ",
       requirements: [
@@ -128,7 +128,7 @@ const scholarshipData = {
       id: 3,
       title: "Học bổng Hỗ trợ học tập",
       typeBadge: "Nội bộ",
-      typeBadgeClass: "type-internal",
+      typeBadgeClass: "type-academic",
       amount: "1.500.000đ",
       amountNote: "Theo kết quả học tập",
       requirements: [
@@ -274,14 +274,21 @@ function renderApplicationCard(app) {
 function renderScholarshipCard(scholarship) {
   const requirements = scholarship.requirements
     .map((req) => {
-      const metClass = req.met ? "met" : "not-met";
-      const icon = req.met ? "fa-check" : "fa-circle";
-      return `
-      <div class="requirement-item ${metClass}">
-        <i class="fas ${icon}"></i>
+      if (req.met) {
+        return `
+      <div class="requirement-item">
+        <div class="req-icon req-icon-met"><i class="fas fa-check"></i></div>
         <span>${req.text}</span>
       </div>
     `;
+      } else {
+        return `
+      <div class="requirement-item">
+        <div class="req-icon req-icon-unmet"></div>
+        <span class="req-text-unmet">${req.text}</span>
+      </div>
+    `;
+      }
     })
     .join("");
 
@@ -323,20 +330,27 @@ function renderScholarshipCard(scholarship) {
 function renderScholarshipTable(scholarship) {
   const requirementsCompact = scholarship.requirements
     .map((req) => {
-      const metClass = req.met ? "met" : "not-met";
-      const icon = req.met ? "fa-check" : "fa-circle";
-      return `
-      <div class="requirement-compact ${metClass}">
-        <i class="fas ${icon}"></i>
+      if (req.met) {
+        return `
+      <div class="requirement-compact">
+        <div class="req-icon req-icon-met"><i class="fas fa-check"></i></div>
         <span>${req.text}</span>
       </div>
     `;
+      } else {
+        return `
+      <div class="requirement-compact">
+        <div class="req-icon req-icon-unmet"></div>
+        <span class="req-text-unmet">${req.text}</span>
+      </div>
+    `;
+      }
     })
     .join("");
 
   const applyButton = scholarship.isAutomatic
     ? `<button class="btn-table disabled" disabled>Tự động xét</button>`
-    : `<button class="btn-table btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal" data-scholarship-id="${scholarship.id}">Đăng ký</button>`;
+    : `<button class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyModal" data-scholarship-id="${scholarship.id}">Đăng ký</button>`;
 
   return `
     <tr data-scholarship-id="${scholarship.id}">
@@ -357,7 +371,7 @@ function renderScholarshipTable(scholarship) {
         <div style="font-size: 0.75rem; color: #6b7280; margin-bottom: 0.25rem;">${scholarship.deadline}</div>
         <div style="font-size: 0.75rem; color: #6b7280;">${scholarship.slots}</div>
       </td>
-      <td>
+      <td >
         <div class="table-actions">
           ${applyButton}
           <button class="btn-table" data-bs-toggle="modal" data-bs-target="#detailModal" data-scholarship-id="${scholarship.id}">Chi tiết</button>
@@ -436,7 +450,6 @@ document.addEventListener("DOMContentLoaded", function () {
   renderApplications();
   renderScholarships();
 
-  // View toggle functionality
   const viewToggleBtns = document.querySelectorAll(".view-toggle-btn");
   viewToggleBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -537,17 +550,28 @@ function openDetailModal(scholarship) {
   reqList.innerHTML = "";
   scholarship.requirements.forEach((req) => {
     const li = document.createElement("li");
-    li.innerHTML = `<i class="fas fa-check"></i> ${req.text}`;
+    if (req.met) {
+      li.innerHTML = `<div class="req-icon req-icon-met"><i class="fas fa-check"></i></div><span>${req.text}</span>`;
+    } else {
+      li.innerHTML = `<div class="req-icon req-icon-unmet"></div><span class="req-text-unmet">${req.text}</span>`;
+    }
     reqList.appendChild(li);
   });
 
   document.getElementById("detailDescription").textContent =
     "Học bổng dành cho sinh viên có thành tích học tập xuất sắc, có ý thức rèn luyện tốt. Học bổng được cấp hàng học kỳ dựa trên kết quả học tập của học kỳ trước đó. Sinh viên được nhận học bổng dưới hình thức miễn giảm học phí trực tiếp.";
+
+  const applyBtn = document.querySelector(
+    "#detailModal .modal-footer .btn-apply",
+  );
+  if (applyBtn) {
+    applyBtn.style.display = scholarship.isAutomatic ? "none" : "";
+  }
 }
 
-function openApplyModal(scholarshipId) {
-  closeModal("detailModal");
-}
+// function openApplyModal(scholarshipId) {
+//   closeModal("detailModal");
+// }
 
 function openApplicationDetailModal(app) {
   document.getElementById("appDetailName").textContent = app.title;

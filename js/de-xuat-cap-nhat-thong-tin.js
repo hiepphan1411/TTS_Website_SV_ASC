@@ -187,8 +187,6 @@ $(function () {
     initializeDatepickers();
 
     bindEventHandlers();
-
-    console.log('[v0] Application initialized successfully');
 });
 
 function initializeDatepickers() {
@@ -354,12 +352,6 @@ function addFamilyMember() {
     }
 
     showNotification('Thêm quan hệ gia đình thành công', 'success');
-    console.log('[v0] Family member added:', {
-        name,
-        relation,
-        birthYear,
-        phone,
-    });
 }
 
 // thêm bằng cấp
@@ -433,18 +425,12 @@ function addCertificate() {
     }
 
     showNotification('Thêm bằng cấp thành công', 'success');
-    console.log('[v0] Certificate added:', {
-        certNumber,
-        certDate,
-        certType,
-        certProvince,
-    });
 }
 
 function saveForm(form) {
     const formData = new FormData(form[0]);
     const data = Object.fromEntries(formData);
-    console.log('[v0] Form data saved:', data);
+
     showNotification('Lưu thông tin thành công', 'success');
 }
 
@@ -486,14 +472,14 @@ function escapeHtml(text) {
 $(document).on('click', '.btn-primary:not([data-bs-toggle])', function (e) {
     if ($(this).text().includes('Lưu')) {
         e.preventDefault();
-        console.log('[v0] Save button clicked');
+
         showNotification('Lưu thông tin thành công', 'success');
     }
 });
 
 $(document).on('click', '.btn-outline-secondary', function (e) {
     e.preventDefault();
-    console.log('[v0] Cancel button clicked');
+
     showNotification('Đã hủy các thay đổi', 'info');
 });
 

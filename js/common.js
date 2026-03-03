@@ -22,14 +22,12 @@ function initHeaderDropdown() {
       this.classList.toggle("active");
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener("click", function (e) {
       if (!loginInfor.contains(e.target)) {
         loginInfor.classList.remove("active");
       }
     });
 
-    // Prevent dropdown from closing when clicking inside
     const dropdown = loginInfor.querySelector(".user-dropdown");
     if (dropdown) {
       dropdown.addEventListener("click", function (e) {
@@ -144,7 +142,12 @@ const SidebarManager = (function () {
 
     if (sidebarToggle && sidebar && mainContent) {
       if (window.innerWidth > 768) {
-        mainContent.classList.add("sidebar-open");
+        // mainContent.classList.add("sidebar-open");
+        sidebar.classList.add("collapsed");
+        mainContent.classList.add("sidebar-collapsed");
+
+        const icon = sidebarToggle.querySelector("i");
+        if (icon) icon.className = "fa-solid fa-bars";
       }
 
       const toggleHandler = function (e) {
@@ -235,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sidebar = document.getElementById("sidebar");
     const sidebarToggle = document.getElementById("sidebarToggle");
 
-    if (sidebar || sidebarToggle) {
+    if (sidebar && sidebarToggle) {
       clearInterval(checkSidebar);
       setTimeout(() => {
         SidebarManager.initialize();

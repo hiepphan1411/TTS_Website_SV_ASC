@@ -58,6 +58,12 @@
   color: white;
 }
 
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
 .info-label {
   color: #878787;
   font-size: 12px;

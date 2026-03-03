@@ -297,14 +297,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 .forEach((b) => b.classList.remove('active'));
             this.classList.add('active');
 
-            // Update current tab
+            // update current tab
             currentTab = this.getAttribute('data-tab');
-            console.log(
-                'Changed to tab:',
-                currentTab,
-                'semester:',
-                currentSemester,
-            );
 
             renderAllowedTable();
         });
@@ -318,7 +312,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (value) {
                 currentSemester = value;
-                console.log('Changed to semester:', currentSemester);
 
                 renderAllowedTable();
             }

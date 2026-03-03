@@ -1,34 +1,15 @@
-:root {
-  --primary-color: #3a74f0;
-  --hover-primary-color: #2e86de;
-  --secondary-color: #6c757d;
-  --danger-color: #ee2929;
-  --hover-danger-color: #d32f2f;
-  --success-color: #4caf50;
-  --hover-success-color: #388e3c;
-  --warning-color: #f9b200;
-  --hover-warning-color: #d18c00;
-  --light-bg: #f5f7fa;
-  --border-color: #e0e0e0;
-  --text-dark: #505050;
-  --text-muted: #666;
-
-  --color-dark-heavy: #333;
-  --bg-blue-light: #f5f5f5;
-}
-
 .icon-copy {
   cursor: pointer;
-  color: var(--success-color);
+  color: #4caf50;
 }
 
 .icon-copy:hover {
-  color: var(--hover-primary-color);
+  color: #388e3c;
 }
 
 .icon-edit {
   cursor: pointer;
-  color: var(--text-dark);
+  color: #505050;
 }
 
 .icon-edit:hover {
@@ -37,11 +18,11 @@
 
 .icon-delete {
   cursor: pointer;
-  color: var(--danger-color);
+  color: #ee2929;
 }
 
 .icon-delete:hover {
-  color: var(--hover-danger-color);
+  color: #d32f2f;
 }
 
 .button {
@@ -53,30 +34,30 @@
 }
 
 .btn-add {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #3a74f0;
+  color: #ffffff;
 }
 
 .btn-add:hover {
-  background-color: var(--hover-primary-color);
+  background-color: #2e86de;
 }
 
 .btn-propose {
-  background-color: var(--warning-color);
-  color: white;
+  background-color: #f9b200;
+  color: #ffffff;
 }
 
 .btn-propose:hover {
-  background-color: var(--hover-warning-color);
+  background-color: #d18c00;
 }
 
 .btn-delete {
-  background-color: var(--danger-color);
-  color: white;
+  background-color: #ee2929;
+  color: #ffffff;
 }
 
 .btn-delete:hover {
-  background-color: var(--hover-danger-color);
+  background-color: #d32f2f;
 }
 
 /* Modal */
@@ -111,13 +92,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .modal-title {
   font-size: 20px;
   font-weight: 600;
-  color: var(--color-dark-heavy);
+  color: #333;
   margin: 0;
 }
 
@@ -126,7 +107,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--text-muted);
+  color: #666;
   padding: 0;
   width: 30px;
   height: 30px;
@@ -136,7 +117,7 @@
 }
 
 .modal-close:hover {
-  color: var(--color-dark-heavy);
+  color: #333;
 }
 
 .modal-body {
@@ -161,12 +142,12 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: var(--color-dark-heavy);
+  color: #333;
   font-size: 14px;
 }
 
 .required {
-  color: var(--danger-color);
+  color: #ee2929;
 }
 
 .form-input,
@@ -182,7 +163,7 @@
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: #56a2e8;
 }
 
 .form-textarea {
@@ -198,7 +179,7 @@
 }
 
 .file-upload-area.dragover {
-  border-color: var(--primary-color);
+  border-color: #56a2e8;
   background-color: #f0f8ff;
 }
 
@@ -209,18 +190,18 @@
 
 .upload-placeholder i {
   font-size: 48px;
-  color: var(--primary-color);
+  color: #56a2e8;
   margin-bottom: 10px;
 }
 
 .upload-placeholder p {
   margin: 10px 0 5px 0;
-  color: var(--color-dark-heavy);
+  color: #333;
   font-weight: 500;
 }
 
 .upload-placeholder small {
-  color: var(--text-muted);
+  color: #666;
   font-size: 12px;
 }
 
@@ -233,7 +214,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: var(--bg-blue-light);
+  background-color: #f5f5f5;
   border-radius: 4px;
   margin-bottom: 8px;
 }
@@ -249,19 +230,19 @@
 .file-item button {
   background: none;
   border: none;
-  color: var(--danger-color);
+  color: #ee2929;
   cursor: pointer;
   padding: 5px;
   font-size: 18px;
 }
 
 .file-item button:hover {
-  color: var(--hover-danger-color);
+  color: #d32f2f;
 }
 
 .certificate-modal-footer {
   padding: 20px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid #e0e0e0;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -278,16 +259,16 @@
 }
 
 .btn-cancel {
-  background-color: var(--bg-blue-light);
-  color: var(--color-dark-heavy);
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 .btn-cancel:hover {
-  background-color: var(--border-color);
+  background-color: #e0e0e0;
 }
 
 .btn-save {
-  background-color: var(--primary-color);
+  background-color: #56a2e8;
   color: white;
   display: flex;
   align-items: center;
@@ -295,5 +276,5 @@
 }
 
 .btn-save:hover {
-  background-color: var(--hover-primary-color);
+  background-color: #2e86de;
 }
