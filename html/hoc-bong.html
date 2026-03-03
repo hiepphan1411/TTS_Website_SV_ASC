@@ -1,607 +1,829 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Học bổng</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Học bổng</title>
 
-    <link href="../lib/bootstrap@5.3.8.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/hoc-bong.css" />
-    <script src="../lib/fontawesome.js" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <div id="header-container"></div>
+        <link href="../lib/bootstrap@5.3.8.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/hoc-bong.css" />
+        <script src="../lib/fontawesome.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <div id="header-container"></div>
 
-    <!-- Main Content  -->
-    <main class="main-content">
-      <!-- Sidebar -->
-      <div id="sidebar-container"></div>
+        <!-- Main Content  -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <div id="sidebar-container"></div>
 
-      <!-- Content Area -->
-      <div class="section-content content-area">
-        <!-- Page Header -->
-        <div class="header-section">
-          <div class="header-title">Thông tin học bổng</div>
-          <div class="header-subtitle">Quản lý và đăng ký học bổng</div>
-        </div>
-
-        <!-- TODO: Content here -->
-        <section class="card-access p-4 mb-4">
-          <div class="section-header">
-            <h3>Danh sách hồ sơ</h3>
-            <div class="filter-tabs">
-              <button class="filter-tab active" data-filter="all">
-                Tất cả (2)
-              </button>
-              <button class="filter-tab" data-filter="pending">
-                Đang xét (1)
-              </button>
-              <button class="filter-tab" data-filter="approved">
-                Đã duyệt (1)
-              </button>
-            </div>
-          </div>
-          <div class="applications-list"></div>
-        </section>
-        <section class="card-access p-4">
-          <div class="section-header">
-            <h3>Học bổng đề xuất</h3>
-            <div class="scholarship-filters">
-              <div class="view-toggle">
-                <button class="view-toggle-btn active" data-view="grid">
-                  <i class="fas fa-th"></i>
-                </button>
-                <button class="view-toggle-btn" data-view="table">
-                  <i class="fas fa-list"></i>
-                </button>
-              </div>
-              <select class="filter-select">
-                <option value="all">Tất cả loại</option>
-                <option value="academic">Khuyến khích học tập</option>
-                <option value="support">Hỗ trợ học tập</option>
-                <option value="admission">Tuyển sinh</option>
-                <option value="external">Tài trợ ngoài</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="scholarships-grid"></div>
-        </section>
-      </div>
-    </main>
-
-    <!-- Modal chi tiết học bổng -->
-    <div
-      class="modal fade"
-      id="detailModal"
-      tabindex="-1"
-      aria-labelledby="detailModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="detailModalLabel">Chi tiết học bổng</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-
-          <div class="modal-body">
-            <div class="detail-section">
-              <h4>Thông tin chung</h4>
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <span class="detail-label">Tên học bổng</span>
-                  <span class="detail-value" id="detailName">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Loại học bổng</span>
-                  <span class="detail-value" id="detailType">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Mức học bổng</span>
-                  <span class="detail-value" id="detailAmount">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Số suất</span>
-                  <span class="detail-value" id="detailSlots">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Hạn nộp hồ sơ</span>
-                  <span class="detail-value" id="detailDeadline">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Học kỳ áp dụng</span>
-                  <span class="detail-value" id="detailSemester">-</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="detail-section">
-              <h4>Điều kiện đăng ký</h4>
-              <ul class="detail-list" id="detailRequirements">
-                <li>Đang tải...</li>
-              </ul>
-            </div>
-
-            <div class="detail-section">
-              <h4>Mô tả</h4>
-              <div class="detail-description" id="detailDescription">
-                Đang tải thông tin...
-              </div>
-            </div>
-
-            <div class="detail-section">
-              <h4>Hồ sơ cần nộp</h4>
-              <ul class="detail-list">
-                <li>
-                  <i class="fas fa-check"></i> Đơn xin học bổng (theo mẫu)
-                </li>
-                <li><i class="fas fa-check"></i> Bảng điểm tích lũy</li>
-                <li><i class="fas fa-check"></i> Giấy chứng nhận rèn luyện</li>
-                <li><i class="fas fa-check"></i> CMND/CCCD (bản sao)</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn-details" data-bs-dismiss="modal">
-              Đóng
-            </button>
-            <button type="button" class="btn-apply" onclick="openApplyModal()">
-              Đăng ký ngay
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal đăng ký học bổng -->
-    <div
-      class="modal fade"
-      id="applyModal"
-      tabindex="-1"
-      aria-labelledby="applyModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="applyModalLabel">Đăng ký học bổng</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-
-          <div class="modal-body">
-            <form id="applyForm">
-              <div class="detail-section">
-                <h4>Thông tin sinh viên</h4>
-                <div class="detail-grid">
-                  <div class="detail-item">
-                    <span class="detail-label">Họ và tên</span>
-                    <span class="detail-value">ASC Test</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">MSSV</span>
-                    <span class="detail-value">21012345</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Khoa/Ngành</span>
-                    <span class="detail-value">Công nghệ Thông tin</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Lớp</span>
-                    <span class="detail-value">DHKTPM17A</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">GPA tích lũy</span>
-                    <span class="detail-value">3.62</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Tín chỉ tích lũy</span>
-                    <span class="detail-value">95</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Điểm rèn luyện</span>
-                    <span class="detail-value">90</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Học kỳ</span>
-                    <span class="detail-value">HK2 2024-2025</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="detail-section">
-                <h4>Thông tin liên hệ</h4>
-                <div class="form-row">
-                  <div class="form-field">
-                    <label>Số điện thoại <span class="required">*</span></label>
-                    <input
-                      type="tel"
-                      placeholder="Nhập số điện thoại"
-                      required
-                    />
-                    <span class="field-hint">
-                      Số điện thoại để nhà trường liên hệ
-                    </span>
-                  </div>
-                  <div class="form-field">
-                    <label>Email liên hệ</label>
-                    <input type="email" value="21012345@student.iuh.edu.vn" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="detail-section">
-                <h4>Lý do và cam kết</h4>
-
-                <div class="form-field full-width">
-                  <label>Lý do đăng ký <span class="required">*</span></label>
-                  <textarea
-                    rows="4"
-                    required
-                    placeholder="Vui lòng mô tả lý do bạn xin học bổng này..."
-                  ></textarea>
-                  <span class="field-hint">
-                    Tối thiểu 50 từ - Mô tả rõ lý do, mục tiêu và kế hoạch sử
-                    dụng học bổng
-                  </span>
-                </div>
-
-                <div class="form-field full-width">
-                  <label>Hoàn cảnh gia đình</label>
-                  <textarea
-                    rows="3"
-                    placeholder="Mô tả ngắn gọn về hoàn cảnh gia đình (nếu có)"
-                  ></textarea>
-                  <span class="field-hint">
-                    Không bắt buộc - Chỉ cần điền nếu có hoàn cảnh đặc biệt
-                  </span>
-                </div>
-
-                <div class="form-field full-width">
-                  <label>Thành tích nổi bật</label>
-                  <textarea
-                    rows="3"
-                    placeholder="Các giải thưởng, chứng chỉ, dự án, hoạt động xã hội..."
-                  ></textarea>
-                  <span class="field-hint">
-                    Không bắt buộc - Giúp tăng cơ hội được xét duyệt
-                  </span>
-                </div>
-              </div>
-
-              <div class="detail-section">
-                <h4>Hồ sơ đính kèm <span class="required">*</span></h4>
-                <div class="form-field full-width">
-                  <div
-                    class="file-upload"
-                    onclick="document.getElementById('applyFileInput').click()"
-                  >
-                    <input
-                      type="file"
-                      id="applyFileInput"
-                      multiple
-                      accept=".pdf,.jpg,.jpeg,.png"
-                    />
-                    <div class="file-upload-content">
-                      <div class="file-upload-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                      </div>
-                      <div class="file-upload-text">
-                        Nhấn để chọn file hoặc kéo thả file vào đây
-                      </div>
-                      <div class="file-upload-hint">
-                        PDF, JPG, PNG - Tối đa 5MB mỗi file
-                      </div>
+            <!-- Content Area -->
+            <div class="section-content content-area">
+                <!-- Page Header -->
+                <div class="header-section">
+                    <div class="header-title">Thông tin học bổng</div>
+                    <div class="header-subtitle">
+                        Quản lý và đăng ký học bổng
                     </div>
-                  </div>
-
-                  <span class="field-hint">
-                    <strong>Yêu cầu:</strong>
-                    Đơn xin học bổng, Bảng điểm, Giấy rèn luyện, CMND/CCCD
-                  </span>
-
-                  <div class="uploaded-files" id="uploadedFilesList"></div>
                 </div>
-              </div>
 
-              <div class="detail-highlight">
-                <i class="fas fa-exclamation-triangle"></i>
-                <strong>Cam kết:</strong>
-                Tôi xin cam đoan những thông tin trên là đúng sự thật và chịu
-                hoàn toàn trách nhiệm.
-              </div>
-            </form>
-          </div>
+                <!-- TODO: Content here -->
+                <section class="card-access p-4 mb-4">
+                    <div class="section-header">
+                        <h3>Danh sách hồ sơ</h3>
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all">
+                                Tất cả (2)
+                            </button>
+                            <button class="filter-tab" data-filter="pending">
+                                Đang xét (1)
+                            </button>
+                            <button class="filter-tab" data-filter="approved">
+                                Đã duyệt (1)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="applications-list"></div>
+                </section>
+                <section class="card-access p-4">
+                    <div class="section-header">
+                        <h3>Học bổng đề xuất</h3>
+                        <div class="scholarship-filters">
+                            <div class="view-toggle">
+                                <button
+                                    class="view-toggle-btn active"
+                                    data-view="grid"
+                                >
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button
+                                    class="view-toggle-btn"
+                                    data-view="table"
+                                >
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                            <select class="filter-select">
+                                <option value="all">Tất cả loại</option>
+                                <option value="academic">
+                                    Khuyến khích học tập
+                                </option>
+                                <option value="support">Hỗ trợ học tập</option>
+                                <option value="admission">Tuyển sinh</option>
+                                <option value="external">Tài trợ ngoài</option>
+                            </select>
+                        </div>
+                    </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn-details" data-bs-dismiss="modal">
-              Hủy
-            </button>
-            <button type="submit" form="applyForm" class="btn-apply">
-              Nộp hồ sơ
-            </button>
-          </div>
+                    <div class="scholarships-grid"></div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Modal chi tiết học bổng -->
+        <div
+            class="modal fade"
+            id="detailModal"
+            tabindex="-1"
+            aria-labelledby="detailModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detailModalLabel">
+                            Chi tiết học bổng
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="detail-section">
+                            <h4>Thông tin chung</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Tên học bổng</span
+                                    >
+                                    <span class="detail-value" id="detailName"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Loại học bổng</span
+                                    >
+                                    <span class="detail-value" id="detailType"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Mức học bổng</span
+                                    >
+                                    <span class="detail-value" id="detailAmount"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Số suất</span>
+                                    <span class="detail-value" id="detailSlots"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Hạn nộp hồ sơ</span
+                                    >
+                                    <span
+                                        class="detail-value"
+                                        id="detailDeadline"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Học kỳ áp dụng</span
+                                    >
+                                    <span
+                                        class="detail-value"
+                                        id="detailSemester"
+                                        >-</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Điều kiện đăng ký</h4>
+                            <ul class="detail-list" id="detailRequirements">
+                                <li>Đang tải...</li>
+                            </ul>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Mô tả</h4>
+                            <div
+                                class="detail-description"
+                                id="detailDescription"
+                            >
+                                Đang tải thông tin...
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Hồ sơ cần nộp</h4>
+                            <ul class="detail-list">
+                                <li>
+                                    <i class="fas fa-check"></i> Đơn xin học
+                                    bổng (theo mẫu)
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i> Bảng điểm tích
+                                    lũy
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i> Giấy chứng nhận
+                                    rèn luyện
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i> CMND/CCCD (bản
+                                    sao)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn-details"
+                            data-bs-dismiss="modal"
+                        >
+                            Đóng
+                        </button>
+                        <button
+                            type="button"
+                            class="btn-apply"
+                            onclick="openApplyModal()"
+                        >
+                            Đăng ký ngay
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- Modal chi tiết hồ sơ -->
-    <div
-      class="modal fade"
-      id="applicationDetailModal"
-      tabindex="-1"
-      aria-labelledby="applicationDetailModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="applicationDetailModalLabel">
-              Chi tiết hồ sơ
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
 
-          <div class="modal-body">
-            <div class="detail-section">
-              <h4>Thông tin học bổng</h4>
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <span class="detail-label">Tên học bổng</span>
-                  <span class="detail-value" id="appDetailName">-</span>
+        <!-- Modal đăng ký học bổng -->
+        <div
+            class="modal fade"
+            id="applyModal"
+            tabindex="-1"
+            aria-labelledby="applyModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applyModalLabel">
+                            Đăng ký học bổng
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="applyForm">
+                            <div class="detail-section">
+                                <h4>Thông tin sinh viên</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label"
+                                            >Họ và tên</span
+                                        >
+                                        <span class="detail-value"
+                                            >ASC Test</span
+                                        >
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">MSSV</span>
+                                        <span class="detail-value"
+                                            >21012345</span
+                                        >
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label"
+                                            >Khoa/Ngành</span
+                                        >
+                                        <span class="detail-value"
+                                            >Công nghệ Thông tin</span
+                                        >
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Lớp</span>
+                                        <span class="detail-value"
+                                            >DHKTPM17A</span
+                                        >
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label"
+                                            >GPA tích lũy</span
+                                        >
+                                        <span class="detail-value">3.62</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label"
+                                            >Tín chỉ tích lũy</span
+                                        >
+                                        <span class="detail-value">95</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label"
+                                            >Điểm rèn luyện</span
+                                        >
+                                        <span class="detail-value">90</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Học kỳ</span>
+                                        <span class="detail-value"
+                                            >HK2 2024-2025</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h4>Thông tin liên hệ</h4>
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label
+                                            >Số điện thoại
+                                            <span class="required"
+                                                >*</span
+                                            ></label
+                                        >
+                                        <input
+                                            type="tel"
+                                            placeholder="Nhập số điện thoại"
+                                            required
+                                        />
+                                        <span class="field-hint">
+                                            Số điện thoại để nhà trường liên hệ
+                                        </span>
+                                    </div>
+                                    <div class="form-field">
+                                        <label>Email liên hệ</label>
+                                        <input
+                                            type="email"
+                                            value="21012345@student.iuh.edu.vn"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h4>Lý do và cam kết</h4>
+
+                                <div class="form-field full-width">
+                                    <label
+                                        >Lý do đăng ký
+                                        <span class="required">*</span></label
+                                    >
+                                    <textarea
+                                        rows="4"
+                                        required
+                                        placeholder="Vui lòng mô tả lý do bạn xin học bổng này..."
+                                    ></textarea>
+                                    <span class="field-hint">
+                                        Tối thiểu 50 từ - Mô tả rõ lý do, mục
+                                        tiêu và kế hoạch sử dụng học bổng
+                                    </span>
+                                </div>
+
+                                <div class="form-field full-width">
+                                    <label>Hoàn cảnh gia đình</label>
+                                    <textarea
+                                        rows="3"
+                                        placeholder="Mô tả ngắn gọn về hoàn cảnh gia đình (nếu có)"
+                                    ></textarea>
+                                    <span class="field-hint">
+                                        Không bắt buộc - Chỉ cần điền nếu có
+                                        hoàn cảnh đặc biệt
+                                    </span>
+                                </div>
+
+                                <div class="form-field full-width">
+                                    <label>Thành tích nổi bật</label>
+                                    <textarea
+                                        rows="3"
+                                        placeholder="Các giải thưởng, chứng chỉ, dự án, hoạt động xã hội..."
+                                    ></textarea>
+                                    <span class="field-hint">
+                                        Không bắt buộc - Giúp tăng cơ hội được
+                                        xét duyệt
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h4>
+                                    Hồ sơ đính kèm
+                                    <span class="required">*</span>
+                                </h4>
+                                <div class="form-field full-width">
+                                    <div
+                                        class="file-upload"
+                                        onclick="
+                                            document
+                                                .getElementById(
+                                                    'applyFileInput',
+                                                )
+                                                .click()
+                                        "
+                                    >
+                                        <input
+                                            type="file"
+                                            id="applyFileInput"
+                                            multiple
+                                            accept=".pdf,.jpg,.jpeg,.png"
+                                        />
+                                        <div class="file-upload-content">
+                                            <div class="file-upload-icon">
+                                                <i
+                                                    class="fas fa-cloud-upload-alt"
+                                                ></i>
+                                            </div>
+                                            <div class="file-upload-text">
+                                                Nhấn để chọn file hoặc kéo thả
+                                                file vào đây
+                                            </div>
+                                            <div class="file-upload-hint">
+                                                PDF, JPG, PNG - Tối đa 5MB mỗi
+                                                file
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span class="field-hint">
+                                        <strong>Yêu cầu:</strong>
+                                        Đơn xin học bổng, Bảng điểm, Giấy rèn
+                                        luyện, CMND/CCCD
+                                    </span>
+
+                                    <div
+                                        class="uploaded-files"
+                                        id="uploadedFilesList"
+                                    ></div>
+                                </div>
+                            </div>
+
+                            <div class="detail-highlight">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Cam kết:</strong>
+                                Tôi xin cam đoan những thông tin trên là đúng sự
+                                thật và chịu hoàn toàn trách nhiệm.
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn-details"
+                            data-bs-dismiss="modal"
+                        >
+                            Hủy
+                        </button>
+                        <button
+                            type="submit"
+                            form="applyForm"
+                            class="btn-apply"
+                        >
+                            Nộp hồ sơ
+                        </button>
+                    </div>
                 </div>
-                <div class="detail-item">
-                  <span class="detail-label">Loại học bổng</span>
-                  <span class="detail-value" id="appDetailType">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Mức học bổng</span>
-                  <span class="detail-value" id="appDetailAmount">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Học kỳ</span>
-                  <span class="detail-value" id="appDetailSemester">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Ngày nộp</span>
-                  <span class="detail-value" id="appDetailSubmitDate">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Trạng thái</span>
-                  <span class="detail-value" id="appDetailStatus">-</span>
-                </div>
-              </div>
             </div>
-
-            <div class="detail-section">
-              <h4>Thông tin sinh viên</h4>
-              <div class="detail-grid">
-                <div class="detail-item">
-                  <span class="detail-label">Họ và tên</span>
-                  <span class="detail-value">ASC Test</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">MSSV</span>
-                  <span class="detail-value">21012345</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Khoa/Ngành</span>
-                  <span class="detail-value">Công nghệ Thông tin</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Lớp</span>
-                  <span class="detail-value">DHKTPM17A</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">GPA</span>
-                  <span class="detail-value" id="appDetailGPA">-</span>
-                </div>
-                <div class="detail-item">
-                  <span class="detail-label">Điểm rèn luyện</span>
-                  <span class="detail-value">Giỏi (85)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="detail-section">
-              <h4>Lý do đăng ký</h4>
-              <div class="detail-description" id="appDetailReason">
-                Em mong muốn được nhận học bổng để có điều kiện tập trung học
-                tập và nghiên cứu tốt hơn. Em cam kết sẽ nỗ lực học tập để đạt
-                kết quả cao nhất và đóng góp cho cộng đồng.
-              </div>
-            </div>
-
-            <div class="detail-section">
-              <h4><i class="fas fa-folder-open"></i> Hồ sơ đã nộp</h4>
-              <ul class="detail-list">
-                <li>
-                  <i class="fas fa-file-pdf"></i>
-                  <span>don-xin-hoc-bong.pdf</span>
-                  <button class="btn-link" style="margin-left: auto">
-                    <i class="fas fa-download"></i> Tải xuống
-                  </button>
-                </li>
-
-                <li>
-                  <i class="fas fa-file-image"></i>
-                  <span>giay-chung-nhan-ren-luyen.jpg</span>
-                  <button class="btn-link" style="margin-left: auto">
-                    <i class="fas fa-download"></i> Tải xuống
-                  </button>
-                </li>
-                <li>
-                  <i class="fas fa-file-image"></i>
-                  <span>cmnd-mat-truoc.jpg</span>
-                  <button class="btn-link" style="margin-left: auto">
-                    <i class="fas fa-download"></i> Tải xuống
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            <div class="detail-section" id="approvalNote" style="display: none">
-              <h4><i class="fas fa-sticky-note"></i> Ghi chú phê duyệt</h4>
-              <div class="detail-description">
-                Hồ sơ đã được xét duyệt. Sinh viên vui lòng theo dõi thông báo
-                để biết thêm chi tiết.
-              </div>
-            </div>
-
-            <div class="detail-highlight" id="pendingNote">
-              <strong>Lưu ý:</strong>
-              Hồ sơ đang được xét duyệt. Vui lòng theo dõi thông báo và tiến độ
-              để nộp hồ sơ bản cứng đúng hạn.
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn-details" data-bs-dismiss="modal">
-              Đóng
-            </button>
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- Modal chỉnh sửa hồ sơ -->
-    <div
-      class="modal fade"
-      id="editModal"
-      tabindex="-1"
-      aria-labelledby="editModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Chỉnh sửa hồ sơ</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
+        <!-- Modal chi tiết hồ sơ -->
+        <div
+            class="modal fade"
+            id="applicationDetailModal"
+            tabindex="-1"
+            aria-labelledby="applicationDetailModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5
+                            class="modal-title"
+                            id="applicationDetailModalLabel"
+                        >
+                            Chi tiết hồ sơ
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
 
-          <div class="modal-body">
-            <div class="form-info-box">
-              Cập nhật thông tin hồ sơ đăng ký học bổng của bạn
+                    <div class="modal-body">
+                        <div class="detail-section">
+                            <h4>Thông tin học bổng</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Tên học bổng</span
+                                    >
+                                    <span
+                                        class="detail-value"
+                                        id="appDetailName"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Loại học bổng</span
+                                    >
+                                    <span
+                                        class="detail-value"
+                                        id="appDetailType"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Mức học bổng</span
+                                    >
+                                    <span
+                                        class="detail-value"
+                                        id="appDetailAmount"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Học kỳ</span>
+                                    <span
+                                        class="detail-value"
+                                        id="appDetailSemester"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Ngày nộp</span>
+                                    <span
+                                        class="detail-value"
+                                        id="appDetailSubmitDate"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Trạng thái</span>
+                                    <span
+                                        class="detail-value"
+                                        id="appDetailStatus"
+                                        >-</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Thông tin sinh viên</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Họ và tên</span>
+                                    <span class="detail-value">ASC Test</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">MSSV</span>
+                                    <span class="detail-value">21012345</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Khoa/Ngành</span>
+                                    <span class="detail-value"
+                                        >Công nghệ Thông tin</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Lớp</span>
+                                    <span class="detail-value">DHKTPM17A</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">GPA</span>
+                                    <span class="detail-value" id="appDetailGPA"
+                                        >-</span
+                                    >
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"
+                                        >Điểm rèn luyện</span
+                                    >
+                                    <span class="detail-value">Giỏi (85)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Lý do đăng ký</h4>
+                            <div
+                                class="detail-description"
+                                id="appDetailReason"
+                            >
+                                Em mong muốn được nhận học bổng để có điều kiện
+                                tập trung học tập và nghiên cứu tốt hơn. Em cam
+                                kết sẽ nỗ lực học tập để đạt kết quả cao nhất và
+                                đóng góp cho cộng đồng.
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>
+                                <i class="fas fa-folder-open"></i> Hồ sơ đã nộp
+                            </h4>
+                            <ul class="detail-list">
+                                <li>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>don-xin-hoc-bong.pdf</span>
+                                    <button
+                                        class="btn-link"
+                                        style="margin-left: auto"
+                                    >
+                                        <i class="fas fa-download"></i> Tải
+                                        xuống
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <i class="fas fa-file-image"></i>
+                                    <span>giay-chung-nhan-ren-luyen.jpg</span>
+                                    <button
+                                        class="btn-link"
+                                        style="margin-left: auto"
+                                    >
+                                        <i class="fas fa-download"></i> Tải
+                                        xuống
+                                    </button>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-image"></i>
+                                    <span>cmnd-mat-truoc.jpg</span>
+                                    <button
+                                        class="btn-link"
+                                        style="margin-left: auto"
+                                    >
+                                        <i class="fas fa-download"></i> Tải
+                                        xuống
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="detail-section"
+                            id="approvalNote"
+                            style="display: none"
+                        >
+                            <h4>
+                                <i class="fas fa-sticky-note"></i> Ghi chú phê
+                                duyệt
+                            </h4>
+                            <div class="detail-description">
+                                Hồ sơ đã được xét duyệt. Sinh viên vui lòng theo
+                                dõi thông báo để biết thêm chi tiết.
+                            </div>
+                        </div>
+
+                        <div class="detail-highlight" id="pendingNote">
+                            <strong>Lưu ý:</strong>
+                            Hồ sơ đang được xét duyệt. Vui lòng theo dõi thông
+                            báo và tiến độ để nộp hồ sơ bản cứng đúng hạn.
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn-details"
+                            data-bs-dismiss="modal"
+                        >
+                            Đóng
+                        </button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <!-- Modal chỉnh sửa hồ sơ -->
+        <div
+            class="modal fade"
+            id="editModal"
+            tabindex="-1"
+            aria-labelledby="editModalLabel"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">
+                            Chỉnh sửa hồ sơ
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
 
-            <form id="editForm">
-              <div class="form-row">
-                <div class="form-field">
-                  <label>Email <span class="required">*</span></label>
-                  <input
-                    type="email"
-                    value="21012345@student.iuh.edu.vn"
-                    required
-                  />
-                </div>
-                <div class="form-field">
-                  <label>Số điện thoại <span class="required">*</span></label>
-                  <input type="tel" value="0123456789" required />
-                </div>
-              </div>
+                    <div class="modal-body">
+                        <div class="form-info-box">
+                            Cập nhật thông tin hồ sơ đăng ký học bổng của bạn
+                        </div>
 
-              <div class="form-field full-width">
-                <label>Lý do đăng ký</label>
-                <textarea placeholder="Nhập lý do bạn xin học bổng này...">
+                        <form id="editForm">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label
+                                        >Email
+                                        <span class="required">*</span></label
+                                    >
+                                    <input
+                                        type="email"
+                                        value="21012345@student.iuh.edu.vn"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-field">
+                                    <label
+                                        >Số điện thoại
+                                        <span class="required">*</span></label
+                                    >
+                                    <input
+                                        type="tel"
+                                        value="0123456789"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-field full-width">
+                                <label>Lý do đăng ký</label>
+                                <textarea
+                                    placeholder="Nhập lý do bạn xin học bổng này..."
+                                >
 Em mong muốn được nhận học bổng để có điều kiện tập trung học tập và nghiên cứu tốt hơn.</textarea
-                >
-              </div>
+                                >
+                            </div>
 
-              <div class="form-field full-width">
-                <label>Hoàn cảnh gia đình</label>
-                <textarea
-                  placeholder="Mô tả ngắn gọn về hoàn cảnh gia đình..."
-                ></textarea>
-              </div>
+                            <div class="form-field full-width">
+                                <label>Hoàn cảnh gia đình</label>
+                                <textarea
+                                    placeholder="Mô tả ngắn gọn về hoàn cảnh gia đình..."
+                                ></textarea>
+                            </div>
 
-              <div class="form-field full-width">
-                <label>Hồ sơ đính kèm</label>
-                <div
-                  class="file-upload"
-                  onclick="document.getElementById('editFileInput').click()"
-                >
-                  <input type="file" id="editFileInput" multiple />
-                  <div class="file-upload-content">
-                    <div class="file-upload-icon">
-                      <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="form-field full-width">
+                                <label>Hồ sơ đính kèm</label>
+                                <div
+                                    class="file-upload"
+                                    onclick="
+                                        document
+                                            .getElementById('editFileInput')
+                                            .click()
+                                    "
+                                >
+                                    <input
+                                        type="file"
+                                        id="editFileInput"
+                                        multiple
+                                    />
+                                    <div class="file-upload-content">
+                                        <div class="file-upload-icon">
+                                            <i
+                                                class="fas fa-cloud-upload-alt"
+                                            ></i>
+                                        </div>
+                                        <div class="file-upload-text">
+                                            Nhấn để chọn file hoặc kéo thả file
+                                            vào đây
+                                        </div>
+                                        <div class="file-upload-hint">
+                                            PDF, JPG, PNG - Tối đa 5MB mỗi file
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uploaded-files">
+                                    <div class="uploaded-file">
+                                        <div class="uploaded-file-info">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span>don-xin-hoc-bong.pdf</span>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="remove-file"
+                                        >
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="uploaded-file">
+                                        <div class="uploaded-file-info">
+                                            <i class="fas fa-file-image"></i>
+                                            <span>bang-diem.jpg</span>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="remove-file"
+                                        >
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="file-upload-text">
-                      Nhấn để chọn file hoặc kéo thả file vào đây
+
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn-details"
+                            data-bs-dismiss="modal"
+                        >
+                            Hủy
+                        </button>
+                        <button type="submit" form="editForm" class="btn-apply">
+                            Lưu thay đổi
+                        </button>
                     </div>
-                    <div class="file-upload-hint">
-                      PDF, JPG, PNG - Tối đa 5MB mỗi file
-                    </div>
-                  </div>
                 </div>
-
-                <div class="uploaded-files">
-                  <div class="uploaded-file">
-                    <div class="uploaded-file-info">
-                      <i class="fas fa-file-pdf"></i>
-                      <span>don-xin-hoc-bong.pdf</span>
-                    </div>
-                    <button type="button" class="remove-file">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-
-                  <div class="uploaded-file">
-                    <div class="uploaded-file-info">
-                      <i class="fas fa-file-image"></i>
-                      <span>bang-diem.jpg</span>
-                    </div>
-                    <button type="button" class="remove-file">
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn-details" data-bs-dismiss="modal">
-              Hủy
-            </button>
-            <button type="submit" form="editForm" class="btn-apply">
-              Lưu thay đổi
-            </button>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <script src="../js/common.js"></script>
-    <script src="../js/hoc-bong.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+        <script src="../js/common.js"></script>
+        <script src="../js/hoc-bong.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

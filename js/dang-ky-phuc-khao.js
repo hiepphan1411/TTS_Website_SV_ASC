@@ -249,10 +249,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.querySelectorAll('.tab-buttons .btn').forEach((btn) => {
+    document.querySelectorAll('.tab-buttons-dkpk .btn').forEach((btn) => {
         btn.addEventListener('click', function () {
             document
-                .querySelectorAll('.tab-buttons .btn')
+                .querySelectorAll('.tab-buttons-dkpk .btn')
                 .forEach((b) => b.classList.remove('active'));
             this.classList.add('active');
 
