@@ -133,13 +133,9 @@ const courses = [
 ];
 
 // Data lớp học phần
-// Trạng thái:
-// - Chờ sinh viên đăng ký: registered < 50% slots
-// - Đang lên kế hoạch: 50% <= registered < 100% slots
-// - Đã khóa: registered >= slots
 const classes = {
     1: [
-        // Lớp 01 - Chờ sinh viên đăng ký (30/100 = 30%)
+        // Lớp 01 - Chờ sinh viên đăng ký (30/100)
         {
             id: '01',
             courseCode: 'THCS101',
@@ -189,7 +185,7 @@ const classes = {
                 },
             ],
         },
-        // Lớp 02 - Đang lên kế hoạch (65/100 = 65%)
+        // Lớp 02 - Đang lên kế hoạch (65/100)
         {
             id: '02',
             courseCode: 'THCS101',
@@ -238,7 +234,7 @@ const classes = {
                 },
             ],
         },
-        // Lớp 03 - Đã khóa (80/80 = 100%)
+        // Lớp 03 - Đã khóa (80/80)
         {
             id: '03',
             courseCode: 'THCS101',
@@ -266,7 +262,7 @@ const classes = {
 
     // Môn 2: Cấu trúc dữ liệu và giải thuật - THCS102
     2: [
-        // Lớp 01 - Chờ sinh viên đăng ký (25/100 = 25%)
+        // Lớp 01 - Chờ sinh viên đăng ký (25/100)
         {
             id: '01',
             courseCode: 'THCS102',
@@ -303,7 +299,7 @@ const classes = {
                 },
             ],
         },
-        // Lớp 02 - Đang lên kế hoạch (70/90 = 78%)
+        // Lớp 02 - Đang lên kế hoạch (70/90)
         {
             id: '02',
             courseCode: 'THCS102',
@@ -327,7 +323,7 @@ const classes = {
             ],
             practiceClasses: [],
         },
-        // Lớp 03 - Đã khóa (100/100 = 100%)
+        // Lớp 03 - Đã khóa (100/100)
         {
             id: '03',
             courseCode: 'THCS102',
@@ -368,7 +364,7 @@ const classes = {
 
     // Môn 3: Cơ sở dữ liệu - THCS201
     3: [
-        // Lớp 01 - Chờ sinh viên đăng ký (35/120 = 29%)
+        // Lớp 01 - Chờ sinh viên đăng ký (35/120)
         {
             id: '01',
             courseCode: 'THCS201',
@@ -417,7 +413,7 @@ const classes = {
                 },
             ],
         },
-        // Lớp 02 - Đang lên kế hoạch (85/110 = 77%)
+        // Lớp 02 - Đang lên kế hoạch (85/110)
         {
             id: '02',
             courseCode: 'THCS201',
@@ -454,7 +450,7 @@ const classes = {
                 },
             ],
         },
-        // Lớp 03 - Đã khóa (90/90 = 100%)
+        // Lớp 03 - Đã khóa (90/90)
         {
             id: '03',
             courseCode: 'THCS201',
@@ -1389,7 +1385,7 @@ function init() {
     attachEventHandlers();
 }
 
-//bảng môn học
+// table course
 function renderCourseTable() {
     const searchText = $('#searchCourse').val().toLowerCase();
     const activeTab = $('.tab-item.active').data('tab');
@@ -1429,7 +1425,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC TIÊN QUYẾT (B)</div>
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN TIÊN QUYẾT</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1446,7 +1442,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #28a745; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC TIÊN QUYẾT (B)</div>
+                        <div style="color: #28a745; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN HỌC TRƯỚC</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1463,7 +1459,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #1976d2; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC SONG HÀNH</div>
+                        <div style="color: #1976d2; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN SONG HÀNH</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1489,7 +1485,7 @@ function renderCourseTable() {
         let rowClass = '';
         if (course.condition === 'A' && prerequisite) {
             rowClass = 'not-eligible';
-            rowTooltipContent = conditionTooltip; // Sử dụng lại tooltip đã tạo
+            rowTooltipContent = conditionTooltip; // Sử dụng lại tooltip
         }
 
         const row = $(`
@@ -1505,14 +1501,14 @@ function renderCourseTable() {
                     </tr>
                 `);
 
-        // Chỉ cho phép click nếu không phải dòng không đủ điều kiện
+        // Chỉ cho phép click nếu đủ điều kiện
         if (course.condition !== 'A') {
             row.on('click', function () {
                 selectCourse(course);
             });
             row.css('cursor', 'pointer');
         } else {
-            row.css('pointer-events', 'auto'); // Cho phép hover để xem tooltip
+            row.css('pointer-events', 'auto'); // Cho phép hover xem tooltip
             row.css('cursor', 'not-allowed');
         }
 
@@ -1528,7 +1524,6 @@ function renderCourseTable() {
 
             if (!tooltipContent) return;
 
-            // Tooltip
             const $tooltip = $('<div class="tooltip"></div>').html(
                 tooltipContent,
             );
@@ -1556,7 +1551,7 @@ function renderCourseTable() {
             setTimeout(() => $('.tooltip').remove(), 200);
         });
 
-    // Xử lý tooltip cho dòng chưa đủ điều kiện
+    // tooltip cho dòng chưa đủ điều kiện
     $('.table-courses tbody tr.not-eligible')
         .off('mouseenter mouseleave')
         .on('mouseenter', function (e) {
@@ -1565,13 +1560,12 @@ function renderCourseTable() {
 
             if (!tooltipContent) return;
 
-            // Tạo tooltip giống như tooltip cột điều kiện
             const $tooltip = $('<div class="tooltip row-tooltip"></div>').html(
                 tooltipContent,
             );
             $('body').append($tooltip);
 
-            // Tính vị trí - hiển thị giữa dòng (phía trên hoặc dưới)
+            // hiển thị giữa dòng
             const rowRect = this.getBoundingClientRect();
             const tooltipWidth = 260;
             const tooltipHeight = $tooltip.outerHeight();
@@ -1580,7 +1574,7 @@ function renderCourseTable() {
             const tooltipLeft =
                 rowRect.left + rowRect.width / 2 - tooltipWidth / 2;
 
-            // Kiểm tra vị trí hiển thị (trên hoặc dưới)
+            // Kiểm tra vị trí hiển thị (trên || dưới)
             const spaceAbove = rowRect.top;
             const spaceBelow = $(window).height() - rowRect.bottom;
 
@@ -1636,7 +1630,7 @@ function selectCourse(course) {
                 </div>
             `);
 
-    // Scroll xuống phần lớp học phần
+    // Scroll xuống lớp học phần chờ đăng ký
     setTimeout(() => {
         const waitingSection = $('.two-column');
         if (waitingSection.length) {
@@ -1679,11 +1673,11 @@ function renderWaitingClasses(courseId) {
         if (available <= 0) {
             statusClass = 'disabled';
             statusText = 'Đã khóa';
-            canRegister = false; // Không cho phép đăng ký
+            canRegister = false;
         } else if (cls.registered > cls.slots * 0.5) {
             statusClass = 'waiting';
             statusText = 'Đang lên kế hoạch';
-            canRegister = false; // Không cho phép đăng ký
+            canRegister = false;
         }
 
         cls.statusClass = statusClass;
@@ -1873,7 +1867,7 @@ function renderClassDetail(courseId, cls) {
 
     $('#classDetailContainer').html(html);
 
-    // event radio buttons cập nhật số nhóm
+    // event radio cập nhật số nhóm
     $('input[name="practice"]').on('change', function () {
         const selectedIndex = $(this).val();
         const selectedPractice = cls.practiceClasses[selectedIndex];
@@ -1979,7 +1973,6 @@ function renderRegisteredTable() {
     tbody.empty();
 
     registeredClasses.forEach((reg, index) => {
-        const theorySchedule = reg.class.theoryClasses[reg.theoryChoice];
         const practiceSchedule =
             reg.practiceChoice !== null
                 ? reg.class.practiceClasses[reg.practiceChoice]
@@ -2000,7 +1993,7 @@ function renderRegisteredTable() {
                         <td>3,380,000</td>
                         <td>30/05/2025</td>
                         <td>Đã thu</td>
-                        <td>Chưa xóa</td>
+                        <td><span class="status-label ready">Chờ sinh viên đăng ký</span></td>
                         <td>
                             <span class="action-icon view" onclick="viewRegistered(${index})" title="Xem"><i class="fa-solid fa-eye"></i></span>
                             <span class="action-icon delete" onclick="deleteRegistered(${index})" title="Xóa"><i class="fa-solid fa-trash"></i></span>
@@ -2025,12 +2018,6 @@ function deleteRegistered(index) {
 
 function viewRegistered(index) {
     const reg = registeredClasses[index];
-    const theorySchedule =
-        reg.class.theoryClasses.length > 0 ? reg.class.theoryClasses[0] : null;
-    const practiceSchedule =
-        reg.practiceChoice !== null
-            ? reg.class.practiceClasses[reg.practiceChoice]
-            : null;
 
     // Thông tin chung - layout ngang theo ảnh
     let modalHtml = `
@@ -2129,7 +2116,7 @@ function viewRegistered(index) {
     openDetailModal('Chi tiết lớp học phần', modalHtml);
 }
 
-// Mở modal
+// mở modal
 function openDetailModal(title, content) {
     const html = `
         <div class="modal-overlay" onclick="closeDetailModal(event)">
