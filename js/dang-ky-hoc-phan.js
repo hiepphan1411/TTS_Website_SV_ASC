@@ -1385,7 +1385,7 @@ function init() {
     attachEventHandlers();
 }
 
-//bảng môn học
+// table course
 function renderCourseTable() {
     const searchText = $('#searchCourse').val().toLowerCase();
     const activeTab = $('.tab-item.active').data('tab');
@@ -1425,7 +1425,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC TIÊN QUYẾT (B)</div>
+                        <div style="color: #dc3545; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN TIÊN QUYẾT</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1442,7 +1442,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #28a745; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC TIÊN QUYẾT (B)</div>
+                        <div style="color: #28a745; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN HỌC TRƯỚC</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1459,7 +1459,7 @@ function renderCourseTable() {
             if (prerequisite) {
                 conditionTooltip = `
                     <div style="margin-bottom: 10px;">
-                        <div style="color: #1976d2; font-weight: bold; margin-bottom: 8px; font-size: 13px;">MÔN HỌC SONG HÀNH</div>
+                        <div style="color: #1976d2; font-weight: bold; margin-bottom: 8px; font-size: 13px;">HỌC PHẦN SONG HÀNH</div>
                         <div style="color: #333; font-size: 12px; line-height: 1.6;">
                             <div style="margin-bottom: 4px; font-weight: 600;">${prerequisite.name}</div>
                             <div style="color: #666; font-size: 11px; margin-bottom: 4px;">Mã học phần: <strong style="color: #333;">${prerequisite.code}</strong></div>
@@ -1485,7 +1485,7 @@ function renderCourseTable() {
         let rowClass = '';
         if (course.condition === 'A' && prerequisite) {
             rowClass = 'not-eligible';
-            rowTooltipContent = conditionTooltip; // Sử dụng lại tooltip đã tạo
+            rowTooltipContent = conditionTooltip; // Sử dụng lại tooltip
         }
 
         const row = $(`
