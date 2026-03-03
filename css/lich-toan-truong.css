@@ -271,17 +271,13 @@ body {
   font-weight: 600;
   font-size: 12px;
   color: var(--text-muted);
-  border-bottom: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
 .schedule-table td {
   padding: 12px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.schedule-table tbody tr:hover {
-  background-color: #f8f9fa;
+  border: 1px solid var(--border-color);
 }
 
 .schedule-table .text-center {
