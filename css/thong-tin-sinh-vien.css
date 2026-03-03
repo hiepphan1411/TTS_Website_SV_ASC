@@ -9,6 +9,7 @@
   --text-dark: #505050;
   --text-light: #666;
   --border-color: #e0e0e0;
+  --border-color-e4: #e0e0e0;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -107,7 +108,7 @@
   color: var(--text-dark);
   padding: 10px;
   border-radius: 8px;
-  background-color: #e7e7e7;
+  background-color: var(--border-color-e4);
 
   border: 8px;
 }

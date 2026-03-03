@@ -12,43 +12,10 @@
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  background-color: #e8eef5;
-  color: var(--text-dark);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
 .grade-main {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-}
-.header-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  margin-bottom: 20px;
-}
-
-.header-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-.header-subtitle {
-  font-size: 13px;
-  font-weight: 400;
-  color: #8e8e8e;
 }
 
 .semesterSelect {
@@ -68,6 +35,7 @@ body {
   border: none;
   border-radius: 8px;
 }
+
 .btn-print:hover {
   color: var(--primary-color);
   background-color: #e6e6e6;
@@ -98,38 +66,11 @@ body {
   font-size: 1.2rem;
 }
 
-.detail-header {
-  background: linear-gradient(
-    135deg,
-    var(--secondary-color),
-    var(--primary-color)
-  );
-  color: white;
-  padding: 3rem 0;
-  margin-bottom: 2rem;
-}
-
-.detail-header .container-lg {
-  padding: 0 1.5rem;
-}
-
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
-}
-
-.header-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.header-subtitle {
-  font-size: 1rem;
-  opacity: 0.9;
-  margin-bottom: 0;
 }
 
 .header-stats {
@@ -195,15 +136,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.stat-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  color: var(--text-light);
-  font-weight: bold;
-
-  margin-bottom: 0.5rem;
 }
 
 .stat-value {
@@ -290,7 +222,7 @@ body {
 
 .detail-table thead th {
   font-weight: bold;
-  color: #333333;
+  color: var(--text-dark);
   padding: 20px 15px;
   text-align: center;
   font-size: 13px;
@@ -299,6 +231,7 @@ body {
   white-space: nowrap;
   border-right: 1px solid var(--border-color);
 }
+
 .detail-table thead th:last-child,
 .detail-table thead td:last-child,
 .detail-table tbody td:last-child {
@@ -359,14 +292,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .detail-header {
-    padding: 2rem 1rem;
-  }
-
-  .header-title {
-    font-size: 1.5rem;
-  }
-
   .header-stats {
     flex-direction: column;
     gap: 1rem;
@@ -468,7 +393,6 @@ body {
   }
 }
 
-.detail-header,
 .stat-card,
 .table-section {
   animation: slideDown 0.4s ease-out;
@@ -679,37 +603,15 @@ tr td:first-child:is([data-level="3"]) {
     display: none !important;
   }
 
-  body {
-    background: white;
-    margin: 0;
-    padding: 0;
-    font-size: 10px !important;
-  }
-
   .main-content {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
   }
 
-  .container-fluid {
-    margin: 0 !important;
-    padding: 10px !important;
-    max-width: 100% !important;
-  }
-
   .header-section {
     margin-bottom: 10px;
     page-break-after: avoid;
-  }
-
-  .header-title {
-    font-size: 16px !important;
-    margin-bottom: 5px;
-  }
-
-  .header-subtitle {
-    font-size: 10px !important;
   }
 
   .table-section {
