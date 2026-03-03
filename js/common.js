@@ -142,7 +142,12 @@ const SidebarManager = (function () {
 
     if (sidebarToggle && sidebar && mainContent) {
       if (window.innerWidth > 768) {
-        mainContent.classList.add("sidebar-open");
+        // mainContent.classList.add("sidebar-open");
+        sidebar.classList.add("collapsed");
+        mainContent.classList.add("sidebar-collapsed");
+
+        const icon = sidebarToggle.querySelector("i");
+        if (icon) icon.className = "fa-solid fa-bars";
       }
 
       const toggleHandler = function (e) {
