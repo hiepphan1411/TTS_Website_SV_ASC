@@ -412,7 +412,7 @@ body {
 .quick-access-section {
   background: var(--white);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 24px;
   box-shadow: var(--shadow);
 }
 
@@ -420,38 +420,38 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
   border-bottom: 2px solid var(--light-bg);
 }
 
 .access-header h3 {
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text-dark);
 }
 
 .access-tabs {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
   background: var(--light-bg);
-  padding: 0.25rem;
+  padding: 4px;
   border-radius: 8px;
 }
 
 .access-tab {
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   background: transparent;
   border: none;
   border-radius: 6px;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-dark);
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .access-tab:hover {
@@ -467,7 +467,7 @@ body {
   border: 1px solid #dee2e6;
   background-color: var(--white);
   color: #555;
-  font-size: 0.8rem;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -498,14 +498,14 @@ body {
 .action-grid-modern {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 16px;
 }
 
 .action-card {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 16px;
+  padding: 16px;
   background: var(--light-bg);
   border-radius: 10px;
   border: 2px solid transparent;
@@ -528,7 +528,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 20px;
   flex-shrink: 0;
 }
 
@@ -546,23 +546,23 @@ body {
 }
 
 .action-card-title {
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
 }
 
 .action-card-time {
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--text-light);
 }
 
 .action-card-stats {
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--text-light);
   display: flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: 6px;
 }
 
 .action-card-badge {
@@ -574,7 +574,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
+  font-size: 14px;
 }
 
 .action-card-badge.popular-badge {
@@ -617,7 +617,7 @@ body {
 }
 
 .card-header {
-  padding: 1rem 1.25rem;
+  padding: 16px 20px;
   border-bottom: 2px solid var(--light-bg);
   display: flex;
   justify-content: space-between;
@@ -634,12 +634,12 @@ body {
 }
 
 .semester-select {
-  padding: 0.4rem 0.75rem;
+  padding: 6px 12px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   background: var(--white);
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 14px;
   color: var(--text-dark);
 }
 
@@ -835,16 +835,16 @@ body {
 .scholarship-list {
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 14px;
 }
 
 .scholarship-item {
-  padding: 1rem;
+  padding: 16px;
   border-radius: 6px;
   background: var(--light-bg);
 }
 
-#semester-select {
+.semester-select-dropdown {
   width: 150px;
   font-size: 13px;
 }
@@ -860,7 +860,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.625rem;
+  margin-bottom: 10px;
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -868,16 +868,16 @@ body {
 .scholarship-name {
   font-weight: 600;
   color: var(--text-dark);
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .scholarship-status {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.625rem;
+  gap: 4px;
+  padding: 4px 10px;
   border-radius: 12px;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 500;
 }
 
@@ -894,35 +894,35 @@ body {
 .scholarship-details {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 .scholarship-amount-approved {
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 700;
   color: var(--success-color);
 }
 
 .scholarship-amount-pending {
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 700;
   color: var(--warning-color);
 }
 
 .scholarship-semester {
-  font-size: 0.8rem;
+  font-size: 13px;
   color: var(--text-light);
 }
 
 .scholarship-date {
-  font-size: 0.75rem;
+  font-size: 12px;
   color: var(--text-light);
 }
 
 .scholarship-progress {
-  margin-top: 0.5rem;
+  margin-top: 8px;
 }
 
 .scholarship-progress-bar {
@@ -940,34 +940,34 @@ body {
 }
 
 .scholarship-summary {
-  margin-top: 0.875rem;
-  padding-top: 0.875rem;
+  margin-top: 14px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-color);
 }
 
 .summary-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   color: var(--text-dark);
-  font-size: 0.875rem;
+  font-size: 14px;
 }
 
 .btn-primary {
   flex: 1;
   min-width: 150px;
-  padding: 0.75rem;
+  padding: 12px;
   color: var(--white);
   border: none;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 0.875rem;
+  margin-top: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 8px;
   transition: all 0.2s;
   height: fit-content;
 }
@@ -1079,11 +1079,11 @@ body {
   gap: 10px;
 }
 
-#semesterSelect {
+.semester-select-dropdown {
   width: 150px;
   font-size: 13px;
 }
-#gradesSelect {
+.grades-select-dropdown {
   width: 140px;
   font-size: 13px;
 }
@@ -1113,7 +1113,7 @@ body {
   height: 300px;
 }
 
-canvas#gpaChart {
+canvas.gpa-chart {
   width: 100% !important;
   height: 100% !important;
 }
@@ -1380,7 +1380,7 @@ canvas#gpaChart {
   }
 
   .dashboard-content {
-    padding: 1rem;
+    padding: 16px;
   }
 }
 
@@ -1429,15 +1429,15 @@ canvas#gpaChart {
 
 @media (max-width: 576px) {
   .dashboard-content {
-    padding: 0.75rem;
+    padding: 12px;
   }
 
   .card-header h3 {
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 
   .quick-function-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 2fr);
   }
 
   .quick-fucntion-card {
@@ -1539,8 +1539,10 @@ canvas#gpaChart {
 
   .gpa-display-card {
     min-width: unset;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding: 1rem !important;
+    padding: 16px !important;
     flex-direction: row;
     display: flex;
     align-items: center;
@@ -1600,7 +1602,7 @@ canvas#gpaChart {
     align-items: center;
     justify-content: space-evenly;
     gap: 16px;
-    padding: 1.25rem !important;
+    padding: 20px !important;
     text-align: center;
     border-radius: 12px !important;
   }
@@ -1645,8 +1647,8 @@ canvas#gpaChart {
 
   .header-container {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 16px;
+    padding: 16px;
   }
 
   .info-header {
@@ -1676,21 +1678,21 @@ canvas#gpaChart {
   }
 
   .week-days {
-    gap: 0.25rem;
+    gap: 4px;
   }
 
   .day-item {
-    padding: 0.5rem 0.125rem;
+    padding: 8px 2px;
   }
 
   .priority-section {
-    padding: 1rem;
+    padding: 16px;
   }
 
   .section-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 8px;
   }
 
   .info-header-simple {
@@ -1714,7 +1716,7 @@ canvas#gpaChart {
 
   .course-info-left {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 12px;
   }
 
   .course-code-badge {
@@ -1735,7 +1737,7 @@ canvas#gpaChart {
   }
 
   .timer-text {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .action-grid-modern {
@@ -1840,32 +1842,42 @@ canvas#gpaChart {
   background-color: var(--white);
 }
 
-/* Compact View Grid Layout */
-#quickAccessCompact {
+.quick-access-compact {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-rows: repeat(1, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: calc(50% - 6px);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-#quickAccessCompact > div {
-  flex: none;
-  width: auto;
-  max-width: none;
-  padding: 0;
+.quick-access-compact::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-access-compact .card-access-quick {
+  scroll-snap-align: start;
+  width: 100%;
 }
 
 .card-access-quick {
   height: 100%;
-  min-height: 110px;
+  min-height: 80px;
   border-radius: 12px;
   background-color: white;
   border: 1px solid #e8e8e8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .card-access-quick:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   border-color: var(--primary-blue);
 }
@@ -1873,16 +1885,20 @@ canvas#gpaChart {
 .card-access-quick .card-body {
   height: 100%;
   display: flex;
+  min-width: 250px;
+  border: 0.5px solid var(--blue-bg-light);
+  border-radius: 8px;
   align-items: center;
-  padding: 1rem !important;
-  gap: 0.75rem;
+  padding: 12px !important;
+  gap: 10px;
 }
 
 .quick-access-icon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
-  font-size: 1.5rem;
+  font-size: 18px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1892,17 +1908,18 @@ canvas#gpaChart {
 .quick-access-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 0.75rem;
+  gap: 12px;
 }
 
 .quick-access-item-expanded {
+  border: 0.5px solid var(--blue-bg-light);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 15px;
-  padding: 1.25rem 0.75rem;
+  padding: 20px 12px;
   transition: all 0.2s ease;
   cursor: pointer;
   border-radius: 12px;
@@ -1921,12 +1938,105 @@ canvas#gpaChart {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 32px;
   color: var(--primary-blue);
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .quick-access-item-expanded h6 {
   line-height: 1.3;
   color: #333;
+}
+
+@media (max-width: 768px) {
+  .card-access-quick .card-body {
+    padding: 10px !important;
+    gap: 8px;
+  }
+
+  .quick-access-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .card-access-quick h6 {
+    font-size: 13px !important;
+  }
+
+  .card-access-quick .text-muted {
+    font-size: 11px !important;
+  }
+
+  .quick-access-grid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+  }
+
+  .quick-access-item-expanded {
+    padding: 14px 8px;
+  }
+
+  .quick-access-icon-simple {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .quick-access-compact {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-access {
+    margin-bottom: 12px;
+  }
+
+  .card-access .card-body {
+    padding: 16px !important;
+  }
+
+  .card-access h5 {
+    font-size: 16px;
+  }
+
+  .btn-toggle {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .schedule-item {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .time-box {
+    width: 60px;
+    height: 45px;
+    padding: 6px;
+  }
+
+  .time-box strong {
+    font-size: 16px;
+  }
+
+  .schedule-info > div:nth-child(2) {
+    font-size: 13px;
+  }
+
+  .summary-card {
+    height: 100px;
+    padding: 14px;
+  }
+
+  .summary-value-study,
+  .summary-value-exam,
+  .summary-value-remind {
+    font-size: 24px;
+  }
 }

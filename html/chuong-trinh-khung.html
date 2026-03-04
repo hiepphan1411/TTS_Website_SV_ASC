@@ -5,46 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chương trình khung đào tạo và tiến độ học tập</title>
 
-    <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap@5.3.8.min.css" rel="stylesheet" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/base/jquery-ui.min.css"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome -->
+    <link href="../lib/kendo-ui@2016.3.1118.common.min.css" rel="stylesheet" />
+    <link href="../lib/kendo@2016.3.1118.default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/chuong-trinh-khung.css" />
+
     <script
       src="https://kit.fontawesome.com/6f955e325d.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="../css/curriculum-framework.css" />
-    <link rel="stylesheet" href="../css/common.css" />
-    <link href="../lib/kendo-ui@2016.3.1118.common.min.css" rel="stylesheet" />
-
-    <link href="../lib/kendo@2016.3.1118.default.min.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Header -->
     <div id="header-container"></div>
+
     <!-- Content -->
     <main class="main-content">
-      <!-- Sidebar -->
       <div id="sidebar-container"></div>
-      <!-- Details -->
-      <div class="container-lg" style="padding: 20px">
-        <div class="header-section">
-          <div class="header-title">
+
+      <div class="container-lg d-flex flex-column gap-3" style="padding: 20px">
+        <div>
+          <h1 class="fs-4 fw-bold" style="color: var(--color-text-primary)">
             Chương trình khung đào tạo và tiến độ học tập
-          </div>
-          <div class="header-subtitle">
+          </h1>
+          <p class="small fw-semibold text-secondary mb-0">
             Xem chương trình đào tạo và tiến độ học tập của bạn
-          </div>
+          </p>
         </div>
-        <!-- Progress Section -->
+
+        <!-- Tiến độ học tập -->
         <div class="content-wrapper">
           <div class="progress-section">
             <div class="learning-progress-title">
               <div class="section-title">Tiến độ học tập</div>
-
               <div class="progress-label">
                 <span
                   ><i class="fa-solid fa-circle badge-completed"></i> Đã hoàn
@@ -60,7 +54,6 @@
                 >
               </div>
             </div>
-
             <div class="progress-bar-div">
               <div class="progress-bar-title">
                 <div>Đã hoàn thành</div>
@@ -72,7 +65,6 @@
               </div>
               <div id="chart" class="progress-chart" style="width: 100%"></div>
             </div>
-
             <div class="stats-container">
               <div class="stat-box">
                 <div class="stat-number green" id="totalCredits">162</div>
@@ -98,7 +90,7 @@
           </div>
         </div>
 
-        <!-- Controls Section -->
+        <!-- Thanh Tab + Tìm kiếm + Lọc -->
         <div class="content-wrapper-tab-group">
           <div class="tab-buttons">
             <button class="tab-btn active">Học kỳ</button>
@@ -109,37 +101,32 @@
             <div class="search-box">
               <input
                 type="text"
+                class="form-control"
                 placeholder="Tìm kiếm môn học theo tên hoặc mã..."
+                hidden
               />
             </div>
-            <div class="action-buttons">
+            <div class="d-flex gap-2">
               <button class="btn-custom primary">
-                <i class="fas fa-bars"></i>
-                Tất cả
+                <i class="fas fa-bars"></i> Tất cả
               </button>
               <button class="btn-custom">
-                <i class="fab fa-leanpub"></i>
-                Chưa học
+                <i class="fab fa-leanpub"></i> Chưa học
               </button>
               <button class="btn-custom">
-                <i class="far fa-calendar-alt"></i>
-                Bắt buộc
+                <i class="far fa-calendar-alt"></i> Bắt buộc
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Timeline Section-->
+        <!-- Lộ trình học tập -->
         <div class="content-wrapper">
+          <h2 class="section-title">Lộ trình học tập</h2>
           <div class="timeline-section">
-            <h2 class="section-title">Lộ trình học tập</h2>
-
             <div class="timeline-container">
               <div class="timeline-wrapper">
-                <!-- Semester circles -->
                 <div class="timeline-items" id="timelineItems"></div>
-
-                <!-- Timeline track with year markers -->
                 <div class="timeline-bottom">
                   <div class="timeline-track-container">
                     <div class="timeline-track">
@@ -156,35 +143,7 @@
                 </div>
               </div>
             </div>
-
             <div class="timeline-footer">
-              <!-- <div class="timeline-date">
-                <i class="fas fa-calendar-alt me-2"></i
-                ><span id="startDate">9/2022</span>
-              </div> -->
-              <!-- <div class="timeline-legends">
-                <div class="legend-item">
-                  <span
-                    class="legend-dot"
-                    style="background-color: var(--color-green-completed)"
-                  ></span>
-                  <span>Hoàn thành</span>
-                </div>
-                <div class="legend-item">
-                  <span
-                    class="legend-dot"
-                    style="background-color: var(--color-yellow-active)"
-                  ></span>
-                  <span>Đang học</span>
-                </div>
-                <div class="legend-item">
-                  <span
-                    class="legend-dot"
-                    style="background-color: #e0e0e0"
-                  ></span>
-                  <span>Chưa học</span>
-                </div>
-              </div> -->
               <div class="legend">
                 <div class="legend-item">
                   <div
@@ -208,113 +167,15 @@
                   <span>Chưa học</span>
                 </div>
               </div>
-              <!-- <div class="timeline-date">
-                <i class="fas fa-calendar-check me-2"></i
-                ><span id="endDate">6/2026</span>
-              </div> -->
             </div>
           </div>
         </div>
 
-        <!-- Knowledge Blocks Overview -->
+        <!-- Khối kiến thức -->
         <div class="content-wrapper">
           <div class="knowledge-block-overview">
             <div class="section-title">Tổng quan khối kiến thức</div>
-
-            <div class="knowledge-blocks">
-              <div class="knowledge-block">
-                <div class="circle-progress">
-                  <svg viewBox="0 0 120 120">
-                    <circle
-                      cx="60"
-                      cy="60"
-                      r="50"
-                      fill="none"
-                      stroke="#e9ecef"
-                      stroke-width="8"
-                    />
-                    <circle
-                      cx="60"
-                      cy="60"
-                      r="50"
-                      fill="none"
-                      stroke="#ffb800"
-                      stroke-width="8"
-                      stroke-dasharray="157 314"
-                      stroke-dashoffset="0"
-                    />
-                  </svg>
-                  <div class="circle-text yellow">GDDC</div>
-                </div>
-                <div class="block-title">Giáo dục đại cương</div>
-                <div class="block-code">32/31 tin chỉ</div>
-                <div class="block-progress">
-                  <div class="block-progress-bar yellow"></div>
-                </div>
-              </div>
-
-              <div class="knowledge-block">
-                <div class="circle-progress">
-                  <svg viewBox="0 0 120 120">
-                    <circle
-                      cx="60"
-                      cy="60"
-                      r="50"
-                      fill="none"
-                      stroke="#e9ecef"
-                      stroke-width="8"
-                    />
-                    <circle
-                      cx="60"
-                      cy="60"
-                      r="50"
-                      fill="none"
-                      stroke="#ffb800"
-                      stroke-width="8"
-                      stroke-dasharray="157 314"
-                      stroke-dashoffset="0"
-                    />
-                  </svg>
-                  <div class="circle-text yellow">GDCN</div>
-                </div>
-                <div class="block-title">Giáo dục chuyên nghiệp</div>
-                <div class="block-code">65/96 tin chỉ</div>
-                <div class="block-progress">
-                  <div class="block-progress-bar yellow"></div>
-                </div>
-              </div>
-
-              <div class="knowledge-block">
-                <div class="circle-progress">
-                  <svg viewBox="0 0 120 120">
-                    <circle
-                      cx="60"
-                      cy="60"
-                      r="50"
-                      fill="none"
-                      stroke="#e9ecef"
-                      stroke-width="8"
-                    />
-                    <circle
-                      cx="60"
-                      cy="60"
-                      r="50"
-                      fill="none"
-                      stroke="#28a745"
-                      stroke-width="8"
-                      stroke-dasharray="251 314"
-                      stroke-dashoffset="0"
-                    />
-                  </svg>
-                  <div class="circle-text green">N/A</div>
-                </div>
-                <div class="block-title">Chưa xác định</div>
-                <div class="block-code">22/22 tin chỉ</div>
-                <div class="block-progress">
-                  <div class="block-progress-bar"></div>
-                </div>
-              </div>
-            </div>
+            <div class="knowledge-blocks" id="knowledgeBlocksContainer"></div>
           </div>
 
           <div class="legend">
@@ -339,490 +200,26 @@
           </div>
         </div>
 
-        <!-- Expandable Sections -->
-        <div class="content-wrapper" id="expandableSections">
-          <!-- JavaScript Render -->
-        </div>
+        <!-- Danh sách môn học (JS render)  -->
+        <div class="content-wrapper" id="expandableSections"></div>
 
-        <div class="footer-section">© 2026</div>
+        <!-- Footer -->
+        <div
+          class="text-center py-3 small text-secondary bg-white rounded-1 mt-auto"
+        >
+          &copy; 2026
+        </div>
       </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
-
-    <script src="../js/chuong-trinh-khung.js"></script>
-
-    <script src="../js/study-progress.js"></script>
-
-    <script src="https://kendo.cdn.telerik.com/2016.3.1118/js/kendo.all.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
     <script src="../js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.3.1118/js/kendo.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-      $("#chart").kendoChart({
-        chartArea: {
-          height: 30,
-          background: "#f4fbff",
-        },
-        legend: { visible: false },
-        seriesDefaults: {
-          type: "bar",
-          stack: true,
-        },
-        series: [
-          { data: [60], color: "#2865EB" }, // xanh
-          { data: [15], color: "#ffb800" }, // vàng
-          { data: [25], color: "#e0e0e0" }, // xám
-        ],
-        valueAxis: {
-          min: 0,
-          max: 100,
-          visible: false,
-          majorGridLines: { visible: false },
-          minorGridLines: { visible: false },
-        },
-        categoryAxis: {
-          categories: [""],
-          visible: false,
-          majorGridLines: { visible: false },
-          minorGridLines: { visible: false },
-        },
-        tooltip: {
-          visible: true,
-          template: "#= value #%",
-        },
-        dataBound: function () {
-          var svg = $("#chart svg");
-
-          svg.find("rect[fill]").each(function () {
-            var rect = $(this);
-            var fill = rect.attr("fill");
-
-            if (fill && !fill.includes("url")) {
-              rect.attr("rx", 8);
-              rect.attr("ry", 8);
-            }
-          });
-        },
-      });
-
-      // Handle responsive timeline rendering
-      function handleResize() {
-        const isMobile = window.innerWidth <= 768;
-        const container = document.querySelector(".timeline-container");
-        if (!container) return;
-
-        const wrapper = container.querySelector(".timeline-wrapper");
-        let mobileTimeline = container.querySelector(".timeline-mobile");
-
-        if (isMobile) {
-          if (wrapper) wrapper.style.display = "none";
-          if (!mobileTimeline) {
-            mobileTimeline = document.createElement("div");
-            mobileTimeline.className = "timeline-mobile";
-            container.appendChild(mobileTimeline);
-          }
-          renderMobileTimeline();
-
-          // Add click handlers to mobile timeline cards
-          setTimeout(() => {
-            const mobileCards = document.querySelectorAll(
-              ".timeline-semester-card",
-            );
-            mobileCards.forEach((card) => {
-              card.addEventListener("click", function () {
-                const semester = this.getAttribute("data-semester");
-                if (window.scrollToSemester) {
-                  window.scrollToSemester(semester);
-                }
-              });
-            });
-          }, 100);
-        } else {
-          if (wrapper) wrapper.style.display = "block";
-          if (mobileTimeline) {
-            mobileTimeline.remove();
-          }
-        }
-
-        // setTimeout(addTooltipListeners, 100);
-      }
-
-      // Render mobile timeline
-      function renderMobileTimeline() {
-        const container = document.querySelector(".timeline-mobile");
-        if (!container) return;
-
-        // Clear existing content first to prevent double rendering
-        container.innerHTML = "";
-
-        const yearGroups = {};
-        timelineData.forEach((sem) => {
-          if (!yearGroups[sem.year]) {
-            yearGroups[sem.year] = [];
-          }
-          yearGroups[sem.year].push(sem);
-        });
-
-        const uniqueYears = Object.keys(yearGroups);
-
-        const currentYearIndex = uniqueYears.indexOf(currentAcademicYear);
-        const totalYears = uniqueYears.length;
-
-        let progressPercent = 0;
-        if (currentYearIndex >= 0) {
-          progressPercent = (currentYearIndex / totalYears) * 100;
-        }
-
-        // Don't clear innerHTML here, already done at the start of function
-
-        uniqueYears.forEach((year, yearIndex) => {
-          const yearSems = yearGroups[year];
-          const dotClass = year <= currentAcademicYear ? "current" : "future";
-          const totalSemesters = timelineData.length;
-
-          const firstSemIndex = timelineData.findIndex((s) => s.year === year);
-
-          // Position in the middle between sem1 and sem2 of this year
-          // Middle = (index0 + index1) / 2 = index0 + 0.5
-          // Convert to percentage: (middle / total) * 100
-          const middlePosition = firstSemIndex + 1;
-          const progressPercent = (yearIndex / totalYears) * 100 + 3;
-
-          if (yearIndex === currentYearIndex && currentYearIndex >= 0) {
-            container.style.setProperty(
-              "--progress-percent",
-              progressPercent + "%",
-            );
-          } else if (currentYearIndex < 0) {
-            container.style.setProperty("--progress-percent", 100 + "%");
-          }
-          const yearGroup = document.createElement("div");
-          yearGroup.className = "timeline-year-group";
-
-          // Year marker
-          const yearMarker = document.createElement("div");
-          yearMarker.className = "timeline-year-marker-mobile";
-          yearMarker.innerHTML = `
-            <div class="timeline-year-dot ${dotClass}"></div>
-          `;
-          // <div class="timeline-year-label">${year}</div>;
-          yearGroup.appendChild(yearMarker);
-
-          // Semesters in horizontal layout
-          const semestersContainer = document.createElement("div");
-          semestersContainer.className = "timeline-semesters-horizontal";
-
-          yearSems.forEach((sem) => {
-            const card = document.createElement("div");
-            card.className = "timeline-semester-card";
-            card.setAttribute("data-semester", sem.semester);
-            card.style.cursor = "pointer";
-
-            const completedPercent =
-              (sem.completedCredits / sem.totalCredits) * 100;
-            const currentPercent =
-              (sem.currentCredits / sem.totalCredits) * 100;
-            const totalPercent = completedPercent + currentPercent;
-
-            // Determine card status
-            if (sem.status === "completed" && sem.progress === 100) {
-              card.classList.add("completed");
-            } else if (sem.status === "active") {
-              card.classList.add("active");
-            } else if (sem.status === "mixed") {
-              card.classList.add("mixed");
-            }
-
-            // Circle with progress
-            let circleClass = "";
-            let circleStyle = "";
-
-            if (sem.status === "completed" && sem.progress === 100) {
-              circleClass = "completed";
-            } else if (sem.status === "active" && sem.completedCredits === 0) {
-              circleClass = "active";
-            } else if (
-              (sem.status === "mixed" || totalPercent > 0) &&
-              sem.completedCredits > 0 &&
-              sem.currentCredits > 0
-            ) {
-              circleClass = "partial-mixed";
-              circleStyle = `style="--progress-green: ${completedPercent}; --progress-total: ${totalPercent}"`;
-            } else if (
-              sem.completedCredits > 0 &&
-              sem.completedCredits < sem.totalCredits
-            ) {
-              circleClass = "partial-green";
-              circleStyle = `style="--progress-green: ${completedPercent}"`;
-            } else if (sem.currentCredits > 0 && sem.completedCredits === 0) {
-              circleClass = "partial-yellow";
-              circleStyle = `style="--progress-yellow: ${currentPercent}"`;
-            } else {
-              circleClass = "future";
-            }
-
-            // Progress bar
-            let progressBarHTML = "";
-            let progressTextClass = "";
-
-            if (completedPercent > 0 && currentPercent > 0) {
-              progressBarHTML = `
-                <div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>
-                <div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>
-              `;
-              progressTextClass = totalPercent > 50 ? "light" : "";
-            } else if (completedPercent > 0) {
-              progressBarHTML = `<div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>`;
-              progressTextClass = completedPercent > 50 ? "light" : "";
-            } else if (currentPercent > 0) {
-              progressBarHTML = `<div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>`;
-              progressTextClass = currentPercent > 50 ? "light" : "";
-            }
-
-            const displayPercent = Math.round(totalPercent);
-            const displayCredits = `${sem.completedCredits + sem.currentCredits}/${sem.totalCredits}`;
-            const remainingCredits =
-              sem.totalCredits - sem.completedCredits - sem.currentCredits;
-
-            card.innerHTML = `
-              <div class="timeline-circle ${circleClass}" ${circleStyle}>
-                <span>HK${sem.semester}</span>
-              </div>
-              <div class="timeline-info">
-                <div class="timeline-semester">Học kỳ ${sem.semester}</div>
-                <div class="timeline-credits">${displayCredits} tín chỉ</div>
-              </div>
-              <div class="timeline-progress">
-                <div class="timeline-progress-bar">
-                  ${progressBarHTML}
-                  <div class="timeline-progress-text ${progressTextClass}">${displayPercent}%</div>
-                </div>
-              </div>
-              <div class="semester-tooltip">
-                <div class="tooltip-row">
-                  <span class="tooltip-label">Học kỳ:</span>
-                  <span class="tooltip-value">HK${sem.semester}</span>
-                </div>
-                <div class="tooltip-row">
-                  <span class="tooltip-label">Đã học:</span>
-                  <span class="tooltip-value">${sem.completedCredits}/${sem.totalCredits} TC</span>
-                </div>
-                <div class="tooltip-row">
-                  <span class="tooltip-label">Đang học:</span>
-                  <span class="tooltip-value">${sem.currentCredits} TC</span>
-                </div>
-              </div>
-            `;
-
-            semestersContainer.appendChild(card);
-          });
-
-          yearGroup.appendChild(semestersContainer);
-          container.appendChild(yearGroup);
-        });
-      }
-
-      // renderProgress and renderTimeline are now in study-progress.js
-      // Removed duplicate functions to fix double rendering issue
-
-      function renderTimeline_DISABLED() {
-        const container = document.getElementById("timelineItems");
-        const markersContainer = document.getElementById("timelineYearMarkers");
-        const trackProgress = document.getElementById("timelineTrackProgress");
-
-        const yearGroups = {};
-        timelineData.forEach((sem) => {
-          if (!yearGroups[sem.year]) {
-            yearGroups[sem.year] = [];
-          }
-          yearGroups[sem.year].push(sem);
-        });
-
-        const uniqueYears = Object.keys(yearGroups);
-        const totalSemesters = timelineData.length;
-
-        const currentYearIndex = uniqueYears.indexOf(currentAcademicYear);
-        if (currentYearIndex >= 0) {
-          const yearSems = yearGroups[currentAcademicYear];
-          const firstSemIndex = timelineData.findIndex(
-            (s) => s.year === currentAcademicYear,
-          );
-          const markerPosition = ((firstSemIndex + 1) / totalSemesters) * 100;
-          trackProgress.style.width = markerPosition + "%";
-        } else {
-          trackProgress.style.width = "100%";
-        }
-
-        // Render semester circles
-        timelineData.forEach((sem, index) => {
-          const item = document.createElement("div");
-          item.className = "timeline-item";
-
-          const completedPercent =
-            (sem.completedCredits / sem.totalCredits) * 100;
-          const currentPercent = (sem.currentCredits / sem.totalCredits) * 100;
-          const totalPercent = completedPercent + currentPercent;
-
-          let circleClass = "";
-          let circleStyle = "";
-          let circleContent = `<span>HK${sem.semester}</span>`;
-
-          if (sem.status === "completed" && sem.progress === 100) {
-            circleClass = "completed";
-          } else if (sem.status === "active" && sem.completedCredits === 0) {
-            circleClass = "active";
-          } else if (
-            (sem.status === "mixed" || totalPercent > 0) &&
-            sem.completedCredits > 0 &&
-            sem.currentCredits > 0
-          ) {
-            circleClass = "partial-mixed";
-            circleStyle = `style="--progress-green: ${completedPercent}; --progress-total: ${totalPercent}"`;
-          } else if (
-            sem.completedCredits > 0 &&
-            sem.completedCredits < sem.totalCredits
-          ) {
-            circleClass = "partial-green";
-            circleStyle = `style="--progress-green: ${completedPercent}"`;
-          } else if (sem.currentCredits > 0 && sem.completedCredits === 0) {
-            circleClass = "partial-yellow";
-            circleStyle = `style="--progress-yellow: ${currentPercent}"`;
-          } else {
-            circleClass = "future";
-          }
-
-          let progressBarHTML = "";
-          let progressTextClass = "";
-
-          if (completedPercent > 0 && currentPercent > 0) {
-            progressBarHTML = `
-            <div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>
-            <div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>
-          `;
-            progressTextClass = totalPercent > 50 ? "light" : "";
-          } else if (completedPercent > 0) {
-            progressBarHTML = `<div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>`;
-            progressTextClass = completedPercent > 50 ? "light" : "";
-          } else if (currentPercent > 0) {
-            progressBarHTML = `<div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>`;
-            progressTextClass = currentPercent > 50 ? "light" : "";
-          }
-
-          const displayPercent = Math.round(totalPercent);
-          const displayCredits = `${sem.completedCredits + sem.currentCredits}/${sem.totalCredits}`;
-          const remainingCredits =
-            sem.totalCredits - sem.completedCredits - sem.currentCredits;
-
-          item.innerHTML = `
-          <div class="timeline-circle-wrapper">
-            <div class="timeline-circle ${circleClass}" ${circleStyle}>
-              ${circleContent}
-            </div>
-          </div>
-          <div class="timeline-info">
-            <div class="timeline-semester">Học kỳ ${sem.semester}</div>
-            <div class="timeline-credits">${displayCredits} tín chỉ</div>
-          </div>
-          <div class="timeline-progress">
-            <div class="timeline-progress-bar">
-              ${progressBarHTML}
-              <div class="timeline-progress-text ${progressTextClass}">${displayPercent}%</div>
-            </div>
-          </div>
-          <div class="semester-tooltip">
-            <div class="tooltip-row">
-              <span class="tooltip-label">Học kỳ:</span>
-              <span class="tooltip-value">HK${sem.semester}</span>
-            </div>
-            <div class="tooltip-row">
-              <span class="tooltip-label">Đã học:</span>
-              <span class="tooltip-value">${sem.completedCredits}/${sem.totalCredits} TC</span>
-            </div>
-            <div class="tooltip-row">
-              <span class="tooltip-label">Đang học:</span>
-              <span class="tooltip-value">${sem.currentCredits} TC</span>
-            </div>
-          </div>
-        `;
-
-          container.appendChild(item);
-        });
-
-        const startMarker = document.createElement("div");
-        startMarker.className = "timeline-year-marker";
-        startMarker.style.left = "0%";
-        startMarker.innerHTML = `
-        <div class="timeline-year-dot current"></div>
-        <div class="timeline-year-label">9/2022</div>
-      `;
-        markersContainer.appendChild(startMarker);
-
-        uniqueYears.forEach((year, yearIndex) => {
-          const yearSems = yearGroups[year];
-          const firstSemIndex = timelineData.findIndex((s) => s.year === year);
-          const totalSemesters = timelineData.length;
-
-          // Position in the middle between sem1 and sem2 of this year
-          // Middle = (index0 + index1) / 2 = index0 + 0.5
-          // Convert to percentage: (middle / total) * 100
-          const middlePosition = firstSemIndex + 1;
-          const positionPercent = (middlePosition / totalSemesters) * 100;
-
-          const marker = document.createElement("div");
-          marker.className = "timeline-year-marker";
-          marker.style.left = positionPercent + "%";
-
-          const dotClass = year <= currentAcademicYear ? "current" : "future";
-          const semestersList = yearSems
-            .map((s) => `HK${s.semester}`)
-            .join(", ");
-
-          marker.innerHTML = `
-          <div class="timeline-year-dot ${dotClass}"></div>
-          <div class="timeline-year-label">${year}</div>
-          <div class="timeline-year-semesters">${semestersList}</div>
-        `;
-          markersContainer.appendChild(marker);
-        });
-
-        const endMarker = document.createElement("div");
-        let stylesCustom = "future";
-        stylesCustom = currentYearIndex >= 0 ? "future" : "current";
-        endMarker.className = "timeline-year-marker";
-        endMarker.style.left = "100%";
-        endMarker.innerHTML = `
-        <div class="timeline-year-dot ${stylesCustom}"></div>
-        <div class="timeline-year-label">6/2026</div>
-      `;
-        markersContainer.appendChild(endMarker);
-      }
-
-      document.querySelectorAll(".filter-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          document
-            .querySelectorAll(".filter-btn")
-            .forEach((b) => b.classList.remove("active"));
-          this.classList.add("active");
-        });
-      });
-
-      $(function () {
-        var tooltipTriggerList = [].slice.call(
-          document.querySelectorAll('[data-bs-toggle="tooltip"]'),
-        );
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-          return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-      });
-
-      document.addEventListener("DOMContentLoaded", function () {
-        handleResize();
-      });
-
-      window.addEventListener("resize", handleResize);
-    </script>
+    <!-- JS đổ data -->
+    <script src="../js/study-progress.js"></script>
+    <script src="../js/chuong-trinh-khung.js"></script>
   </body>
 </html>

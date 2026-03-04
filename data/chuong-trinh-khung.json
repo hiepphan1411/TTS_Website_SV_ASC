@@ -1,0 +1,130 @@
+{
+  "progressData": {
+    "totalCredits": 162,
+    "completedCredits": 122,
+    "currentCredits": 24,
+    "remainingCredits": 16,
+    "progressDiff": "+2%"
+  },
+  "currentAcademicYear": "2023-2024",
+  "chartData": {
+    "completed": 60,
+    "current": 15,
+    "remaining": 25
+  },
+  "knowledgeBlocks": [
+    {
+      "code": "GDDC",
+      "name": "Giáo dục đại cương",
+      "completedCredits": 32,
+      "currentCredits": 10,
+      "totalCredits": 65
+    },
+    {
+      "code": "GDCN",
+      "name": "Giáo dục chuyên nghiệp",
+      "completedCredits": 65,
+      "currentCredits": 0,
+      "totalCredits": 96
+    },
+    {
+      "code": "N/A",
+      "name": "Chưa xác định",
+      "completedCredits": 10,
+      "currentCredits": 12,
+      "totalCredits": 22
+    }
+  ],
+  "timelineData": [
+    {
+      "semester": 1,
+      "year": "2022-2023",
+      "status": "completed",
+      "progress": 100,
+      "completedCredits": 12,
+      "totalCredits": 12,
+      "currentCredits": 0
+    },
+    {
+      "semester": 2,
+      "year": "2022-2023",
+      "status": "completed",
+      "progress": 100,
+      "completedCredits": 12,
+      "totalCredits": 12,
+      "currentCredits": 0
+    },
+    {
+      "semester": 3,
+      "year": "2023-2024",
+      "status": "completed",
+      "progress": 71,
+      "completedCredits": 15,
+      "totalCredits": 21,
+      "currentCredits": 0
+    },
+    {
+      "semester": 4,
+      "year": "2023-2024",
+      "status": "active",
+      "progress": 100,
+      "completedCredits": 0,
+      "totalCredits": 19,
+      "currentCredits": 19
+    },
+    {
+      "semester": 5,
+      "year": "2024-2025",
+      "status": "mixed",
+      "progress": 74,
+      "completedCredits": 10,
+      "totalCredits": 19,
+      "currentCredits": 4
+    },
+    {
+      "semester": 6,
+      "year": "2024-2025",
+      "status": "future",
+      "progress": 0,
+      "completedCredits": 0,
+      "totalCredits": 21,
+      "currentCredits": 0
+    },
+    {
+      "semester": 7,
+      "year": "2025-2026",
+      "status": "future",
+      "progress": 0,
+      "completedCredits": 5,
+      "totalCredits": 15,
+      "currentCredits": 0
+    },
+    {
+      "semester": 8,
+      "year": "2025-2026",
+      "status": "future",
+      "progress": 0,
+      "completedCredits": 0,
+      "totalCredits": 15,
+      "currentCredits": 0
+    },
+    {
+      "semester": 9,
+      "year": "2026-2027",
+      "status": "future",
+      "progress": 0,
+      "completedCredits": 0,
+      "totalCredits": 15,
+      "currentCredits": 0
+    },
+    {
+      "semester": 10,
+      "year": "2026-2027",
+      "status": "future",
+      "progress": 0,
+      "completedCredits": 0,
+      "totalCredits": 15,
+      "currentCredits": 0
+    }
+  ]
+}

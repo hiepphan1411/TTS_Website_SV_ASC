@@ -13,10 +13,10 @@ document.querySelectorAll(".menu-link").forEach((link) => {
   });
 });
 
-const btnCompact = document.getElementById("btnCompact");
-const btnExpanded = document.getElementById("btnExpanded");
-const quickAccessCompact = document.getElementById("quickAccessCompact");
-const quickAccessExpanded = document.getElementById("quickAccessExpanded");
+const btnCompact = document.querySelector(".btn-compact");
+const btnExpanded = document.querySelector(".btn-expanded");
+const quickAccessCompact = document.querySelector(".quick-access-compact");
+const quickAccessExpanded = document.querySelector(".quick-access-expanded");
 
 btnCompact.addEventListener("click", function () {
   quickAccessCompact.classList.remove("d-none");

@@ -1,367 +1,659 @@
-const progressData = {
-  totalCredits: 162,
-  completedCredits: 122,
-  currentCredits: 24,
-  remainingCredits: 16,
-  progressDiff: "+2%",
-};
+let curriculumData = null;
+let semesterCurriculumData = null;
+let currentView = "semester";
 
-//Current academic year
-const currentAcademicYear = "2023-2024";
-
-const timelineData = [
-  {
-    semester: 1,
-    year: "2022-2023",
-    status: "completed",
-    progress: 100,
-    completedCredits: 12,
-    totalCredits: 12,
-    currentCredits: 0,
-  },
-  {
-    semester: 2,
-    year: "2022-2023",
-    status: "completed",
-    progress: 100,
-    completedCredits: 12,
-    totalCredits: 12,
-    currentCredits: 0,
-  },
-  {
-    semester: 3,
-    year: "2023-2024",
-    status: "completed",
-    progress: 71,
-    completedCredits: 15,
-    totalCredits: 21,
-    currentCredits: 0,
-  },
-  {
-    semester: 4,
-    year: "2023-2024",
-    status: "active",
-    progress: 100,
-    completedCredits: 0,
-    totalCredits: 19,
-    currentCredits: 19,
-  },
-  {
-    semester: 5,
-    year: "2024-2025",
-    status: "mixed",
-    progress: 74,
-    completedCredits: 10,
-    totalCredits: 19,
-    currentCredits: 4,
-  },
-  {
-    semester: 6,
-    year: "2024-2025",
-    status: "future",
-    progress: 0,
-    completedCredits: 0,
-    totalCredits: 21,
-    currentCredits: 0,
-  },
-  {
-    semester: 7,
-    year: "2025-2026",
-    status: "future",
-    progress: 0,
-    completedCredits: 0,
-    totalCredits: 15,
-    currentCredits: 0,
-  },
-  {
-    semester: 8,
-    year: "2025-2026",
-    status: "future",
-    progress: 0,
-    completedCredits: 0,
-    totalCredits: 15,
-    currentCredits: 0,
-  },
-];
-
-function renderTimeline() {
-  const container = document.getElementById("timelineItems");
-  const markersContainer = document.getElementById("timelineYearMarkers");
-  const trackProgress = document.getElementById("timelineTrackProgress");
-
-  if (container) container.innerHTML = "";
-  if (markersContainer) markersContainer.innerHTML = "";
-
-  const yearGroups = {};
-  timelineData.forEach((sem) => {
-    if (!yearGroups[sem.year]) {
-      yearGroups[sem.year] = [];
-    }
-    yearGroups[sem.year].push(sem);
-  });
-
-  const uniqueYears = Object.keys(yearGroups);
-  const totalSemesters = timelineData.length;
-
-  const currentYearIndex = uniqueYears.indexOf(currentAcademicYear);
-  if (currentYearIndex >= 0) {
-    const yearSems = yearGroups[currentAcademicYear];
-    const firstSemIndex = timelineData.findIndex(
-      (s) => s.year === currentAcademicYear,
-    );
-    const markerPosition = ((firstSemIndex + 1) / totalSemesters) * 100;
-    trackProgress.style.width = markerPosition + "%";
-  }
-
-  //Render semester circles
-  timelineData.forEach((sem, index) => {
-    const item = document.createElement("div");
-    item.className = "timeline-item";
-    item.setAttribute("data-semester", sem.semester);
-    item.style.cursor = "pointer";
-
-    const completedPercent = (sem.completedCredits / sem.totalCredits) * 100;
-    const currentPercent = (sem.currentCredits / sem.totalCredits) * 100;
-    const totalPercent = completedPercent + currentPercent;
-
-    let circleClass = "";
-    let circleStyle = "";
-    let circleContent = `<span>HK${sem.semester}</span>`;
-
-    if (sem.status === "completed" && sem.progress === 100) {
-      circleClass = "completed";
-    } else if (sem.status === "active" && sem.completedCredits === 0) {
-      circleClass = "active";
-    } else if (
-      (sem.status === "mixed" || totalPercent > 0) &&
-      sem.completedCredits > 0 &&
-      sem.currentCredits > 0
-    ) {
-      circleClass = "partial-mixed";
-      circleStyle = `style="--progress-green: ${completedPercent}; --progress-total: ${totalPercent}"`;
-    } else if (
-      sem.completedCredits > 0 &&
-      sem.completedCredits < sem.totalCredits
-    ) {
-      circleClass = "partial-green";
-      circleStyle = `style="--progress-green: ${completedPercent}"`;
-    } else if (sem.currentCredits > 0 && sem.completedCredits === 0) {
-      circleClass = "partial-yellow";
-      circleStyle = `style="--progress-yellow: ${currentPercent}"`;
-    } else {
-      circleClass = "future";
-    }
-
-    let progressBarHTML = "";
-    let progressTextClass = "";
-
-    if (completedPercent > 0 && currentPercent > 0) {
-      progressBarHTML = `
-            <div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>
-            <div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>
-          `;
-      progressTextClass = totalPercent > 50 ? "light" : "";
-    } else if (completedPercent > 0) {
-      progressBarHTML = `<div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>`;
-      progressTextClass = completedPercent > 50 ? "light" : "";
-    } else if (currentPercent > 0) {
-      progressBarHTML = `<div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>`;
-      progressTextClass = currentPercent > 50 ? "light" : "";
-    }
-
-    const displayPercent = Math.round(totalPercent);
-    const displayCredits = `${sem.completedCredits + sem.currentCredits}/${sem.totalCredits}`;
-
-    item.innerHTML = `
-          <div class="timeline-circle-wrapper">
-            <div class="timeline-circle ${circleClass}" ${circleStyle}>
-              ${circleContent}
-            </div>
-          </div>
-          <div class="timeline-info">
-            <div class="timeline-semester">Học kỳ ${sem.semester}</div>
-            <div class="timeline-credits">${displayCredits} tín chỉ</div>
-          </div>
-          <div class="timeline-progress">
-            <div class="timeline-progress-bar">
-              ${progressBarHTML}
-              <div class="timeline-progress-text ${progressTextClass}">${displayPercent}%</div>
-            </div>
-          </div>
-        `;
-
-    container.appendChild(item);
-  });
-
-  const startMarker = document.createElement("div");
-  startMarker.className = "timeline-year-marker";
-  startMarker.style.left = "0%";
-  startMarker.innerHTML = `
-        <div class="timeline-year-dot current"></div>
-        <div class="timeline-year-label">9/2022</div>
-      `;
-  markersContainer.appendChild(startMarker);
-
-  uniqueYears.forEach((year, yearIndex) => {
-    const yearSems = yearGroups[year];
-    const firstSemIndex = timelineData.findIndex((s) => s.year === year);
-
-    const middlePosition = firstSemIndex + 1;
-    const positionPercent = (middlePosition / totalSemesters) * 100;
-
-    const marker = document.createElement("div");
-    marker.className = "timeline-year-marker";
-    marker.style.left = positionPercent + "%";
-
-    const dotClass = year <= currentAcademicYear ? "current" : "future";
-    const semestersList = yearSems.map((s) => `HK${s.semester}`).join(", ");
-
-    marker.innerHTML = `
-          <div class="timeline-year-dot ${dotClass}"></div>
-          <div class="timeline-year-label">${year}</div>
-          <div class="timeline-year-semesters">${semestersList}</div>
-        `;
-    markersContainer.appendChild(marker);
-  });
-
-  const endMarker = document.createElement("div");
-  endMarker.className = "timeline-year-marker";
-  endMarker.style.left = "100%";
-  endMarker.innerHTML = `
-        <div class="timeline-year-dot future"></div>
-        <div class="timeline-year-label">6/2026</div>
-      `;
-  markersContainer.appendChild(endMarker);
-}
-
-function renderProgress() {
-  const data = progressData;
-
-  // Update all progress data elements if they exist
-  const totalCreditsEl = document.getElementById("totalCredits");
-  const completedCreditsEl = document.getElementById("completedCredits");
-  const currentCreditsEl = document.getElementById("currentCredits");
-  const remainingCreditsEl = document.getElementById("remainingCredits");
-  const progressDiffEl = document.getElementById("progressDiff");
-  const overallPercentageEl = document.getElementById("overallPercentage");
-
-  if (totalCreditsEl) totalCreditsEl.textContent = data.totalCredits;
-  if (completedCreditsEl)
-    completedCreditsEl.textContent = data.completedCredits;
-  if (currentCreditsEl) currentCreditsEl.textContent = data.currentCredits;
-  if (remainingCreditsEl)
-    remainingCreditsEl.textContent = data.remainingCredits;
-  if (progressDiffEl) progressDiffEl.textContent = data.progressDiff;
-
-  const completedPercent = (
-    (data.completedCredits / data.totalCredits) *
-    100
-  ).toFixed(1);
-  const currentPercent = (
-    (data.currentCredits / data.totalCredits) *
-    100
-  ).toFixed(1);
-  const remainingPercent = (
-    (data.remainingCredits / data.totalCredits) *
-    100
-  ).toFixed(1);
-
-  if (overallPercentageEl) {
-    overallPercentageEl.textContent = completedPercent + "%";
+//Load data test
+async function loadCurriculumData() {
+  try {
+    const response = await fetch("../data/khoi-kien-thuc.json");
+    curriculumData = await response.json();
+    return curriculumData;
+  } catch (error) {
+    console.error("Lỗi khi tải dữ liệu chương trình đào tạo:", error);
+    return null;
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  renderProgress();
-  renderTimeline();
+async function loadSemesterCurriculumData() {
+  try {
+    const response = await fetch("../data/hoc-ky.json");
+    semesterCurriculumData = await response.json();
+    return semesterCurriculumData;
+  } catch (error) {
+    console.error("Lỗi khi tải dữ liệu học kỳ:", error);
+    return null;
+  }
+}
 
-  // Add click handlers to timeline items after rendering
-  setTimeout(() => {
-    addTimelineClickHandlers();
-  }, 100);
+function getAllCourses() {
+  if (!curriculumData) return [];
+  return [
+    ...curriculumData.professionalEducation.mandatory,
+    ...curriculumData.professionalEducation.elective.block1,
+    ...curriculumData.professionalEducation.elective.block2,
+  ];
+}
+
+function isPrerequisiteCompleted(prerequisiteStr) {
+  if (!prerequisiteStr || prerequisiteStr === "-") return true;
+
+  const matches = prerequisiteStr.match(/\d{6}/g);
+  if (!matches || matches.length === 0) return true;
+
+  const allCourses = getAllCourses();
+
+  return matches.every((prereqCode) => {
+    const prereqCourse = allCourses.find((c) => c.courseCode === prereqCode);
+    return prereqCourse ? prereqCourse.completed : true;
+  });
+}
+
+function getPrerequisiteTooltip(prerequisiteStr) {
+  if (!prerequisiteStr || prerequisiteStr === "-") return null;
+
+  const matches = prerequisiteStr.match(/\d{6}/g);
+  if (!matches || matches.length === 0) return null;
+
+  const allCourses = getAllCourses();
+
+  const prerequisites = matches
+    .map((prereqCode) => {
+      const course = allCourses.find((c) => c.courseCode === prereqCode);
+      if (!course) return null;
+      return {
+        courseName: course.courseName,
+        courseCode: prereqCode,
+        completed: course.completed,
+      };
+    })
+    .filter((p) => p !== null);
+
+  return prerequisites.length > 0 ? prerequisites : null;
+}
+
+function createTableRow(course, viewMode = "knowledgeBlock") {
+  const isLocked = !isPrerequisiteCompleted(course.prerequisite);
+  const lockedClass = isLocked ? ' class="row-locked"' : "";
+
+  const bgStyle = course.completed
+    ? ' style="background-color: #F4FFF5 !important;"'
+    : "";
+
+  const tooltipData = getPrerequisiteTooltip(course.prerequisite);
+  const dataTooltip = tooltipData
+    ? ` data-tooltip="${encodeURIComponent(JSON.stringify(tooltipData))}"`
+    : "";
+
+  const completedIcon = course.completed
+    ? '<span class="checkmark">✓</span>'
+    : '<span class="dash">-</span>';
+
+  const secondColumn =
+    viewMode === "semester"
+      ? `<td class="column-center">${course.knowledgeBlock}</td>`
+      : `<td class="column-center">${course.semester}</td>`;
+
+  return `
+    <tr${lockedClass}${bgStyle}${dataTooltip}>
+      <td class="column-center">${course.stt}</td>
+      ${secondColumn}
+      <td>${course.courseName}</td>
+      <td class="column-center">${course.courseCode}</td>
+      <td class="column-center">${course.prerequisite}</td>
+      <td class="column-center">${course.equivalent}</td>
+      <td class="column-center">${course.replacement}</td>
+      <td class="column-center">${course.credits}</td>
+      <td class="column-center">${course.theoryHours}</td>
+      <td class="column-center">${course.practiceHours}</td>
+      <td class="column-center">${completedIcon}</td>
+      <td class="column-center">
+        <button class="btn btn-sm btn-outline-primary" ${isLocked ? "disabled" : ""}><i class="fa-solid fa-file-invoice"></i></button>
+      </td>
+    </tr>
+  `;
+}
+
+function buildTableHeader(viewMode = "knowledgeBlock") {
+  const secondColTitle = viewMode === "semester" ? "KHỐI KIẾN THỨC" : "HỌC KỲ";
+  return `
+    <thead>
+      <tr>
+        <th class="column-center">STT</th>
+        <th class="column-center">${secondColTitle}</th>
+        <th>TÊN MÔN HỌC/HỌC PHẦN</th>
+        <th class="column-center">MÃ HP</th>
+        <th class="column-center">HỌC PHẦN</th>
+        <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
+        <th class="column-center">HP THAY THẾ</th>
+        <th class="column-center">SỐ TC</th>
+        <th class="column-center">SỐ TIẾT LÝ</th>
+        <th class="column-center">SỐ TIẾT THI</th>
+        <th class="column-center">ĐẠT</th>
+        <th class="column-center">ĐỀ CƯƠNG</th>
+      </tr>
+    </thead>
+  `;
+}
+
+function renderKnowledgeBlockView() {
+  if (!curriculumData) return;
+
+  const container = document.getElementById("expandableSections");
+  const timelineSection = document
+    .querySelector(".timeline-section")
+    ?.closest(".content-wrapper");
+  const knowledgeSection = document
+    .querySelector(".knowledge-block-overview")
+    ?.closest(".content-wrapper");
+
+  if (timelineSection) timelineSection.style.display = "none";
+  if (knowledgeSection) knowledgeSection.style.display = "block";
+
+  const data = curriculumData.professionalEducation;
+  const tableHeader = buildTableHeader("knowledgeBlock");
+
+  function buildElectiveBlock(title, courses) {
+    return `
+      <div style="width: max-content; min-width: 100%">
+        <div class="block-type">${title}</div>
+        <table class="table table-sm elective-table">
+          ${tableHeader}
+          <tbody>
+            ${courses.map((c) => createTableRow(c, "knowledgeBlock")).join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function buildSection(
+    title,
+    mandatoryCredits,
+    electiveCredits,
+    isExpanded,
+    electiveBlocks,
+  ) {
+    const expandedClass = isExpanded ? "expanded" : "";
+    const rotatedClass = isExpanded ? "rotated" : "";
+    const activeClass = isExpanded ? "active" : "";
+
+    return `
+      <div class="expandable-section">
+        <div class="section-header ${expandedClass}" onclick="toggleSection(this)">
+          <div class="semester-title">
+            <div class="semester-head-icon"></div>
+            <div>
+              <div class="section-header-text">${title}</div>
+              <div class="section-meta">
+                Bắt buộc: <span class="bold-text">${mandatoryCredits} tín chỉ</span>
+                • Tự chọn: <span class="bold-text">${electiveCredits} tín chỉ</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-icon ${rotatedClass}">
+            <i class="fas fa-chevron-up"></i>
+          </div>
+        </div>
+        <div class="section-contents ${activeClass}">
+          <div class="subtitle-header">Học phần bắt buộc</div>
+          <div class="table-frame">
+            <table class="table table-sm mandatory-courses-table">
+              ${tableHeader}
+              <tbody>
+                ${data.mandatory.map((c) => createTableRow(c, "knowledgeBlock")).join("")}
+              </tbody>
+            </table>
+          </div>
+          <div class="subtitle-header">Học phần tự chọn</div>
+          <div class="elective-course">
+            ${electiveBlocks}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = [
+    buildSection(
+      "Khối kiến thức giáo dục đại cương",
+      12,
+      6,
+      false,
+      buildElectiveBlock(
+        "TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC ĐẠI CƯƠNG 1",
+        data.elective.block1,
+      ) +
+        buildElectiveBlock(
+          "TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC ĐẠI CƯƠNG 2",
+          data.elective.block2,
+        ),
+    ),
+    buildSection(
+      "Khối kiến thức giáo dục chuyên nghiệp",
+      6,
+      6,
+      true,
+      buildElectiveBlock(
+        "TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC CHUYÊN NGHIỆP 1",
+        data.elective.block1,
+      ) +
+        buildElectiveBlock(
+          "TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC CHUYÊN NGHIỆP 2",
+          data.elective.block2,
+        ),
+    ),
+    buildSection(
+      "Khối kiến thức chưa xác định",
+      6,
+      6,
+      false,
+      buildElectiveBlock(
+        "TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC ĐẠI CƯƠNG",
+        data.elective.block1,
+      ),
+    ),
+  ].join("");
+}
+
+function renderSemesterView() {
+  if (!semesterCurriculumData) return;
+
+  const container = document.getElementById("expandableSections");
+  const timelineSection = document
+    .querySelector(".timeline-section")
+    ?.closest(".content-wrapper");
+  const knowledgeSection = document
+    .querySelector(".knowledge-block-overview")
+    ?.closest(".content-wrapper");
+
+  if (timelineSection) timelineSection.style.display = "block";
+  if (knowledgeSection) knowledgeSection.style.display = "none";
+
+  const tableHeader = buildTableHeader("semester");
+
+  const semestersHTML = semesterCurriculumData.semesters
+    .map((semData, index) => {
+      const isExpanded = index === 0;
+      const expandedClass = isExpanded ? "expanded" : "";
+      const rotatedClass = isExpanded ? "rotated" : "";
+      const activeClass = isExpanded ? "active" : "";
+
+      const mandatoryHTML =
+        semData.mandatory.length > 0
+          ? `
+        <div class="subtitle-header">Học phần bắt buộc</div>
+        <div class="table-frame">
+          <table class="table table-sm mandatory-courses-table">
+            ${tableHeader}
+            <tbody>
+              ${semData.mandatory.map((c, idx) => createTableRow({ ...c, stt: idx + 1 }, "semester")).join("")}
+            </tbody>
+          </table>
+        </div>
+      `
+          : "";
+
+      const electiveHTML =
+        semData.elective.length > 0
+          ? `
+        <div class="subtitle-header">Học phần tự chọn</div>
+        <div class="table-frame">
+          <table class="table table-sm">
+            ${tableHeader}
+            <tbody>
+              ${semData.elective.map((c, idx) => createTableRow({ ...c, stt: idx + 1 }, "semester")).join("")}
+            </tbody>
+          </table>
+        </div>
+      `
+          : "";
+
+      return `
+        <div class="expandable-section">
+          <div class="section-header ${expandedClass}" onclick="toggleSection(this)">
+            <div class="semester-title">
+              <div class="semester-head-icon"></div>
+              <div>
+                <div class="section-header-text">Học kỳ ${semData.semester}</div>
+                <div class="section-meta">
+                  Bắt buộc: <span class="bold-text">${semData.mandatoryCredits} tín chỉ</span>
+                  • Tự chọn: <span class="bold-text">${semData.electiveCredits} tín chỉ</span>
+                </div>
+              </div>
+            </div>
+            <div class="section-icon ${rotatedClass}">
+              <i class="fas fa-chevron-up"></i>
+            </div>
+          </div>
+          <div class="section-contents ${activeClass}">
+            ${mandatoryHTML}
+            ${electiveHTML}
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  container.innerHTML = semestersHTML;
+}
+
+function switchView(view) {
+  currentView = view;
+
+  document
+    .querySelectorAll(".tab-btn")
+    .forEach((btn) => btn.classList.remove("active"));
+
+  if (view === "semester") {
+    document.querySelector(".tab-btn:first-child")?.classList.add("active");
+    renderSemesterView();
+  } else {
+    document.querySelector(".tab-btn:last-child")?.classList.add("active");
+    renderKnowledgeBlockView();
+  }
+
+  setTimeout(attachTooltipListeners, 100);
+}
+
+let tooltipElement = null;
+let tooltipTimeout = null;
+
+function createTooltipElement() {
+  if (!tooltipElement) {
+    tooltipElement = document.createElement("div");
+    tooltipElement.className = "custom-tooltip";
+    document.body.appendChild(tooltipElement);
+  }
+  return tooltipElement;
+}
+
+function showTooltip(event, tooltipData) {
+  if (tooltipTimeout) {
+    clearTimeout(tooltipTimeout);
+    tooltipTimeout = null;
+  }
+
+  const tooltip = createTooltipElement();
+  const prerequisites = Array.isArray(tooltipData)
+    ? tooltipData
+    : [tooltipData];
+
+  const allCompleted = prerequisites.every((p) => p.completed);
+  const uncompletedCourses = prerequisites
+    .filter((p) => !p.completed)
+    .map((p) => p.courseName);
+
+  const tooltipFrames = prerequisites
+    .map((prereq) => {
+      const statusClass = prereq.completed ? "completed" : "not-completed";
+      const statusText = prereq.completed ? "Đã học" : "Chưa học";
+      const statusIcon = prereq.completed
+        ? '<i class="fa-solid fa-circle-check" style="color: #22C55E"></i>'
+        : '<i class="fa-solid fa-circle-xmark" style="color: #EA5455"></i>';
+      const requiredText = prereq.completed
+        ? "Đã hoàn thành chương trình"
+        : "Môn phải học tiên quyết";
+
+      return `
+        <div class="tooltip-frame">
+          <div>${statusIcon}</div>
+          <div class="tooltip-body">
+            <div class="tooltip-content">${prereq.courseName}</div>
+            <div class="tooltip-require">Yêu cầu: <i>${requiredText}</i></div>
+          </div>
+          <div class="tooltip-status ${statusClass}">${statusText}</div>
+        </div>
+      `;
+    })
+    .join("");
+
+  const remindText = allCompleted
+    ? "Môn học đã đủ điều kiện đăng ký."
+    : `<span class='remind-text'>Bạn <span class='text-danger'>CHƯA THỂ ĐĂNG KÝ</span> môn này do chưa hoàn thành học phần tiên quyết: <b>${uncompletedCourses.join(", ")}</b>.</span>`;
+
+  tooltip.innerHTML = `
+    <div class="tooltip-title">MÔN HỌC TIÊN QUYẾT${prerequisites.length > 1 ? " (" + prerequisites.length + " môn)" : ""}</div>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      ${tooltipFrames}
+    </div>
+    <div class="tooltip-remind">${remindText}</div>
+  `;
+
+  const tooltipLeft = event.clientX - 22;
+  tooltip.style.left = tooltipLeft + "px";
+  tooltip.style.visibility = "hidden";
+  tooltip.style.display = "block";
+
+  const tooltipHeight = tooltip.offsetHeight;
+  tooltip.style.top = event.clientY - tooltipHeight - 8 + "px";
+  tooltip.style.visibility = "visible";
+
+  const arrowLeft = event.clientX - tooltipLeft - 8;
+  tooltip.style.setProperty("--arrow-left", arrowLeft + "px");
+
+  tooltipTimeout = setTimeout(() => tooltip.classList.add("show"), 50);
+}
+
+function hideTooltip() {
+  if (tooltipTimeout) {
+    clearTimeout(tooltipTimeout);
+    tooltipTimeout = null;
+  }
+  if (tooltipElement) tooltipElement.classList.remove("show");
+}
+
+function attachTooltipListeners() {
+  document.querySelectorAll("tr[data-tooltip]").forEach((row) => {
+    row.addEventListener("mouseenter", function (e) {
+      const encodedData = this.getAttribute("data-tooltip");
+      if (encodedData) {
+        showTooltip(e, JSON.parse(decodeURIComponent(encodedData)));
+      }
+    });
+
+    row.addEventListener("mousemove", function (e) {
+      if (tooltipElement && tooltipElement.classList.contains("show")) {
+        const tooltipLeft = e.clientX - 22;
+        tooltipElement.style.left = tooltipLeft + "px";
+        tooltipElement.style.top =
+          e.clientY - tooltipElement.offsetHeight - 8 + "px";
+
+        const arrowLeft = e.clientX - tooltipLeft - 8;
+        tooltipElement.style.setProperty("--arrow-left", arrowLeft + "px");
+      }
+    });
+
+    row.addEventListener("mouseleave", hideTooltip);
+  });
+}
+
+function toggleSection(header) {
+  const icon = header.querySelector(".section-icon");
+  const content = header.nextElementSibling;
+
+  document.querySelectorAll(".section-header").forEach((h) => {
+    if (h !== header) {
+      h.classList.remove("expanded");
+      h.querySelector(".section-icon").classList.remove("rotated");
+      h.nextElementSibling.classList.remove("active");
+    }
+  });
+  header.classList.toggle("expanded");
+  icon.classList.toggle("rotated");
+  content.classList.toggle("active");
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+  await Promise.all([loadCurriculumData(), loadSemesterCurriculumData()]);
+  switchView(currentView);
+  attachTooltipListeners();
+
+  const tabBtns = document.querySelectorAll(".tab-btn");
+  if (tabBtns.length >= 2) {
+    tabBtns[0].addEventListener("click", () => switchView("semester"));
+    tabBtns[1].addEventListener("click", () => switchView("knowledgeBlock"));
+  }
 });
 
-function addTimelineClickHandlers() {
-  const timelineItems = document.querySelectorAll(".timeline-item");
+// ...existing code...
 
-  timelineItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      const semester = this.getAttribute("data-semester");
-      scrollToSemester(semester);
-    });
-  });
-}
+// Copy từ process-chuong-trinh-khung.js để dùng độc lập
+function getCircleStyles(sem) {
+  const completedPercent = (sem.completedCredits / sem.totalCredits) * 100;
+  const currentPercent = (sem.currentCredits / sem.totalCredits) * 100;
+  const totalPercent = completedPercent + currentPercent;
 
-function scrollToSemester(semester) {
-  // Switch to semester view if not already
-  const semesterTab = document.querySelector(".tab-btn:first-child");
-  if (semesterTab && !semesterTab.classList.contains("active")) {
-    semesterTab.click();
+  let circleClass = "";
+  let circleStyle = "";
+
+  if (sem.status === "completed" && sem.progress === 100) {
+    circleClass = "completed";
+  } else if (sem.status === "active" && sem.completedCredits === 0) {
+    circleClass = "active";
+  } else if (
+    (sem.status === "mixed" || totalPercent > 0) &&
+    sem.completedCredits > 0 &&
+    sem.currentCredits > 0
+  ) {
+    circleClass = "partial-mixed";
+    circleStyle = `style="--progress-green: ${completedPercent}; --progress-total: ${totalPercent}"`;
+  } else if (
+    sem.completedCredits > 0 &&
+    sem.completedCredits < sem.totalCredits
+  ) {
+    circleClass = "partial-green";
+    circleStyle = `style="--progress-green: ${completedPercent}"`;
+  } else if (sem.currentCredits > 0 && sem.completedCredits === 0) {
+    circleClass = "partial-yellow";
+    circleStyle = `style="--progress-yellow: ${currentPercent}"`;
+  } else {
+    circleClass = "future";
   }
 
-  // Wait for view to render
-  setTimeout(() => {
-    // Find the section for this semester
-    const sections = document.querySelectorAll(".expandable-section");
-    let targetSection = null;
-
-    sections.forEach((section) => {
-      const headerText = section.querySelector(".section-header-text");
-      if (headerText && headerText.textContent.includes(`Học kỳ ${semester}`)) {
-        targetSection = section;
-      }
-    });
-
-    if (targetSection) {
-      // Expand the section if not expanded
-      const header = targetSection.querySelector(".section-header");
-      const content = targetSection.querySelector(".section-content");
-
-      if (!header.classList.contains("expanded")) {
-        header.click();
-      }
-
-      // Scroll to section with offset for header
-      setTimeout(() => {
-        const headerHeight =
-          document.querySelector(".header-container")?.offsetHeight || 70;
-        const yOffset = -headerHeight - 20;
-        const y =
-          targetSection.getBoundingClientRect().top +
-          window.pageYOffset +
-          yOffset;
-
-        window.scrollTo({ top: y, behavior: "smooth" });
-
-        // Highlight incomplete courses
-        highlightIncompleteCourses(targetSection);
-      }, 100);
-    }
-  }, 200);
+  return {
+    circleClass,
+    circleStyle,
+    completedPercent,
+    currentPercent,
+    totalPercent,
+  };
 }
 
-// Export to global scope for mobile timeline
-if (typeof window !== "undefined") {
-  window.scrollToSemester = scrollToSemester;
+function buildProgressBarHTML(completedPercent, currentPercent, totalPercent) {
+  let html = "";
+  let textClass = "";
+
+  if (completedPercent > 0 && currentPercent > 0) {
+    html = `
+      <div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>
+      <div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>
+    `;
+    textClass = totalPercent > 50 ? "light" : "";
+  } else if (completedPercent > 0) {
+    html = `<div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>`;
+    textClass = completedPercent > 50 ? "light" : "";
+  } else if (currentPercent > 0) {
+    html = `<div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>`;
+    textClass = currentPercent > 50 ? "light" : "";
+  }
+
+  return { html, textClass };
 }
+//Render tổng quan khối kiến thức
+function renderKnowledgeBlocksOverview() {
+  if (!knowledgeBlocksData) return;
 
-function highlightIncompleteCourses(section) {
-  // Remove previous highlights
-  document.querySelectorAll(".highlight-incomplete").forEach((el) => {
-    el.classList.remove("highlight-incomplete");
-  });
+  const container = document.getElementById("knowledgeBlocksContainer");
+  if (!container) return;
 
-  // Find all rows without completed status
-  const rows = section.querySelectorAll("tbody tr");
-  rows.forEach((row) => {
-    const completedCell = row.querySelector("td:last-child");
-    if (completedCell && !completedCell.querySelector(".checkmark")) {
-      row.classList.add("highlight-incomplete");
+  const circumference = Math.round(2 * Math.PI * 50);
 
-      // Remove highlight after 3 seconds
-      setTimeout(() => {
-        row.classList.remove("highlight-incomplete");
-      }, 3000);
-    }
-  });
+  container.innerHTML = knowledgeBlocksData
+    .map((block) => {
+      const sem = {
+        completedCredits: block.completedCredits || 0,
+        currentCredits: block.currentCredits || 0,
+        totalCredits: block.totalCredits || 0,
+        status: block.status || "",
+        progress:
+          block.totalCredits > 0
+            ? Math.round(
+                ((block.completedCredits + (block.currentCredits || 0)) /
+                  block.totalCredits) *
+                  100,
+              )
+            : 0,
+      };
+
+      const { circleClass, completedPercent, currentPercent, totalPercent } =
+        getCircleStyles(sem);
+
+      const progressBar = buildProgressBarHTML(
+        completedPercent,
+        currentPercent,
+        totalPercent,
+      );
+      console.log("Test: ", progressBar);
+      const displayPercent = Math.round(totalPercent);
+
+      const completedDash = Math.round(
+        (completedPercent / 100) * circumference,
+      );
+      const currentDash = Math.round((currentPercent / 100) * circumference);
+
+      let strokeCompleted = "transparent";
+      let strokeCurrent = "transparent";
+
+      if (circleClass === "completed") {
+        strokeCompleted = "#28a745";
+      } else if (circleClass === "active" || circleClass === "partial-yellow") {
+        strokeCurrent = "#ffb800";
+      } else if (circleClass === "partial-mixed") {
+        strokeCompleted = "#28a745";
+        strokeCurrent = "#ffb800";
+      } else if (circleClass === "partial-green") {
+        strokeCompleted = "#28a745";
+      }
+
+      const displayCredits = `${sem.completedCredits + sem.currentCredits}/${sem.totalCredits}`;
+
+      return `
+        <div class="knowledge-block">
+          <div class="circle-progress">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#e9ecef" stroke-width="8"/>
+              ${
+                strokeCompleted !== "transparent"
+                  ? `<circle cx="60" cy="60" r="50" fill="none"
+                  stroke="${strokeCompleted}"
+                  stroke-width="8"
+                  stroke-dasharray="${completedDash} ${circumference}"
+                  stroke-dashoffset="0"/>`
+                  : ""
+              }
+              <!-- Phần current (vàng), bắt đầu sau phần completed -->
+              ${
+                strokeCurrent !== "transparent"
+                  ? `<circle cx="60" cy="60" r="50" fill="none"
+                  stroke="${strokeCurrent}"
+                  stroke-width="8"
+                  stroke-dasharray="${currentDash} ${circumference}"
+                  stroke-dashoffset="-${completedDash}"/>`
+                  : ""
+              }
+            </svg>
+            <div class="circle-text ${circleClass}">${block.code}</div>
+          </div>
+          <div class="block-title">${block.name}</div>
+          <div class="block-code">${displayCredits} tín chỉ</div>
+            <div class="timeline-progress">
+                <div class="timeline-progress-bar">
+                ${progressBar.html}
+                <div class="timeline-progress-text ${progressBar.textClass}">${displayPercent}%</div>
+                </div>
+            </div>
+        </div>
+      `;
+    })
+    .join("");
 }

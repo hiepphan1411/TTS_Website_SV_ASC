@@ -1,0 +1,185 @@
+{
+  "semesters": [
+    {
+      "semester": 1,
+      "mandatoryCredits": 7,
+      "electiveCredits": 7,
+      "mandatory": [
+        {
+          "stt": 1,
+          "semester": 1,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Kỹ năng tham gia giải quyết các vụ án dân sự",
+          "courseCode": "000093",
+          "prerequisite": "-",
+          "equivalent": "[010115]",
+          "replacement": "-",
+          "credits": 3,
+          "theoryHours": 30,
+          "practiceHours": 30,
+          "completed": true
+        },
+        {
+          "stt": 2,
+          "semester": 1,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Phương pháp điều tra xã hội học",
+          "courseCode": "000901",
+          "prerequisite": "-",
+          "equivalent": "[010006]",
+          "replacement": "-",
+          "credits": 1,
+          "theoryHours": 10,
+          "practiceHours": 0,
+          "completed": true
+        },
+        {
+          "stt": 3,
+          "semester": 1,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Luật Hiến pháp Việt Nam",
+          "courseCode": "000110",
+          "prerequisite": "-",
+          "equivalent": "-",
+          "replacement": "-",
+          "credits": 3,
+          "theoryHours": 45,
+          "practiceHours": 0,
+          "completed": false
+        }
+      ],
+      "elective": [
+        {
+          "stt": 1,
+          "semester": 1,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Kỹ năng tham gia giải quyết các vụ án dân sự 1",
+          "courseCode": "000093",
+          "prerequisite": "-",
+          "equivalent": "[010115]",
+          "replacement": "-",
+          "credits": 3,
+          "theoryHours": 30,
+          "practiceHours": 30,
+          "completed": false
+        },
+        {
+          "stt": 2,
+          "semester": 1,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Pháp luật về quyền con người",
+          "courseCode": "000121",
+          "prerequisite": "000901 (b)",
+          "equivalent": "-",
+          "replacement": "-",
+          "credits": 2,
+          "theoryHours": 30,
+          "practiceHours": 0,
+          "completed": false
+        },
+        {
+          "stt": 3,
+          "semester": 1,
+          "knowledgeBlock": "GDDC",
+          "courseName": "Pháp luật đại cương 2",
+          "courseCode": "000906",
+          "prerequisite": "000902 (b), 000093 (b)",
+          "equivalent": "[010116]",
+          "replacement": "-",
+          "credits": 2,
+          "theoryHours": 20,
+          "practiceHours": 0,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "mandatoryCredits": 2,
+      "electiveCredits": 3,
+      "mandatory": [
+        {
+          "stt": 1,
+          "semester": 2,
+          "knowledgeBlock": "GDDC",
+          "courseName": "Pháp luật đại cương 1",
+          "courseCode": "000902",
+          "prerequisite": "-",
+          "equivalent": "[010116]",
+          "replacement": "-",
+          "credits": 2,
+          "theoryHours": 20,
+          "practiceHours": 0,
+          "completed": false
+        }
+      ],
+      "elective": [
+        {
+          "stt": 1,
+          "semester": 2,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Phương pháp điều tra xã hội học 1",
+          "courseCode": "000901",
+          "prerequisite": "-",
+          "equivalent": "[010006]",
+          "replacement": "-",
+          "credits": 1,
+          "theoryHours": 10,
+          "practiceHours": 0,
+          "completed": true
+        },
+        {
+          "stt": 2,
+          "semester": 2,
+          "knowledgeBlock": "GDDC",
+          "courseName": "Pháp luật đại cương 1",
+          "courseCode": "000902",
+          "prerequisite": "-",
+          "equivalent": "[010116]",
+          "replacement": "-",
+          "credits": 2,
+          "theoryHours": 20,
+          "practiceHours": 0,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "semester": 3,
+      "mandatoryCredits": 0,
+      "electiveCredits": 4,
+      "mandatory": [],
+      "elective": [
+        {
+          "stt": 1,
+          "semester": 3,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Kỹ năng tham gia giải quyết các vụ án dân sự 2",
+          "courseCode": "000094",
+          "prerequisite": "000093 (b)",
+          "equivalent": "[010115]",
+          "replacement": "-",
+          "credits": 3,
+          "theoryHours": 30,
+          "practiceHours": 30,
+          "completed": false,
+          "isStudy": true
+        },
+        {
+          "stt": 2,
+          "semester": 3,
+          "knowledgeBlock": "GDCN",
+          "courseName": "Phương pháp điều tra xã hội học 2",
+          "courseCode": "000905",
+          "prerequisite": "000901 (b)",
+          "equivalent": "[010006]",
+          "replacement": "-",
+          "credits": 1,
+          "theoryHours": 10,
+          "practiceHours": 0,
+          "completed": false
+        }
+      ]
+    }
+  ]
+}

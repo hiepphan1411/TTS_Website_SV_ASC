@@ -1,897 +1,526 @@
-const curriculumData = {
-  // Khối kiến thức giáo dục chuyên nghiệp
-  professionalEducation: {
-    mandatory: [
-      {
-        stt: 1,
-        semester: 1,
-        knowledgeBlock: "GDCN",
-        courseName: "Kỹ năng tham gia giải quyết các vụ án dân sự",
-        courseCode: "000093",
-        prerequisite: "-",
-        equivalent: "[010115]",
-        replacement: "-",
-        credits: 3,
-        theoryHours: 30,
-        practiceHours: 30,
-        completed: true,
-      },
-      {
-        stt: 2,
-        semester: 1,
-        knowledgeBlock: "GDCN",
-        courseName: "Phương pháp điều tra xã hội học",
-        courseCode: "000901",
-        prerequisite: "-",
-        equivalent: "[010006]",
-        replacement: "-",
-        credits: 1,
-        theoryHours: 10,
-        practiceHours: 0,
-        completed: true,
-      },
-      {
-        stt: 3,
-        semester: 2,
-        knowledgeBlock: "GDDC",
-        courseName: "Pháp luật đại cương 1",
-        courseCode: "000902",
-        prerequisite: "-",
-        equivalent: "[010116]",
-        replacement: "-",
-        credits: 2,
-        theoryHours: 20,
-        practiceHours: 0,
-        completed: false,
-      },
-      {
-        stt: 4,
-        semester: 1,
-        knowledgeBlock: "GDCN",
-        courseName: "Luật Hiến pháp Việt Nam",
-        courseCode: "000110",
-        prerequisite: "-",
-        equivalent: "-",
-        replacement: "-",
-        credits: 3,
-        theoryHours: 45,
-        practiceHours: 0,
-        completed: false,
-      },
-    ],
-    elective: {
-      block1: [
-        {
-          stt: 1,
-          semester: 1,
-          knowledgeBlock: "GDCN",
-          courseName: "Kỹ năng tham gia giải quyết các vụ án dân sự 1",
-          courseCode: "000093",
-          prerequisite: "-",
-          equivalent: "[010115]",
-          replacement: "-",
-          credits: 3,
-          theoryHours: 30,
-          practiceHours: 30,
-          completed: false,
-        },
-        {
-          stt: 2,
-          semester: 2,
-          knowledgeBlock: "GDCN",
-          courseName: "Phương pháp điều tra xã hội học 1",
-          courseCode: "000901",
-          prerequisite: "-",
-          equivalent: "[010006]",
-          replacement: "-",
-          credits: 1,
-          theoryHours: 10,
-          practiceHours: 0,
-          completed: true,
-        },
-        {
-          stt: 3,
-          semester: 2,
-          knowledgeBlock: "GDDC",
-          courseName: "Pháp luật đại cương 1",
-          courseCode: "000902",
-          prerequisite: "-",
-          equivalent: "[010116]",
-          replacement: "-",
-          credits: 2,
-          theoryHours: 20,
-          practiceHours: 0,
-          completed: false,
-        },
-        {
-          stt: 4,
-          semester: 1,
-          knowledgeBlock: "GDCN",
-          courseName: "Pháp luật về quyền con người",
-          courseCode: "000121",
-          prerequisite: "000901 (b)",
-          equivalent: "-",
-          replacement: "-",
-          credits: 2,
-          theoryHours: 30,
-          practiceHours: 0,
-          completed: false,
-        },
-      ],
-      block2: [
-        {
-          stt: 1,
-          semester: 3,
-          knowledgeBlock: "GDCN",
-          courseName: "Kỹ năng tham gia giải quyết các vụ án dân sự 2",
-          courseCode: "000094",
-          prerequisite: "000093 (b)",
-          equivalent: "[010115]",
-          replacement: "-",
-          credits: 3,
-          theoryHours: 30,
-          practiceHours: 30,
-          completed: false,
-        },
-        {
-          stt: 2,
-          semester: 3,
-          knowledgeBlock: "GDCN",
-          courseName: "Phương pháp điều tra xã hội học 2",
-          courseCode: "000905",
-          prerequisite: "000901 (b)",
-          equivalent: "[010006]",
-          replacement: "-",
-          credits: 1,
-          theoryHours: 10,
-          practiceHours: 0,
-          completed: false,
-        },
-        {
-          stt: 3,
-          semester: 1,
-          knowledgeBlock: "GDDC",
-          courseName: "Pháp luật đại cương 2",
-          courseCode: "000906",
-          prerequisite: "000902 (b), 000093 (b)",
-          equivalent: "[010116]",
-          replacement: "-",
-          credits: 2,
-          theoryHours: 20,
-          practiceHours: 0,
-          completed: false,
-        },
-      ],
+let progressData = null;
+let currentAcademicYear = "";
+let timelineData = [];
+let chartData = null;
+let knowledgeBlocksData = null;
+
+//Load data test
+async function loadProgressData() {
+  try {
+    const response = await fetch("../data/chuong-trinh-khung.json");
+    const data = await response.json();
+
+    progressData = data.progressData;
+    currentAcademicYear = data.currentAcademicYear;
+    timelineData = data.timelineData;
+    chartData = data.chartData;
+    knowledgeBlocksData = data.knowledgeBlocks;
+
+    return data;
+  } catch (error) {
+    console.error("Lỗi khi tải dữ liệu tiến độ:", error);
+    return null;
+  }
+}
+
+function renderProgress() {
+  if (!progressData) return;
+
+  const ids = [
+    "totalCredits",
+    "completedCredits",
+    "currentCredits",
+    "remainingCredits",
+    "progressDiff",
+  ];
+  const keys = [
+    "totalCredits",
+    "completedCredits",
+    "currentCredits",
+    "remainingCredits",
+    "progressDiff",
+  ];
+
+  ids.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = progressData[keys[i]];
+  });
+
+  const overallEl = document.getElementById("overallPercentage");
+  if (overallEl) {
+    const percent = (
+      (progressData.completedCredits / progressData.totalCredits) *
+      100
+    ).toFixed(1);
+    overallEl.textContent = percent + "%";
+  }
+}
+
+function initKendoChart() {
+  if (!chartData || typeof $ === "undefined" || !$.fn.kendoChart) return;
+
+  $("#chart").kendoChart({
+    chartArea: {
+      height: 30,
+      background: "#f4fbff",
     },
-  },
-};
+    legend: { visible: false },
+    seriesDefaults: {
+      type: "bar",
+      stack: true,
+    },
+    series: [
+      { data: [chartData.completed], color: "#2865EB" }, // Đã hoàn thành (xanh)
+      { data: [chartData.current], color: "#ffb800" }, // Đang học (vàng)
+      { data: [chartData.remaining], color: "#e0e0e0" }, // Còn lại (xám)
+    ],
+    valueAxis: {
+      min: 0,
+      max: 100,
+      visible: false,
+      majorGridLines: { visible: false },
+      minorGridLines: { visible: false },
+    },
+    categoryAxis: {
+      categories: [""],
+      visible: false,
+      majorGridLines: { visible: false },
+      minorGridLines: { visible: false },
+    },
+    tooltip: {
+      visible: true,
+      template: "#= value #%",
+    },
 
-function isPrerequisiteCompleted(prerequisiteStr) {
-  if (!prerequisiteStr || prerequisiteStr === "-") return true;
-
-  //"000902 (b), 000093 (b)" -> ["000902", "000093"]
-  const matches = prerequisiteStr.match(/\d{6}/g);
-  if (!matches || matches.length === 0) return true;
-
-  const allCourses = [
-    ...curriculumData.professionalEducation.mandatory,
-    ...curriculumData.professionalEducation.elective.block1,
-    ...curriculumData.professionalEducation.elective.block2,
-  ];
-
-  return matches.every((prereqCode) => {
-    const prereqCourse = allCourses.find((c) => c.courseCode === prereqCode);
-    return prereqCourse ? prereqCourse.completed : true;
+    dataBound: function () {
+      $("#chart svg")
+        .find("rect[fill]")
+        .each(function () {
+          var rect = $(this);
+          if (rect.attr("fill") && !rect.attr("fill").includes("url")) {
+            rect.attr("rx", 8);
+            rect.attr("ry", 8);
+          }
+        });
+    },
   });
 }
 
-function getPrerequisiteTooltip(prerequisiteStr) {
-  if (!prerequisiteStr || prerequisiteStr === "-") return null;
+/* Timeline lộ trình học tập (Desktop) */
 
-  //"000902 (b), 000093 (b)" -> ["000902", "000093"]
-  const matches = prerequisiteStr.match(/\d{6}/g);
-  if (!matches || matches.length === 0) return null;
+/* Tính phần trăm cho vòng tròn timeline */
+function getCircleStyles(sem) {
+  const completedPercent = (sem.completedCredits / sem.totalCredits) * 100;
+  const currentPercent = (sem.currentCredits / sem.totalCredits) * 100;
+  const totalPercent = completedPercent + currentPercent;
 
-  const allCourses = [
-    ...curriculumData.professionalEducation.mandatory,
-    ...curriculumData.professionalEducation.elective.block1,
-    ...curriculumData.professionalEducation.elective.block2,
-  ];
+  let circleClass = "";
+  let circleStyle = "";
 
-  const prerequisites = matches
-    .map((prereqCode) => {
-      const prereqCourse = allCourses.find((c) => c.courseCode === prereqCode);
-      if (!prereqCourse) return null;
-      return {
-        courseName: prereqCourse.courseName,
-        courseCode: prereqCode,
-        completed: prereqCourse.completed,
-      };
-    })
-    .filter((p) => p !== null);
-
-  return prerequisites.length > 0 ? prerequisites : null;
-}
-
-function createTableRow(course, viewMode = "knowledgeBlock") {
-  const isLocked = !isPrerequisiteCompleted(course.prerequisite);
-  const lockedClass = isLocked ? ' class="row-locked"' : "";
-  const bgStyle = course.completed
-    ? ' style="background-color: #F4FFF5 !important;"'
-    : "";
-  const tooltipData = getPrerequisiteTooltip(course.prerequisite);
-  const dataTooltip = tooltipData
-    ? ` data-tooltip="${encodeURIComponent(JSON.stringify(tooltipData))}"`
-    : "";
-
-  if (viewMode === "semester") {
-    //HK
-    return `
-      <tr${lockedClass}${bgStyle}${dataTooltip}>
-        <td class="column-center">${course.stt}</td>
-        <td class="column-center">${course.knowledgeBlock}</td>
-        <td>${course.courseName}</td>
-        <td class="column-center">${course.courseCode}</td>
-        <td class="column-center">${course.prerequisite}</td>
-        <td class="column-center">${course.equivalent}</td>
-        <td class="column-center">${course.replacement}</td>
-        <td class="column-center">${course.credits}</td>
-        <td class="column-center">${course.theoryHours}</td>
-        <td class="column-center">${course.practiceHours}</td>
-        <td class="column-center">${course.completed ? '<span class="checkmark">✓</span>' : '<span class="dash">-</span>'}</td>
-      </tr>
-    `;
+  if (sem.status === "completed" && sem.progress === 100) {
+    circleClass = "completed";
+  } else if (sem.status === "active" && sem.completedCredits === 0) {
+    circleClass = "active";
+  } else if (
+    (sem.status === "mixed" || totalPercent > 0) &&
+    sem.completedCredits > 0 &&
+    sem.currentCredits > 0
+  ) {
+    circleClass = "partial-mixed";
+    circleStyle = `style="--progress-green: ${completedPercent}; --progress-total: ${totalPercent}"`;
+  } else if (
+    sem.completedCredits > 0 &&
+    sem.completedCredits < sem.totalCredits
+  ) {
+    circleClass = "partial-green";
+    circleStyle = `style="--progress-green: ${completedPercent}"`;
+  } else if (sem.currentCredits > 0 && sem.completedCredits === 0) {
+    circleClass = "partial-yellow";
+    circleStyle = `style="--progress-yellow: ${currentPercent}"`;
   } else {
-    //Khối kiến thức
-    return `
-      <tr${lockedClass}${bgStyle}${dataTooltip}>
-        <td class="column-center">${course.stt}</td>
-        <td class="column-center">${course.semester}</td>
-        <td>${course.courseName}</td>
-        <td class="column-center">${course.courseCode}</td>
-        <td class="column-center">${course.prerequisite}</td>
-        <td class="column-center">${course.equivalent}</td>
-        <td class="column-center">${course.replacement}</td>
-        <td class="column-center">${course.credits}</td>
-        <td class="column-center">${course.theoryHours}</td>
-        <td class="column-center">${course.practiceHours}</td>
-        <td class="column-center">${course.completed ? '<span class="checkmark">✓</span>' : '<span class="dash">-</span>'}</td>
-      </tr>
+    circleClass = "future";
+  }
+
+  return {
+    circleClass,
+    circleStyle,
+    completedPercent,
+    currentPercent,
+    totalPercent,
+  };
+}
+
+function buildProgressBarHTML(completedPercent, currentPercent, totalPercent) {
+  let html = "";
+  let textClass = "";
+
+  if (completedPercent > 0 && currentPercent > 0) {
+    html = `
+      <div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>
+      <div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>
     `;
+    textClass = totalPercent > 50 ? "light" : "";
+  } else if (completedPercent > 0) {
+    html = `<div class="timeline-progress-segment completed" style="width: ${completedPercent}%;"></div>`;
+    textClass = completedPercent > 50 ? "light" : "";
+  } else if (currentPercent > 0) {
+    html = `<div class="timeline-progress-segment active" style="width: ${currentPercent}%;"></div>`;
+    textClass = currentPercent > 50 ? "light" : "";
   }
+
+  return { html, textClass };
 }
 
-// const VIEW = {
-//   SEMESTER: "semester",
-//   KNOWLEDGE: "knowledgeBlock",
-// };
+function renderTimeline() {
+  const container = document.getElementById("timelineItems");
+  const markersContainer = document.getElementById("timelineYearMarkers");
+  const trackProgress = document.getElementById("timelineTrackProgress");
 
-//View mode
-let currentView = "semester"; // "semester" / "knowledgeBlock"
+  if (!container || !markersContainer || !trackProgress) return;
+  container.innerHTML = "";
+  markersContainer.innerHTML = "";
 
-//Khối kiến thức
-function renderKnowledgeBlockView() {
-  const container = document.getElementById("expandableSections");
-  const timelineSection = document
-    .querySelector(".timeline-section")
-    ?.closest(".content-wrapper");
-  const knowledgeSection = document
-    .querySelector(".knowledge-block-overview")
-    ?.closest(".content-wrapper");
-
-  if (timelineSection) {
-    timelineSection.style.display = "none";
-    knowledgeSection.style.display = "block";
-  }
-
-  container.innerHTML = `
-    <!-- Section 1 -->
-    <div class="expandable-section">
-      <div class="section-header" onclick="toggleSection(this)">
-        <div class="semester-title">
-          <div class="semester-head-icon"></div>
-          <div>
-            <div class="section-header-text">
-              Khối kiến thức giáo dục đại cương
-            </div>
-            <div class="section-meta">
-              Bắt buộc:
-              <span class="bold-text">12 tín chỉ</span>
-              • Tự chọn:
-              <span class="bold-text">6 tín chỉ</span>
-            </div>
-          </div>
-        </div>
-        <div class="section-icon">
-          <i class="fas fa-chevron-up"></i>
-        </div>
-      </div>
-      <div class="section-contents">
-        <div class="subtitle-header">Học phần bắt buộc</div>
-        <div class="table-frame">
-          <table class="table mandatory-courses-table">
-            <thead>
-              <tr>
-                <th class="column-center">STT</th>
-                <th class="column-center">HỌC KỲ</th>
-                <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                <th class="column-center">MÃ HP</th>
-                <th class="column-center">HỌC PHẦN</th>
-                <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                <th class="column-center">HP THAY THẾ</th>
-                <th class="column-center">SỐ TC</th>
-                <th class="column-center">SỐ TIẾT LÝ</th>
-                <th class="column-center">SỐ TIẾT THI</th>
-                <th class="column-center">ĐẠT</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${curriculumData.professionalEducation.mandatory.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-            </tbody>
-          </table>
-        </div>
-
-        <div class="subtitle-header">Học phần tự chọn</div>
-        <div class="elective-course">
-          <div style="width: max-content; min-width: 100%">
-            <div class="block-type">
-              TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC ĐẠI CƯƠNG 1
-            </div>
-            <table class="table elective-table" id="elective-block1-table">
-              <thead>
-                <tr>
-                  <th class="column-center">STT</th>
-                  <th class="column-center">HỌC KỲ</th>
-                  <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                  <th class="column-center">MÃ HP</th>
-                  <th class="column-center">HỌC PHẦN</th>
-                  <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                  <th class="column-center">HP THAY THẾ</th>
-                  <th class="column-center">SỐ TC</th>
-                  <th class="column-center">SỐ TIẾT LÝ</th>
-                  <th class="column-center">SỐ TIẾT THI</th>
-                  <th class="column-center">ĐẠT</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${curriculumData.professionalEducation.elective.block1.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-              </tbody>
-            </table>
-          </div>
-
-          <div style="width: max-content; min-width: 100%">
-            <div class="block-type">
-              TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC ĐẠI CƯƠNG 2
-            </div>
-            <table class="table elective-table" id="elective-block2-table">
-              <thead>
-                <tr>
-                  <th class="column-center">STT</th>
-                  <th class="column-center">HỌC KỲ</th>
-                  <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                  <th class="column-center">MÃ HP</th>
-                  <th class="column-center">HỌC PHẦN</th>
-                  <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                  <th class="column-center">HP THAY THẾ</th>
-                  <th class="column-center">SỐ TC</th>
-                  <th class="column-center">SỐ TIẾT LÝ</th>
-                  <th class="column-center">SỐ TIẾT THI</th>
-                  <th class="column-center">ĐẠT</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${curriculumData.professionalEducation.elective.block2.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 2 -->
-    <div class="expandable-section">
-      <div class="section-header expanded" onclick="toggleSection(this)">
-        <div class="semester-title">
-          <div class="semester-head-icon"></div>
-          <div>
-            <div class="section-header-text">
-              Khối kiến thức giáo dục chuyên nghiệp
-            </div>
-            <div class="section-meta">
-              Bắt buộc:
-              <span class="bold-text">6 tín chỉ</span>
-              • Tự chọn:
-              <span class="bold-text">6 tín chỉ</span>
-            </div>
-          </div>
-        </div>
-        <div class="section-icon rotated">
-          <i class="fas fa-chevron-up"></i>
-        </div>
-      </div>
-      <div class="section-contents active">
-        <div class="subtitle-header">Học phần bắt buộc</div>
-        <div class="table-frame">
-          <table class="table mandatory-courses-table">
-            <thead>
-              <tr>
-                <th class="column-center">STT</th>
-                <th class="column-center">HỌC KỲ</th>
-                <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                <th class="column-center">MÃ HP</th>
-                <th class="column-center">HỌC PHẦN</th>
-                <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                <th class="column-center">HP THAY THẾ</th>
-                <th class="column-center">SỐ TC</th>
-                <th class="column-center">SỐ TIẾT LÝ</th>
-                <th class="column-center">SỐ TIẾT THI</th>
-                <th class="column-center">ĐẠT</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${curriculumData.professionalEducation.mandatory.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-            </tbody>
-          </table>
-        </div>
-
-        <div class="subtitle-header">Học phần tự chọn</div>
-        <div class="elective-course">
-          <div style="width: max-content; min-width: 100%">
-            <div class="block-type">
-              TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC CHUYÊN NGHIỆP 1
-            </div>
-            <table class="table elective-table" id="elective-block1-table">
-              <thead>
-                <tr>
-                  <th class="column-center">STT</th>
-                  <th class="column-center">HỌC KỲ</th>
-                  <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                  <th class="column-center">MÃ HP</th>
-                  <th class="column-center">HỌC PHẦN</th>
-                  <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                  <th class="column-center">HP THAY THẾ</th>
-                  <th class="column-center">SỐ TC</th>
-                  <th class="column-center">SỐ TIẾT LÝ</th>
-                  <th class="column-center">SỐ TIẾT THI</th>
-                  <th class="column-center">ĐẠT</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${curriculumData.professionalEducation.elective.block1.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-              </tbody>
-            </table>
-          </div>
-
-          <div style="width: max-content; min-width: 100%">
-            <div class="block-type">
-              TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC CHUYÊN NGHIỆP 2
-            </div>
-            <table class="table elective-table" id="elective-block2-table">
-              <thead>
-                <tr>
-                  <th class="column-center">STT</th>
-                  <th class="column-center">HỌC KỲ</th>
-                  <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                  <th class="column-center">MÃ HP</th>
-                  <th class="column-center">HỌC PHẦN</th>
-                  <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                  <th class="column-center">HP THAY THẾ</th>
-                  <th class="column-center">SỐ TC</th>
-                  <th class="column-center">SỐ TIẾT LÝ</th>
-                  <th class="column-center">SỐ TIẾT THI</th>
-                  <th class="column-center">ĐẠT</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${curriculumData.professionalEducation.elective.block2.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 3 -->
-    <div class="expandable-section">
-      <div class="section-header" onclick="toggleSection(this)">
-        <div class="semester-title">
-          <div class="semester-head-icon"></div>
-          <div>
-            <div class="section-header-text">
-              Khối kiến thức chưa xác định
-            </div>
-            <div class="section-meta">
-              Bắt buộc:
-              <span class="bold-text">6 tín chỉ</span>
-              • Tự chọn:
-              <span class="bold-text">6 tín chỉ</span>
-            </div>
-          </div>
-        </div>
-        <div class="section-icon">
-          <i class="fas fa-chevron-up"></i>
-        </div>
-      </div>
-      <div class="section-contents">
-        <div class="subtitle-header">Học phần bắt buộc</div>
-        <div class="table-frame">
-          <table class="table mandatory-courses-table">
-            <thead>
-              <tr>
-                <th class="column-center">STT</th>
-                <th class="column-center">HỌC KỲ</th>
-                <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                <th class="column-center">MÃ HP</th>
-                <th class="column-center">HỌC PHẦN</th>
-                <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                <th class="column-center">HP THAY THẾ</th>
-                <th class="column-center">SỐ TC</th>
-                <th class="column-center">SỐ TIẾT LÝ</th>
-                <th class="column-center">SỐ TIẾT THI</th>
-                <th class="column-center">ĐẠT</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${curriculumData.professionalEducation.mandatory.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-            </tbody>
-          </table>
-        </div>
-
-        <div class="subtitle-header">Học phần tự chọn</div>
-        <div class="elective-course">
-          <div style="width: max-content; min-width: 100%">
-            <div class="block-type">
-              TỰ CHỌN KHỐI KIẾN THỨC GIÁO DỤC ĐẠI CƯƠNG
-            </div>
-            <table class="table elective-table" id="elective-block1-table">
-              <thead>
-                <tr>
-                  <th class="column-center">STT</th>
-                  <th class="column-center">HỌC KỲ</th>
-                  <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                  <th class="column-center">MÃ HP</th>
-                  <th class="column-center">HỌC PHẦN</th>
-                  <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                  <th class="column-center">HP THAY THẾ</th>
-                  <th class="column-center">SỐ TC</th>
-                  <th class="column-center">SỐ TIẾT LÝ</th>
-                  <th class="column-center">SỐ TIẾT THI</th>
-                  <th class="column-center">ĐẠT</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${curriculumData.professionalEducation.elective.block1.map((course) => createTableRow(course, "knowledgeBlock")).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-//Học kỳ
-function renderSemesterView() {
-  const container = document.getElementById("expandableSections");
-  const timelineSection = document
-    .querySelector(".timeline-section")
-    ?.closest(".content-wrapper");
-  const knowledgeSection = document
-    .querySelector(".knowledge-block-overview")
-    ?.closest(".content-wrapper");
-
-  if (timelineSection) {
-    timelineSection.style.display = "block";
-    knowledgeSection.style.display = "none";
-  }
-
-  const allCourses = [
-    ...curriculumData.professionalEducation.mandatory.map((c) => ({
-      ...c,
-      type: "mandatory",
-    })),
-    ...curriculumData.professionalEducation.elective.block1.map((c) => ({
-      ...c,
-      type: "elective",
-    })),
-    ...curriculumData.professionalEducation.elective.block2.map((c) => ({
-      ...c,
-      type: "elective",
-    })),
-  ];
-
-  //Group theo học kỳ
-  const semesterGroups = {};
-  allCourses.forEach((course) => {
-    if (!semesterGroups[course.semester]) {
-      semesterGroups[course.semester] = [];
-    }
-    semesterGroups[course.semester].push(course);
+  const yearGroups = {};
+  timelineData.forEach((sem) => {
+    if (!yearGroups[sem.year]) yearGroups[sem.year] = [];
+    yearGroups[sem.year].push(sem);
   });
 
-  const semestersHTML = Object.keys(semesterGroups)
-    .sort((a, b) => a - b)
-    .map((semester, index) => {
-      const courses = semesterGroups[semester];
+  const uniqueYears = Object.keys(yearGroups);
+  const totalSemesters = timelineData.length;
 
-      console.log("Courses: ", courses);
+  const currentYearIndex = uniqueYears.indexOf(currentAcademicYear);
+  if (currentYearIndex >= 0) {
+    const firstSemIndex = timelineData.findIndex(
+      (s) => s.year === currentAcademicYear,
+    );
+    trackProgress.style.width =
+      ((firstSemIndex + 1) / totalSemesters) * 100 + "%";
+  }
 
-      const mandatoryCourses = courses.filter((c) => c.type === "mandatory");
-      const electiveCourses = courses.filter((c) => c.type === "elective");
+  timelineData.forEach((sem) => {
+    const item = document.createElement("div");
+    item.className = "timeline-item";
+    item.setAttribute("data-semester", sem.semester);
+    item.style.cursor = "pointer";
 
-      const totalCredits = courses.reduce((sum, c) => sum + c.credits, 0);
-      const completedCredits = courses
-        .filter((c) => c.completed)
-        .reduce((sum, c) => sum + c.credits, 0);
+    const {
+      circleClass,
+      circleStyle,
+      completedPercent,
+      currentPercent,
+      totalPercent,
+    } = getCircleStyles(sem);
+    const progressBar = buildProgressBarHTML(
+      completedPercent,
+      currentPercent,
+      totalPercent,
+    );
+    const displayPercent = Math.round(totalPercent);
+    const displayCredits = `${sem.completedCredits + sem.currentCredits}/${sem.totalCredits}`;
 
-      return `
-        <div class="expandable-section">
-          <div class="section-header ${index === 0 ? "expanded" : ""}" onclick="toggleSection(this)">
-            <div class="semester-title">
-              <div class="semester-head-icon"></div>
-              <div>
-                <div class="section-header-text">
-                  Học kỳ ${semester}
-                </div>
-                <div class="section-meta">
-                  Đã hoàn thành:
-                  <span class="bold-text">${completedCredits} tín chỉ</span>
-                  • Tổng:
-                  <span class="bold-text">${totalCredits} tín chỉ</span>
-                </div>
-              </div>
-            </div>
-            <div class="section-icon ${index === 0 ? "rotated" : ""}">
-              <i class="fas fa-chevron-up"></i>
-            </div>
+    item.innerHTML = `
+      <div class="timeline-circle-wrapper">
+        <div class="timeline-circle ${circleClass}" ${circleStyle}>
+          <span>HK${sem.semester}</span>
+        </div>
+      </div>
+      <div class="timeline-info">
+        <div class="timeline-semester">Học kỳ ${sem.semester}</div>
+        <div class="timeline-credits">${displayCredits} tín chỉ</div>
+      </div>
+      <div class="timeline-progress">
+        <div class="timeline-progress-bar">
+          ${progressBar.html}
+          <div class="timeline-progress-text ${progressBar.textClass}">${displayPercent}%</div>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(item);
+  });
+
+  /* Bắt đầu */
+  const startMarker = document.createElement("div");
+  startMarker.className = "timeline-year-marker";
+  startMarker.style.left = "0%";
+  startMarker.innerHTML = `
+    <div class="timeline-year-dot current"></div>
+    <div class="timeline-year-label">9/2022</div>
+  `;
+  markersContainer.appendChild(startMarker);
+
+  /* Mốc từng năm học */
+  uniqueYears.forEach((year) => {
+    const firstSemIndex = timelineData.findIndex((s) => s.year === year);
+    const positionPercent = ((firstSemIndex + 1) / totalSemesters) * 100;
+
+    const marker = document.createElement("div");
+    marker.className = "timeline-year-marker";
+    marker.style.left = positionPercent + "%";
+
+    const dotClass = year <= currentAcademicYear ? "current" : "future";
+    const semestersList = yearGroups[year]
+      .map((s) => `HK${s.semester}`)
+      .join(", ");
+
+    if (positionPercent === 100) {
+      marker.innerHTML = ``;
+    } else {
+      marker.innerHTML = `
+      <div class="timeline-year-dot ${dotClass}"></div>
+      <div class="timeline-year-label">${year}</div>
+      <div class="timeline-year-semesters">${semestersList}</div>
+    `;
+    }
+    markersContainer.appendChild(marker);
+  });
+
+  /* Kết thúc */
+  const endMarker = document.createElement("div");
+  endMarker.className = "timeline-year-marker";
+  endMarker.style.left = "100%";
+  endMarker.innerHTML = `
+    <div class="timeline-year-dot ${currentYearIndex >= 0 ? "future" : "current"}"></div>
+    <div class="timeline-year-label">6/2028</div>
+  `;
+  markersContainer.appendChild(endMarker);
+
+  const minItemWidth = 140;
+  const totalMinWidth = totalSemesters * minItemWidth;
+  container.style.minWidth = totalMinWidth + "px";
+  const trackContainerEl = document.querySelector(".timeline-track-container");
+  if (trackContainerEl) {
+    trackContainerEl.style.minWidth = totalMinWidth + "px";
+  }
+}
+
+/* Timeline trên mobile */
+
+function handleResize() {
+  const isMobile = window.innerWidth <= 768;
+  const container = document.querySelector(".timeline-container");
+  if (!container) return;
+
+  const wrapper = container.querySelector(".timeline-wrapper");
+  let mobileTimeline = container.querySelector(".timeline-mobile");
+
+  if (isMobile) {
+    if (wrapper) wrapper.style.display = "none";
+    if (!mobileTimeline) {
+      mobileTimeline = document.createElement("div");
+      mobileTimeline.className = "timeline-mobile";
+      container.appendChild(mobileTimeline);
+    }
+    renderMobileTimeline();
+
+    setTimeout(() => {
+      document.querySelectorAll(".timeline-semester-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const semester = this.getAttribute("data-semester");
+          if (window.scrollToSemester) window.scrollToSemester(semester);
+        });
+      });
+    }, 100);
+  } else {
+    if (wrapper) wrapper.style.display = "block";
+    if (mobileTimeline) mobileTimeline.remove();
+  }
+}
+
+function renderMobileTimeline() {
+  const container = document.querySelector(".timeline-mobile");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const yearGroups = {};
+  timelineData.forEach((sem) => {
+    if (!yearGroups[sem.year]) yearGroups[sem.year] = [];
+    yearGroups[sem.year].push(sem);
+  });
+
+  const uniqueYears = Object.keys(yearGroups);
+  const totalYears = uniqueYears.length;
+  const currentYearIndex = uniqueYears.indexOf(currentAcademicYear);
+
+  uniqueYears.forEach((year, yearIndex) => {
+    const yearSems = yearGroups[year];
+    const dotClass = year <= currentAcademicYear ? "current" : "future";
+
+    const progressPercent = (yearIndex / totalYears) * 100 + 3;
+    if (yearIndex === currentYearIndex && currentYearIndex >= 0) {
+      container.style.setProperty("--progress-percent", progressPercent + "%");
+    } else if (currentYearIndex < 0) {
+      container.style.setProperty("--progress-percent", "100%");
+    }
+
+    const yearGroup = document.createElement("div");
+    yearGroup.className = "timeline-year-group";
+
+    const yearMarker = document.createElement("div");
+    yearMarker.className = "timeline-year-marker-mobile";
+    yearMarker.innerHTML = `<div class="timeline-year-dot ${dotClass}"></div>`;
+    yearGroup.appendChild(yearMarker);
+
+    const semestersContainer = document.createElement("div");
+    semestersContainer.className = "timeline-semesters-horizontal";
+
+    yearSems.forEach((sem) => {
+      const card = document.createElement("div");
+      card.className = "timeline-semester-card";
+      card.setAttribute("data-semester", sem.semester);
+      card.style.cursor = "pointer";
+
+      const {
+        circleClass,
+        circleStyle,
+        completedPercent,
+        currentPercent,
+        totalPercent,
+      } = getCircleStyles(sem);
+      const progressBar = buildProgressBarHTML(
+        completedPercent,
+        currentPercent,
+        totalPercent,
+      );
+
+      if (sem.status === "completed" && sem.progress === 100)
+        card.classList.add("completed");
+      else if (sem.status === "active") card.classList.add("active");
+      else if (sem.status === "mixed") card.classList.add("mixed");
+
+      const displayPercent = Math.round(totalPercent);
+      const displayCredits = `${sem.completedCredits + sem.currentCredits}/${sem.totalCredits}`;
+
+      card.innerHTML = `
+        <div class="timeline-circle ${circleClass}" ${circleStyle}>
+          <span>HK${sem.semester}</span>
+        </div>
+        <div class="timeline-info">
+          <div class="timeline-semester">Học kỳ ${sem.semester}</div>
+          <div class="timeline-credits">${displayCredits} tín chỉ</div>
+        </div>
+        <div class="timeline-progress">
+          <div class="timeline-progress-bar">
+            ${progressBar.html}
+            <div class="timeline-progress-text ${progressBar.textClass}">${displayPercent}%</div>
           </div>
-          <div class="section-contents ${index === 0 ? "active" : ""}">
-            ${
-              mandatoryCourses.length > 0
-                ? `
-            <div class="subtitle-header">Học phần bắt buộc</div>
-            <div class="table-frame">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="column-center">STT</th>
-                    <th class="column-center">KHỐI KIẾN THỨC</th>
-                    <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                    <th class="column-center">MÃ HP</th>
-                    <th class="column-center">HỌC PHẦN</th>
-                    <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                    <th class="column-center">HP THAY THẾ</th>
-                    <th class="column-center">SỐ TC</th>
-                    <th class="column-center">SỐ TIẾT LÝ</th>
-                    <th class="column-center">SỐ TIẾT THI</th>
-                    <th class="column-center">ĐẠT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${mandatoryCourses.map((course, idx) => createTableRow({ ...course, stt: idx + 1 }, "semester")).join("")}
-                </tbody>
-              </table>
-            </div>
-            `
-                : ""
-            }
-
-            ${
-              electiveCourses.length > 0
-                ? `
-            <div class="subtitle-header">Học phần tự chọn</div>
-            <div class="table-frame">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="column-center">STT</th>
-                    <th class="column-center">KHỐI KIẾN THỨC</th>
-                    <th>TÊN MÔN HỌC/HỌC PHẦN</th>
-                    <th class="column-center">MÃ HP</th>
-                    <th class="column-center">HỌC PHẦN</th>
-                    <th class="column-center">HP TƯƠNG ĐƯƠNG</th>
-                    <th class="column-center">HP THAY THẾ</th>
-                    <th class="column-center">SỐ TC</th>
-                    <th class="column-center">SỐ TIẾT LÝ</th>
-                    <th class="column-center">SỐ TIẾT THI</th>
-                    <th class="column-center">ĐẠT</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${electiveCourses.map((course, idx) => createTableRow({ ...course, stt: idx + 1 }, "semester")).join("")}
-                </tbody>
-              </table>
-            </div>
-            `
-                : ""
-            }
+        </div>
+        <div class="semester-tooltip">
+          <div class="tooltip-row">
+            <span class="tooltip-label">Học kỳ:</span>
+            <span class="tooltip-value">HK${sem.semester}</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-label">Đã học:</span>
+            <span class="tooltip-value">${sem.completedCredits}/${sem.totalCredits} TC</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-label">Đang học:</span>
+            <span class="tooltip-value">${sem.currentCredits} TC</span>
           </div>
         </div>
       `;
-    })
-    .join("");
 
-  container.innerHTML = semestersHTML;
-}
+      semestersContainer.appendChild(card);
+    });
 
-//Switch view
-function switchView(view) {
-  currentView = view;
-
-  document.querySelectorAll(".tab-btn").forEach((btn) => {
-    btn.classList.remove("active");
+    yearGroup.appendChild(semestersContainer);
+    container.appendChild(yearGroup);
   });
-
-  if (view === "semester") {
-    document.querySelector(".tab-btn:first-child").classList.add("active");
-    renderSemesterView();
-  } else {
-    document.querySelector(".tab-btn:last-child").classList.add("active");
-    renderKnowledgeBlockView();
-  }
 }
-
-// Custom Tooltip Functions
-let tooltipElement = null;
-let tooltipTimeout = null;
-
-function createTooltipElement() {
-  if (!tooltipElement) {
-    tooltipElement = document.createElement("div");
-    tooltipElement.className = "custom-tooltip";
-    document.body.appendChild(tooltipElement);
-  }
-  return tooltipElement;
-}
-
-function showTooltip(event, tooltipData) {
-  if (tooltipTimeout) {
-    clearTimeout(tooltipTimeout);
-    tooltipTimeout = null;
-  }
-
-  const tooltip = createTooltipElement();
-  const prerequisites = Array.isArray(tooltipData)
-    ? tooltipData
-    : [tooltipData];
-
-  const allCompleted = prerequisites.every((p) => p.completed);
-  const uncompletedCourses = prerequisites
-    .filter((p) => !p.completed)
-    .map((p) => p.courseName);
-
-  // Generate tooltip frames for each prerequisite
-  const tooltipFrames = prerequisites
-    .map((prereq) => {
-      const statusClass = prereq.completed ? "completed" : "not-completed";
-      const statusText = prereq.completed ? "Đã học" : "Chưa học";
-      const statusIcon = prereq.completed
-        ? '<i class="fa-solid fa-circle-check" style="color: #22C55E"></i>'
-        : '<i class="fa-solid fa-circle-xmark" style="color: #EA5455"></i>';
-      const requiredText = prereq.completed
-        ? "Đã hoàn thành chương trình"
-        : "Môn phải học tiên quyết";
-
-      return `
-      <div class="tooltip-frame">
-          <div>
-              ${statusIcon}
-          </div>
-          <div class="tooltip-body">
-              <div class="tooltip-content">${prereq.courseName}</div>
-              <div class="tooltip-require">Yêu cầu: <i>${requiredText}</i></div>
-          </div>
-          <div class="tooltip-status ${statusClass}">${statusText}</div>
-      </div>
-    `;
-    })
-    .join("");
-
-  const remindText = allCompleted
-    ? "Môn học đã đủ điều kiện đăng ký."
-    : `<span class='remind-text'>Bạn <span class='text-danger'>CHƯA THỂ ĐĂNG KÝ</span> môn này do chưa hoàn thành học phần tiên quyết: <b>${uncompletedCourses.join(", ")}</b>.</span>`;
-
-  tooltip.innerHTML = `
-    <div class="tooltip-title">MÔN HỌC TIÊN QUYẾT${prerequisites.length > 1 ? " (" + prerequisites.length + " môn)" : ""}</div>
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-      ${tooltipFrames}
-    </div>
-    <div class="tooltip-remind">${remindText}</div>
-  `;
-
-  //Position
-  const x = event.clientX;
-  const y = event.clientY;
-
-  const tooltipLeft = x - 22;
-  tooltip.style.left = tooltipLeft + "px";
-
-  tooltip.style.visibility = "hidden";
-  tooltip.style.display = "block";
-
-  const tooltipHeight = tooltip.offsetHeight;
-  tooltip.style.top = y - tooltipHeight - 8 + "px";
-
-  tooltip.style.visibility = "visible";
-
-  const arrowLeft = x - tooltipLeft - 8;
-  tooltip.style.setProperty("--arrow-left", arrowLeft + "px");
-
-  tooltipTimeout = setTimeout(() => {
-    tooltip.classList.add("show");
-  }, 50);
-}
-
-function hideTooltip() {
-  // Clear any pending show timeout
-  if (tooltipTimeout) {
-    clearTimeout(tooltipTimeout);
-    tooltipTimeout = null;
-  }
-
-  if (tooltipElement) {
-    tooltipElement.classList.remove("show");
-  }
-}
-
-function attachTooltipListeners() {
-  const rows = document.querySelectorAll("tr[data-tooltip]");
-  rows.forEach((row) => {
-    row.addEventListener("mouseenter", function (e) {
-      const encodedData = this.getAttribute("data-tooltip");
-      if (encodedData) {
-        const tooltipData = JSON.parse(decodeURIComponent(encodedData));
-        showTooltip(e, tooltipData);
-      }
+//THêm sự kiện click cho timeline
+function addTimelineClickHandlers() {
+  document.querySelectorAll(".timeline-item").forEach((item) => {
+    item.addEventListener("click", function () {
+      const semester = this.getAttribute("data-semester");
+      scrollToSemester(semester);
     });
-
-    row.addEventListener("mousemove", function (e) {
-      if (tooltipElement && tooltipElement.classList.contains("show")) {
-        const tooltipLeft = e.clientX - 22;
-        const tooltipHeight = tooltipElement.offsetHeight;
-
-        tooltipElement.style.left = tooltipLeft + "px";
-        tooltipElement.style.top = e.clientY - tooltipHeight - 8 + "px";
-
-        const arrowLeft = e.clientX - tooltipLeft - 8;
-        tooltipElement.style.setProperty("--arrow-left", arrowLeft + "px");
-      }
-    });
-
-    row.addEventListener("mouseleave", hideTooltip);
   });
 }
 
-function toggleSection(header) {
-  const icon = header.querySelector(".section-icon");
-  const content = header.nextElementSibling;
+function scrollToSemester(semester) {
+  const semesterTab = document.querySelector(".tab-btn:first-child");
+  if (semesterTab && !semesterTab.classList.contains("active")) {
+    semesterTab.click();
+  }
 
-  document.querySelectorAll(".section-header").forEach((h) => {
-    if (h !== header) {
-      h.classList.remove("expanded");
-      h.querySelector(".section-icon").classList.remove("rotated");
-      h.nextElementSibling.classList.remove("active");
+  setTimeout(() => {
+    const sections = document.querySelectorAll(".expandable-section");
+    let targetSection = null;
+
+    sections.forEach((section) => {
+      const headerText = section.querySelector(".section-header-text");
+      if (headerText && headerText.textContent.includes(`Học kỳ ${semester}`)) {
+        targetSection = section;
+      }
+    });
+
+    if (targetSection) {
+      const header = targetSection.querySelector(".section-header");
+      if (!header.classList.contains("expanded")) {
+        header.click();
+      }
+
+      setTimeout(() => {
+        const headerHeight =
+          document.querySelector(".header-container")?.offsetHeight || 70;
+        const y =
+          targetSection.getBoundingClientRect().top +
+          window.pageYOffset -
+          headerHeight -
+          20;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        highlightIncompleteCourses(targetSection);
+      }, 100);
+    }
+  }, 200);
+}
+
+if (typeof window !== "undefined") {
+  window.scrollToSemester = scrollToSemester;
+}
+
+// Hightlight nhưng môn chưa học
+function highlightIncompleteCourses(section) {
+  document.querySelectorAll(".highlight-incomplete").forEach((el) => {
+    el.classList.remove("highlight-incomplete");
+  });
+
+  section.querySelectorAll("tbody tr").forEach((row) => {
+    const completedCell = row.querySelector("td:last-child");
+    if (completedCell && !completedCell.querySelector(".checkmark")) {
+      row.classList.add("highlight-incomplete");
+      setTimeout(() => row.classList.remove("highlight-incomplete"), 3000);
     }
   });
-
-  header.classList.toggle("expanded");
-  icon.classList.toggle("rotated");
-  content.classList.toggle("active");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  switchView(currentView);
-  attachTooltipListeners();
+function initBootstrapTooltips() {
+  if (typeof bootstrap === "undefined") return;
 
-  const tabBtns = document.querySelectorAll(".tab-btn");
-  if (tabBtns.length >= 2) {
-    tabBtns[0].addEventListener("click", () => {
-      switchView("semester");
-      setTimeout(attachTooltipListeners, 100);
-    });
-    tabBtns[1].addEventListener("click", () => {
-      switchView("knowledgeBlock");
-      setTimeout(attachTooltipListeners, 100);
-    });
-  }
+  const tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]'),
+  );
+  tooltipTriggerList.map(function (el) {
+    return new bootstrap.Tooltip(el);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+  await loadProgressData();
+
+  renderProgress();
+  renderKnowledgeBlocksOverview();
+  initKendoChart();
+
+  renderTimeline();
+  handleResize();
+
+  setTimeout(() => addTimelineClickHandlers(), 100);
+
+  initBootstrapTooltips();
 });
+
+window.addEventListener("resize", handleResize);
