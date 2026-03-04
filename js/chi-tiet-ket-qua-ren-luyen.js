@@ -4,8 +4,6 @@ $(document).ready(function () {
     loadSemesterData();
 
     animateStatCards();
-
-    initializeTableInteractions();
 });
 
 function loadSemesterData() {
@@ -61,19 +59,9 @@ function animateStatCards() {
     });
 }
 
-function initializeTableInteractions() {
-    $('.detail-table tbody tr').on('click', function () {
-        $(this).toggleClass('active');
-    });
-
-    $('.detail-table tbody tr').on('mouseenter', function () {
-        $(this).css('cursor', 'pointer');
-    });
-}
-
 function exportTableToCSV(filename = 'chi-tiet-ren-luyen.csv') {
     const csv = [];
-    const rows = document.querySelectorAll('.detail-table tr');
+    const rows = document.querySelectorAll('.detail-table-rl tr');
 
     const semesterData = sessionStorage.getItem('selectedSemester');
     if (semesterData) {
@@ -137,7 +125,7 @@ function formatNumber(num, type = 'decimal') {
 }
 
 function generateSummaryStats() {
-    const rows = $('.detail-table tbody tr');
+    const rows = $('.detail-table-rl tbody tr');
     let totalScore = 0;
     let rowCount = 0;
 
@@ -162,7 +150,7 @@ function generateSummaryStats() {
 }
 
 function highlightRows(criteria) {
-    $('.detail-table tbody tr').each(function () {
+    $('.detail-table-rl tbody tr').each(function () {
         const text = $(this).text().toLowerCase();
         if (text.includes(criteria.toLowerCase())) {
             $(this).css('background-color', '#fffacd');
@@ -171,12 +159,12 @@ function highlightRows(criteria) {
 }
 
 function expandAllRows() {
-    $('.detail-table tbody tr').show();
+    $('.detail-table-rl tbody tr').show();
 }
 
 function collapseAllRows() {
-    $('.detail-table tbody tr').hide();
-    $('.detail-table tbody tr:first-child').show();
+    $('.detail-table-rl tbody tr').hide();
+    $('.detail-table-rl tbody tr:first-child').show();
 }
 
 $(function () {
@@ -496,7 +484,7 @@ const trainingDetailData = {
 };
 
 function renderTrainingDetailTable() {
-    const tbody = document.querySelector('.detail-table tbody');
+    const tbody = document.querySelector('.detail-table-rl tbody');
     if (!tbody) return;
 
     tbody.innerHTML = '';

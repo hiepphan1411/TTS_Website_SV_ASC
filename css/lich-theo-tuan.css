@@ -77,7 +77,7 @@ body {
 
 .nav-buttons button:hover {
     color: white;
-    background-color: #56a2e8;
+    background-color: #3a74f0;
 }
 
 .button-schedule {
@@ -100,6 +100,12 @@ body {
     background-color: white;
     color: #1976d2;
     border-color: #1976d2;
+}
+.button-schedule.active:hover {
+    background-color: white;
+    color: #1976d2;
+    border-color: #1976d2;
+    cursor: default;
 }
 
 .button-schedule.active i,
@@ -143,7 +149,7 @@ body {
 /* Main Container */
 .main-container {
     display: flex;
-    min-height: calc(100vh - 80px);
+    height: 83vh;
     overflow: visible;
 }
 
@@ -201,39 +207,42 @@ body {
     text-align: center;
     font-weight: bold;
 }
-
 .mini-calendar td {
-    padding: 7px 0;
-    width: 60px;
+    height: 40px;
+    width: 40px;
+}
 
-    text-align: center;
-    height: fit-content;
-    border-radius: 100%;
+.mini-calendar td span {
+    display: inline-flex;
+    justify-content: center;
     align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     font-size: 12px;
     cursor: pointer;
 }
 
-.mini-calendar td:hover {
+.mini-calendar td span:hover {
     background-color: #f0f0f0;
     border-radius: 100%;
 }
 
-.mini-calendar td.today {
+.mini-calendar td span.today {
     background-color: #153898;
     color: white;
     border-radius: 100%;
     font-weight: 600;
 }
 
-.mini-calendar td.selected {
+.mini-calendar td span.selected {
     background-color: #4caf50;
     color: white;
     border-radius: 50%;
     font-weight: bold;
 }
 
-.mini-calendar td.other-month {
+.mini-calendar td span.other-month {
     color: #ccc;
 }
 
@@ -287,11 +296,10 @@ body {
 /* Calendar Content */
 .calendar-content {
     flex: 1;
-    min-width: 0;
     background-color: white;
     border-radius: 0 4px 4px 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    max-height: calc(100vh - 80px);
+    max-height: calc(85.5vh);
     overflow-x: auto;
     overflow-y: auto;
     position: relative;
@@ -378,7 +386,7 @@ body {
 }
 
 .day-number.today {
-    background-color: #56a2e8;
+    background-color: #3a74f0;
     color: white;
     border-radius: 50%;
     width: 40px;
@@ -393,7 +401,8 @@ body {
 .calendar-body {
     display: table;
     width: 100%;
-    border-collapse: collapse;
+    min-height: 500px;
+
     table-layout: fixed;
 }
 
@@ -520,8 +529,8 @@ body {
 
 .btn-join:hover {
     background-color: white;
-    color: #56a2e8;
-    border: 1px solid #56a2e8;
+    color: #3a74f0;
+    border: 1px solid #3a74f0;
     transition: all 0.2s;
 }
 
@@ -543,7 +552,7 @@ body {
 @media (max-width: 1400px) {
     .main-container {
         flex-direction: column;
-        min-height: auto;
+        height: auto;
     }
 
     .sidebar-schedule {
@@ -564,7 +573,10 @@ body {
     }
 
     .calendar-content {
-        width: 100%;
+        overflow: auto;
+    }
+    .event {
+        width: 300px;
     }
 }
 
@@ -572,6 +584,24 @@ body {
     .sidebar-schedule {
         flex-direction: column;
         gap: 1rem;
+    }
+    .calendar-header,
+    .calendar-body {
+        display: table;
+        width: 2500px;
+        min-width: 800px;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    .time-row .time-slot,
+    .time-slot {
+        width: 60px;
+    }
+    .event {
+        width: 100%;
+    }
+    .calendar-header .day-column.no-event, .day-column:empty {
+        width: 100px;
     }
 
     .sidebar-schedule > div:first-child {

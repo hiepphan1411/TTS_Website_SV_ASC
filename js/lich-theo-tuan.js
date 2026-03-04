@@ -1,119 +1,4 @@
-// Data lịch học và lịch thi đầy đủ
 const scheduleData = {
-    // Tuần 0: 1-5/1/2026 (Thứ 5-CN)
-    '2026-02-25': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Nhập môn Lập trình',
-            code: 'DHKTPM18A - 42030001101',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A1.01',
-            teacher: 'TS. Nguyễn Văn Z',
-            note: '',
-        },
-    ],
-    '2026-02-26': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'practice',
-            title: 'Lập trình C',
-            code: 'DHKTPM18A - 42030002201',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'B3.01',
-            teacher: 'TS. Trần Thị Y',
-            note: '',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'theory',
-            title: 'Toán cao cấp',
-            code: 'DHKTPM18A - 42030003301',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'A1.02',
-            teacher: 'TS. Lê Văn X',
-            note: '',
-        },
-    ],
-    '2026-02-27': [
-        {
-            time: 'morning',
-            category: 'exam',
-            type: 'exam',
-            title: 'Nhập môn CNTT',
-            code: 'DHKTPM18A - 42030004401',
-            period: '1 - 3 (7:00 - 9:30)',
-            room: 'A1.05',
-            teacher: 'Ban Giám thị',
-            note: '',
-        },
-    ],
-    '2026-02-28': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'online',
-            title: 'Tiếng Anh chuyên ngành',
-            code: 'DHKTPM18A - 42030005501',
-            period: '4 - 6 (9:30 - 12:00)',
-            room: 'Trực tuyến',
-            teacher: 'ThS. Phạm Thị W',
-            note: 'Zoom FI30: 652 722 8922 / 123456',
-        },
-    ],
-    '2026-03-01': [
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'theory',
-            title: 'Giáo dục thể chất',
-            code: 'DHKTPM18A - 42030006601',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'Sân vận động',
-            teacher: 'Võ Văn V',
-            note: '',
-        },
-    ],
-
-    // Tuần 1: 6-12/1/2026
-    '2026-03-02': [
-        {
-            time: 'morning',
-            category: 'study',
-            type: 'theory',
-            title: 'Kiến trúc và Thiết kế Phần mềm',
-            code: 'DHKTPM18A - 42030015401',
-            period: '10 - 12 (7:30 - 12:00)',
-            room: 'A2.04',
-            teacher: 'TS. Nguyễn Văn A',
-            note: '',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Cơ sở dữ liệu',
-            code: 'DHKTPM18B - 42030013701',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.01',
-            teacher: 'TS. Trần Thị B',
-            note: '',
-        },
-        {
-            time: 'afternoon',
-            category: 'study',
-            type: 'practice',
-            title: 'Cơ sở dữ liệu',
-            code: 'DHKTPM18B - 42030013701',
-            period: '7 - 9 (12:30 - 15:00)',
-            room: 'B3.01',
-            teacher: 'TS. Trần Thị B',
-            note: '',
-        },
-    ],
     '2026-03-03': [
         {
             time: 'morning',
@@ -121,29 +6,66 @@ const scheduleData = {
             type: 'practice',
             title: 'Kiến trúc và Thiết kế Phần mềm',
             code: 'DHKTPM18A - 42030015401',
-            period: '10 - 12 (7:30 - 12:00)',
+            periodFrom: 1,
+            periodTo: 3,
+            timeFrom: '6:30',
+            timeTo: '9:00',
             room: 'A2.04',
             teacher: 'TS. Hà Thị C',
             note: '',
         },
         {
-            time: 'noon',
+            time: 'morning',
+            category: 'study',
+            type: 'practice',
+            title: 'Kiến trúc và Thiết kế Phần mềm',
+            code: 'DHKTPM18A - 42030015401',
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '9:30',
+            timeTo: '12:00',
+            room: 'A2.04',
+            teacher: 'TS. Hà Thị C',
+            note: '',
+        },
+        {
+            time: 'afternoon',
             category: 'study',
             type: 'online',
             title: 'Lập trình Web',
             code: 'DHKTPM18A - 42030018901',
-            period: '10 - 12 (7:30 - 12:00)',
+            periodFrom: 7,
+            periodTo: 9,
+            timeFrom: '12:30',
+            timeTo: '15:00',
             room: 'Trực tuyến',
             teacher: 'TS. Ngô Thị D',
             note: 'Zoom FI30: 652 722 8922 / 123456',
         },
         {
             time: 'afternoon',
+            category: 'study',
+            type: 'online',
+            title: 'Lập trình Web',
+            code: 'DHKTPM18A - 42030018901',
+            periodFrom: 10,
+            periodTo: 12,
+            timeFrom: '15:00',
+            timeTo: '17:40',
+            room: 'Trực tuyến',
+            teacher: 'TS. Ngô Thị D',
+            note: 'Zoom FI30: 652 722 8922 / 123456',
+        },
+        {
+            time: 'evening',
             category: 'exam',
             type: 'exam',
             title: 'Kiểm tra giữa kỳ - Toán rời rạc',
             code: 'DHKTPM18A - 42030010201',
-            period: '7 - 9 (12:30 - 15:00)',
+            periodFrom: 7,
+            periodTo: 9,
+            timeFrom: '12:30',
+            timeTo: '15:00',
             room: 'A1.05',
             teacher: 'TS. Lê Văn E',
             note: '',
@@ -157,17 +79,24 @@ const scheduleData = {
             title: 'Kiến trúc và Thiết kế Phần mềm',
             code: 'DHKTPM18A - 42030015401',
             period: '10 - 12 (7:30 - 12:00)',
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '9:30',
+            timeTo: '12:00',
             room: 'Trực tuyến',
             teacher: 'TS. Nguyễn Văn A',
             note: 'Zoom FI30: 652 722 8922 / 123456',
         },
         {
-            time: 'afternoon',
+            time: 'evening',
             category: 'study',
             type: 'suspended',
             title: 'Hệ điều hành (TẠM NGỪNG)',
             code: 'DHKTPM18A - 42030014801',
-            period: '10 - 12 (7:30 - 12:00)',
+            periodFrom: 13,
+            periodTo: 15,
+            timeFrom: '18:00',
+            timeTo: '20:30',
             room: 'A2.04',
             teacher: 'TS. Trần Văn E',
             note: '',
@@ -180,18 +109,24 @@ const scheduleData = {
             type: 'theory',
             title: 'Mạng máy tính',
             code: 'DHKTPM18A - 42030016501',
-            period: '1 - 3 (7:00 - 9:30)',
+            periodFrom: 1,
+            periodTo: 3,
+            timeFrom: '7:00',
+            timeTo: '9:30',
             room: 'A3.02',
             teacher: 'TS. Huỳnh Thị B',
             note: '',
         },
         {
-            time: 'afternoon',
+            time: 'evening',
             category: 'exam',
             type: 'exam',
             title: 'Thi cuối kỳ - Cấu trúc dữ liệu',
             code: 'DHKTPM18A - 42030011101',
-            period: '7 - 9 (12:30 - 15:00)',
+            periodFrom: 13,
+            periodTo: 15,
+            timeFrom: '18:00',
+            timeTo: '20:30',
             room: 'A1.01',
             teacher: 'Ban Giám thị',
             note: '',
@@ -204,18 +139,24 @@ const scheduleData = {
             type: 'theory',
             title: 'Trí tuệ nhân tạo',
             code: 'DHKTPM18A - 42030019801',
-            period: '4 - 6 (9:30 - 12:00)',
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '09:30',
+            timeTo: '12:00',
             room: 'A2.05',
             teacher: 'TS. Phạm Văn F',
             note: '',
         },
         {
-            time: 'afternoon',
+            time: 'evening',
             category: 'exam',
             type: 'exam',
             title: 'Lập trình hướng đối tượng',
             code: 'DHKTPM18A - 42030012801',
-            period: '10 - 12 (7:30 - 12:00)',
+            periodFrom: 10,
+            periodTo: 12,
+            timeFrom: '15:00',
+            timeTo: '17:40',
             room: 'A1.02',
             teacher: 'Ban Giám thị',
             note: '',
@@ -228,7 +169,10 @@ const scheduleData = {
             type: 'theory',
             title: 'An toàn thông tin',
             code: 'DHKTPM18A - 42030020501',
-            period: '1 - 3 (7:00 - 9:30)',
+            periodFrom: 1,
+            periodTo: 3,
+            timeFrom: '7:00',
+            timeTo: '9:30',
             room: 'A3.01',
             teacher: 'TS. Võ Thị G',
             note: '',
@@ -241,9 +185,213 @@ const scheduleData = {
             type: 'theory',
             title: 'Phân tích thiết kế hệ thống',
             code: 'DHKTPM18A - 42030017201',
-            period: '4 - 6 (9:30 - 12:00)',
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '9:30',
+            timeTo: '12:00',
             room: 'A2.03',
             teacher: 'TS. Đỗ Văn H',
+            note: '',
+        },
+    ],
+    '2026-03-09': [
+        {
+            time: 'morning',
+            category: 'study',
+            type: 'theory',
+            title: 'Trí tuệ nhân tạo',
+            code: 'DHKTPM18A - 42030019801',
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '9:30',
+            timeTo: '12:00',
+            room: 'A2.05',
+            teacher: 'TS. Phạm Văn F',
+            note: '',
+        },
+    ],
+    '2026-03-10': [
+        {
+            time: 'afternoon',
+            category: 'study',
+            type: 'online',
+            title: 'Trí tuệ nhân tạo',
+            code: 'DHKTPM18A - 42030019801',
+            periodFrom: 7,
+            periodTo: 9,
+            timeFrom: '12:30',
+            timeTo: '15:00',
+            room: 'A2.05',
+            teacher: 'TS. Phạm Văn F',
+            note: '',
+        },
+    ],
+    '2026-03-11': [
+        {
+            time: 'evening',
+            category: 'study',
+            type: 'suspended',
+            title: 'Trí tuệ nhân tạo',
+            code: 'DHKTPM18A - 42030019801',
+            periodFrom: 13,
+            periodTo: 15,
+            timeFrom: '18:00',
+            timeTo: '20:30',
+            room: 'A2.05',
+            teacher: 'TS. Phạm Văn F',
+            note: '',
+        },
+    ],
+    '2026-03-12': [
+        {
+            time: 'morning',
+            category: 'study',
+            type: 'theory',
+            title: 'Nhập môn Lập trình',
+            code: 'DHKTPM18A - 42030001101',
+            periodFrom: 1,
+            periodTo: 3,
+            timeFrom: '7:00',
+            timeTo: '9:30',
+            room: 'A1.01',
+            teacher: 'TS. Nguyễn Văn Z',
+            note: '',
+        },
+    ],
+    '2026-03-13': [
+        {
+            time: 'morning',
+            category: 'study',
+            type: 'practice',
+            title: 'Lập trình C',
+            code: 'DHKTPM18A - 42030002201',
+
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '9:30',
+            timeTo: '12:00',
+            room: 'B3.01',
+            teacher: 'TS. Trần Thị Y',
+            note: '',
+        },
+        {
+            time: 'evening',
+            category: 'study',
+            type: 'theory',
+            title: 'Toán cao cấp',
+            code: 'DHKTPM18A - 42030003301',
+            period: '7 - 9 (12:30 - 15:00)',
+            room: 'A1.02',
+            teacher: 'TS. Lê Văn X',
+            note: '',
+        },
+    ],
+    '2026-03-14': [
+        {
+            time: 'morning',
+            category: 'exam',
+            type: 'exam',
+            title: 'Nhập môn CNTT',
+            code: 'DHKTPM18A - 42030004401',
+            periodFrom: 1,
+            periodTo: 3,
+            timeFrom: '6:00',
+            timeTo: '9:30',
+            room: 'A1.05',
+            teacher: 'Ban Giám thị',
+            note: '',
+        },
+    ],
+    '2026-03-15': [
+        {
+            time: 'morning',
+            category: 'study',
+            type: 'online',
+            title: 'Tiếng Anh chuyên ngành',
+            code: 'DHKTPM18A - 42030005501',
+            periodFrom: 4,
+            periodTo: 6,
+            timeFrom: '9:30',
+            timeTo: '12:00',
+            room: 'Trực tuyến',
+            teacher: 'ThS. Phạm Thị W',
+            note: 'Zoom FI30: 652 722 8922 / 123456',
+        },
+    ],
+    '2026-03-16': [
+        {
+            time: 'evening',
+            category: 'study',
+            type: 'theory',
+            title: 'Giáo dục thể chất',
+            code: 'DHKTPM18A - 42030006601',
+            periodFrom: 13,
+            periodTo: 15,
+            timeFrom: '18:00',
+            timeTo: '20:30',
+            room: 'Sân vận động',
+            teacher: 'Võ Văn V',
+            note: '',
+        },
+    ],
+
+    '2026-03-17': [
+        {
+            time: 'morning',
+            category: 'study',
+            type: 'theory',
+            title: 'Kiến trúc và Thiết kế Phần mềm',
+            code: 'DHKTPM18A - 42030015401',
+            periodFrom: 1,
+            periodTo: 3,
+            timeFrom: '6:30',
+            timeTo: '9:00',
+            room: 'A2.04',
+            teacher: 'TS. Nguyễn Văn A',
+            note: '',
+        },
+        {
+            time: 'evening',
+            category: 'study',
+            type: 'practice',
+            title: 'Cơ sở dữ liệu',
+            code: 'DHKTPM18B - 42030013701',
+            periodFrom: 13,
+            periodTo: 15,
+            timeFrom: '18:00',
+            timeTo: '20:30',
+            room: 'B3.01',
+            teacher: 'TS. Trần Thị B',
+            note: '',
+        },
+        {
+            time: 'evening',
+            category: 'study',
+            type: 'practice',
+            title: 'Mạng máy tính',
+            code: 'DHKTPM18B - 42030013701',
+            periodFrom: 16,
+            periodTo: 16,
+            timeFrom: '20:30',
+            timeTo: '21:20',
+            room: 'B3.01',
+            teacher: 'TS. Trần Thị B',
+            note: '',
+        },
+    ],
+    '2026-03-18': [
+        {
+            time: 'afternoon',
+            category: 'study',
+            type: 'suspended',
+            title: 'Giáo dục thể chất',
+            code: 'DHKTPM18A - 42030006601',
+            periodFrom: 7,
+            periodTo: 9,
+            timeFrom: '12:30',
+            timeTo: '15:00',
+            room: 'Sân vận động',
+            teacher: 'Võ Văn V',
             note: '',
         },
     ],
@@ -280,8 +428,8 @@ const DAY_NAMES = [
     'THỨ 7',
     'CHỦ NHẬT',
 ];
-const TIME_PERIODS = ['Sáng', 'Trưa', 'Chiều'];
-const TIME_KEYS = ['morning', 'noon', 'afternoon'];
+const TIME_PERIODS = ['Sáng', 'Chiều', 'Tối'];
+const TIME_KEYS = ['morning', 'afternoon', 'evening'];
 
 $(document).ready(function () {
     initializeCalendar();
@@ -411,9 +559,9 @@ function renderMiniCalendar(month, year) {
         for (let j = 0; j < 7; j++) {
             if (i === 0 && j < firstDay) {
                 const prevDay = daysInPrevMonth - firstDay + j + 1;
-                html += `<td class="other-month" data-date="${year}-${month}-${prevDay}">${prevDay}</td>`;
+                html += `<td class="text-center"><span class="other-month" data-date="${year}-${month}-${prevDay}">${prevDay}</span></td>`;
             } else if (dayCount > daysInMonth) {
-                html += `<td class="other-month" data-date="${year}-${month + 2}-${nextMonthDay}">${nextMonthDay}</td>`;
+                html += `<td class="text-center"><span class="other-month" data-date="${year}-${month + 2}-${nextMonthDay}">${nextMonthDay}</span></td>`;
                 nextMonthDay++;
             } else {
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayCount).padStart(2, '0')}`;
@@ -423,7 +571,7 @@ function renderMiniCalendar(month, year) {
                     month === TODAY.getMonth() &&
                     year === TODAY.getFullYear();
                 const todayClass = isToday ? ' today' : '';
-                html += `<td class="${todayClass}" data-date="${dateStr}">${dayCount}</td>`;
+                html += `<td class="text-center" ><span class="${todayClass}" data-date="${dateStr}">${dayCount}</span></td>`;
                 dayCount++;
             }
         }
@@ -436,8 +584,8 @@ function renderMiniCalendar(month, year) {
 
 function setupMiniCalendarClick() {
     $('.mini-calendar tbody')
-        .off('click', 'td:not(.other-month)')
-        .on('click', 'td:not(.other-month)', function () {
+        .off('click', 'td span:not(.other-month)')
+        .on('click', 'td span:not(.other-month)', function () {
             const dateStr = $(this).data('date');
             const dateParts = dateStr.split('-');
 
@@ -448,7 +596,7 @@ function setupMiniCalendarClick() {
             );
             viewDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
 
-            $('.mini-calendar td').removeClass('selected');
+            $('.mini-calendar td span').removeClass('selected');
             $(this).addClass('selected');
 
             renderWeekCalendar(viewDate);
@@ -456,12 +604,12 @@ function setupMiniCalendarClick() {
 }
 
 function updateMiniCalendarSelection() {
-    $('.mini-calendar td').removeClass('selected');
+    $('.mini-calendar td span').removeClass('selected');
 
     if (!selectedDate) return;
 
     const dateStr = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
-    $(`.mini-calendar td[data-date="${dateStr}"]`).addClass('selected');
+    $(`.mini-calendar td span[data-date="${dateStr}"] `).addClass('selected');
 }
 
 function getMonday(date) {
@@ -482,6 +630,7 @@ function renderWeekCalendar(date) {
     renderWeekHeader(monday);
     renderWeekBody(monday);
     attachEventHandlers();
+    updateEmptyColumns();
 }
 
 function renderWeekHeader(monday) {
@@ -563,7 +712,7 @@ function renderEvents(events) {
             <div class="event-code">${event.code}</div>
             <div class="event-time">
                 <span class="label-time">Tiết:</span>
-                ${event.period}
+                ${event.periodFrom} - ${event.periodTo} (${event.timeFrom} - ${event.timeTo})
             </div>
             <div class="event-room">
                 <span class="label-room">Phòng:</span>
@@ -584,4 +733,28 @@ function renderEvents(events) {
     `,
         )
         .join('');
+}
+function updateEmptyColumns() {
+    const headerColumns = document.querySelectorAll(
+        '.calendar-header .day-column',
+    );
+
+  headerColumns.forEach((_, index) => {
+      console.log("chirmucj : ", index);
+      
+        const bodyColumns = document.querySelectorAll(
+            `.calendar-body .time-row .day-column:nth-child(${index + 2})`,
+        );
+        let hasEvent = false;
+        bodyColumns.forEach((col) => {
+            if (col.querySelector('.event')) {
+                hasEvent = true;
+            }
+        });
+        if (!hasEvent) {
+            headerColumns[index].classList.add('no-event');
+        } else {
+            headerColumns[index].classList.remove('no-event');
+        }
+    });
 }

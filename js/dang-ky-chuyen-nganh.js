@@ -1,7 +1,6 @@
 const $ = window.jQuery;
 const bootstrap = window.bootstrap;
 
-// Application state
 let registrationState = {
     isRegistered: false,
     selectedSpecialty: null,
@@ -44,10 +43,38 @@ const specialtyData = {
 };
 
 $(function () {
+    loadSpecialtyOptions();
+    loadStateFromStorage();
     bindEventHandlers();
-
     updateUIState();
 });
+
+function loadSpecialtyOptions() {
+    const selectElement = $('#specialtySelect');
+
+    selectElement.find('option:not(:first)').remove();
+
+    // Add options from data
+    Object.keys(specialtyData).forEach((code) => {
+        const specialty = specialtyData[code];
+        const option = $('<option></option>')
+            .val(code)
+            .text(`${code} - ${specialty.name}`);
+        selectElement.append(option);
+    });
+}
+
+function loadStateFromStorage() {
+    try {
+        const savedState = localStorage.getItem('registrationState');
+        if (savedState) {
+            const parsedState = JSON.parse(savedState);
+            registrationState = { ...registrationState, ...parsedState };
+        }
+    } catch (error) {
+        console.error('Error loading state:', error);
+    }
+}
 
 function bindEventHandlers() {
     $('#specialtyForm').on('submit', function (e) {
@@ -89,14 +116,12 @@ function handleRegistration() {
     }
 }
 
-// Toggle between form and info views
 function toggleState() {
     registrationState.isRegistered = false;
     localStorage.removeItem('registrationState');
     updateUIState();
 }
 
-// Update UI based on registration state
 function updateUIState() {
     const formContainer = $('#registrationForm');
     const infoContainer = $('#registrationInfo');
@@ -112,6 +137,14 @@ function updateUIState() {
 
         $('#displaySpecialty').text(registrationState.selectedSpecialty);
         $('#displayCode').text(registrationState.selectedCode);
+
+        const specialty = specialtyData[registrationState.selectedCode];
+        if (specialty) {
+            $('#displayFaculty').text(specialty.faculty);
+            $('#displayAcademicYear').text(
+                `Khóa học ${specialty.academicYear}`,
+            );
+        }
     } else {
         formContainer.removeClass('d-none');
         infoContainer.addClass('d-none');
@@ -132,39 +165,4 @@ function saveStateToStorage() {
     } catch (error) {
         console.error('Error saving state:', error);
     }
-}
-
-function loadStateFromStorage() {
-    try {
-        const stored = localStorage.getItem('registrationState');
-        if (stored) {
-            registrationState = JSON.parse(stored);
-        }
-    } catch (error) {
-        console.error('[v0] Error loading state:', error);
-    }
-}
-
-function clearStoredData() {
-    localStorage.removeItem('registrationState');
-    registrationState = {
-        isRegistered: false,
-        selectedSpecialty: null,
-        selectedCode: null,
-        selectedMajor: 'Công nghệ thông tin',
-        selectedFaculty: 'Khoa Công nghệ thông tin',
-    };
-    updateUIState();
-}
-
-function getState() {
-    return registrationState;
-}
-
-function simulateRegistered(code = 'D09.40.01') {
-    registrationState.isRegistered = true;
-    registrationState.selectedCode = code;
-    registrationState.selectedSpecialty = specialtyData[code].name;
-    saveStateToStorage();
-    updateUIState();
 }

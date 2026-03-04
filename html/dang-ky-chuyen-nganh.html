@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="../css/common.css" />
 
         <link rel="stylesheet" href="../css/dang-ky-chuyen-nganh.css" />
+        <link rel="stylesheet" href="../css/curriculum-framework.css" />
     </head>
     <body>
         <div id="header-container"></div>
@@ -42,16 +43,9 @@
             <div id="sidebar-container"></div>
 
             <!-- PAGE CONTENT -->
-            <div class="container-fluid">
+            <div class="container-lg pt-4">
                 <div class="p-3 bg-white rounded-3">
-                    <div class="mb-3">
-                        <h5
-                            class="fw-bold mb-0"
-                            style="font-size: 20px; color: #505050"
-                        >
-                            Đăng ký chuyên ngành
-                        </h5>
-                    </div>
+                    <div class="page-title">Đăng ký chuyên ngành</div>
 
                     <div id="statusAlert" class="mb-3">
                         <div
@@ -141,13 +135,14 @@
                                                 style="font-size: 16px"
                                                 id="displaySpecialty"
                                             >
-                                                Công nghệ thông tin
+                                                <!-- Loaded data -->
                                             </div>
                                             <div
                                                 class="text-muted"
                                                 style="font-size: 13px"
+                                                id="displayFaculty"
                                             >
-                                                Khoa Công nghệ thông tin
+                                                <!-- Loaded data -->
                                             </div>
                                         </div>
                                     </div>
@@ -174,13 +169,14 @@
                                                 style="font-size: 16px"
                                                 id="displayCode"
                                             >
-                                                D09.40.01
+                                                <!-- Loaded data -->
                                             </div>
                                             <div
                                                 class="text-muted"
                                                 style="font-size: 13px"
+                                                id="displayAcademicYear"
                                             >
-                                                Khóa học 2024 - 2029
+                                                <!-- Loaded data -->
                                             </div>
                                         </div>
                                     </div>
@@ -230,24 +226,7 @@
                                                 >
                                                     Chọn chuyên ngành
                                                 </option>
-                                                <option value="D09.40.01">
-                                                    D09.40.01 - Công nghệ phần
-                                                    mềm
-                                                </option>
-                                                <option value="D09.40.02">
-                                                    D09.40.02 - Hệ thống thông
-                                                    tin
-                                                </option>
-                                                <option value="D09.40.03">
-                                                    D09.40.03 - Khoa học dữ liệu
-                                                </option>
-                                                <option value="D09.40.04">
-                                                    D09.40.04 - An toàn thông
-                                                    tin
-                                                </option>
-                                                <option value="D09.40.05">
-                                                    D09.40.05 - Trí tuệ nhân tạo
-                                                </option>
+                                                <!-- load data -->
                                             </select>
                                         </div>
                                         <div class="col-md-2">
