@@ -281,7 +281,7 @@ function renderSemesterView() {
       const mandatoryHTML =
         semData.mandatory.length > 0
           ? `
-        <div class="subtitle-header">Học phần bắt buộc</div>
+        <div class="subtitle-header">Học phần bắt buộc (${semData.mandatoryCredits} tín chỉ)</div>
         <div class="table-frame">
           <table class="table table-sm mandatory-courses-table">
             ${tableHeader}
@@ -296,7 +296,7 @@ function renderSemesterView() {
       const electiveHTML =
         semData.elective.length > 0
           ? `
-        <div class="subtitle-header">Học phần tự chọn</div>
+        <div class="subtitle-header">Học phần tự chọn (${semData.electiveCredits} tín chỉ)</div>
         <div class="table-frame">
           <table class="table table-sm">
             ${tableHeader}
