@@ -10,6 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="../css/curriculum-framework.css" />
     <link rel="stylesheet" href="../css/ket-qua-hoc-tap.css" />
     <link rel="stylesheet" href="../css/common.css" />
     <script
@@ -27,52 +28,61 @@
       <div id="sidebar-container"></div>
 
       <!-- Content Area -->
-      <div class="section-content content-area">
+      <div class="container-lg pt-4">
         <!-- Page Header -->
-        <div class="page-header">
-          <h1 class="page-title">Kết quả học tập</h1>
-          <p class="page-subtitle">Xem điểm số và kết quả học tập của bạn</p>
+        <div class="header-section">
+          <div class="header-title">Kết quả học tập</div>
+          <div class="header-subtitle">
+            Xem điểm số và kết quả học tập của bạn
+          </div>
         </div>
 
         <!-- Summary Cards -->
         <div class="summary-cards">
-          <div class="summary-card primary" style="max-width: 300px">
-            <div class="card-label">GPA Tích lũy</div>
-            <div class="card-value">
-              3.62<span class="card-scale">/4.0</span>
+          <div class="summary-card primary">
+            <div>
+              <div class="card-label">GPA Tích lũy</div>
+              <div class="card-value">
+                3.62<span class="card-scale">/4.0</span>
+              </div>
             </div>
             <div class="card-badge">
               <i class="fas fa-star"></i>
               <span>Xếp loại: Giỏi</span>
             </div>
           </div>
-          <!-- Section 2 -->
-          <div class="d-flex flex-column gap-3">
-            <div class="summary-card">
+          <div class="summary-card">
+            <div>
+              <div class="card-label">Điểm rèn luyện</div>
+              <div class="card-value card-value-content">
+                <!-- JS Render -->
+                <span class="card-scale">
+                  <!-- JS Render -->
+                </span>
+              </div>
+              <!-- <div class="card-sub-label">Khá</div> -->
+            </div>
+            <div class="card-badge">
+              <i class="fas fa-star"></i>
+              <span>Xếp loại: Khá</span>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div>
               <div class="card-label">Tổng tín chỉ hoàn thành</div>
               <div class="card-value card-value-content">
-                142<span class="card-scale">/162</span>
-              </div>
-            </div>
-            <div class="summary-card">
-              <div class="card-label">Điểm rèn luyện</div>
-              <div class="d-flex flex-row align-items-center gap-2">
-                <div class="card-value card-value-content">
-                  85<span class="card-scale">/100</span>
-                </div>
-                <div class="card-sub-label">Khá</div>
+                <!-- JS Render -->
+                <span class="card-scale">
+                  <!-- JS Render -->
+                </span>
               </div>
             </div>
           </div>
-          <div class="d-flex flex-column gap-3">
-            <div class="summary-card">
+          <div class="summary-card">
+            <div>
               <div class="card-label">Điểm trung bình (Hệ 10)</div>
-              <div class="card-value card-value-content">8.40</div>
-            </div>
-            <div class="summary-card">
-              <div class="card-label">Xếp loại tích lũy (Hệ 10)</div>
-              <div class="d-flex flex-row align-items-center gap-2">
-                <div class="card-value card-value-content">Giỏi</div>
+              <div class="card-value card-value-content">
+                <!-- JS Render -->
               </div>
             </div>
           </div>
@@ -80,39 +90,10 @@
 
         <div class="semester-selection">
           <!-- Semester Tabs -->
-          <h4
-            style="
-              margin-bottom: 16px;
-              font-size: 18px;
-              font-weight: 600;
-              color: #505050;
-            "
-          >
-            Chọn học kỳ
-          </h4>
+          <span class="fw-semibold fs-[18px]">Chọn học kỳ</span>
           <div class="semester-tabs">
-            <button class="btn-view-all semester-tab">
-              <i class="fas fa-list"></i>
-              <span>Xem tất cả</span>
-            </button>
-            <button class="semester-tab">
-              <div class="tab-title">HK1 (2023-2024)</div>
-              <div class="tab-subtitle">GPA: 3.68</div>
-            </button>
-            <button class="semester-tab">
-              <div class="tab-title">HK2 (2023-2024)</div>
-              <div class="tab-subtitle">GPA: 3.61</div>
-            </button>
-            <button class="semester-tab">
-              <div class="tab-title">HK1 (2024-2025)</div>
-              <div class="tab-subtitle">GPA: 3.75</div>
-            </button>
-            <button class="semester-tab active">
-              <div class="tab-title">HK2 (2024-2025)</div>
-              <div class="tab-subtitle">Học kỳ hiện tại</div>
-            </button>
+            <!-- JS Render -->
           </div>
-
           <!-- Statistics Cards -->
           <div class="stats-grid" hidden>
             <div class="stat-card">

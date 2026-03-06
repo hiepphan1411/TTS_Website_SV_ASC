@@ -140,10 +140,10 @@ function renderPaymentTable(filterType = "") {
         <td class="text-center">${item.phong}</td>
         <td class="text-center">${item.giuong}</td>
         <td class="text-center">${item.thang}/${item.nam}</td>
-        <td style="text-align: right">${item.amount.toLocaleString("vi-VN")}</td>
+        <td class="text-end text-danger fw-bold">${item.amount.toLocaleString("vi-VN")}</td>
         <td class="action-cell">
           <button class="select-btn" onclick="toggleSelect(this)">
-            Chọn</i>
+            <i class="fas fa-arrow-right"></i>
           </button>
         </td>
       </tr>
@@ -160,11 +160,11 @@ function toggleSelect(button) {
   if (isSelected) {
     row.classList.remove("selected");
     button.classList.remove("selected");
-    button.innerHTML = "Chọn";
+    button.innerHTML = '<i class="fas fa-arrow-right"></i>';
   } else {
     row.classList.add("selected");
     button.classList.add("selected");
-    button.innerHTML = "Đã chọn";
+    button.innerHTML = '<i class="fas fa-check"></i>';
   }
 
   updateSelectedItems();
@@ -261,13 +261,13 @@ function selectAllItems() {
       if (isSelected) {
         row.classList.remove("selected");
         button.classList.remove("selected");
-        button.innerHTML = "Chọn";
+        button.innerHTML = '<i class="fas fa-arrow-right"></i>';
       }
     } else {
       if (!isSelected) {
         row.classList.add("selected");
         button.classList.add("selected");
-        button.innerHTML = "Đã chọn";
+        button.innerHTML = '<i class="fas fa-check"></i>';
       }
     }
   });
@@ -288,7 +288,7 @@ function discardAllItems() {
 
     row.classList.remove("selected");
     button.classList.remove("selected");
-    button.innerHTML = "Chọn";
+    button.innerHTML = '<i class="fas fa-arrow-right"></i>';
   });
 
   updateSelectedItems();

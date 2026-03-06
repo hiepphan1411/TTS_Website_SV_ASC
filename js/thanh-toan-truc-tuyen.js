@@ -1,3 +1,145 @@
+const paymentData = [
+  {
+    id: 1,
+    type: "TN",
+    name: "Học phí tốt nghiệp",
+    credit: null,
+    obligate: true,
+    amount: 1000000,
+  },
+  {
+    id: 2,
+    type: "001549",
+    name: "Kiến trúc và Thiết kế Phần mềm",
+    credit: 4,
+    obligate: false,
+    amount: 3380000,
+  },
+  {
+    id: 3,
+    type: "003147",
+    name: "Công nghệ mới trong phát triển ứng dụng CNTT",
+    credit: 3,
+    obligate: "Tùy chọn",
+    amount: 2630000,
+  },
+  {
+    id: 4,
+    type: "003098",
+    name: "Thực tập doanh nghiệp",
+    credit: 5,
+    obligate: false,
+    amount: 3750000,
+  },
+  {
+    id: 5,
+    type: "BHYT2026",
+    name: "Thu bảo hiểm y tế năm 2026",
+    credit: null,
+    obligate: false,
+    amount: 632000,
+  },
+];
+
+const paymentData2 = [
+  {
+    id: 1,
+    code: "KT2301",
+    name: "Thu đoàn phí năm học 2025 - 2026",
+    type: "Lệ phí",
+    qty: 1,
+    price: 24000,
+  },
+  {
+    id: 2,
+    code: "KT2001",
+    name: "Thu hội phí năm học 2025 - 2026",
+    type: "Lệ phí",
+    qty: 2,
+    price: 24000,
+  },
+];
+
+let currentFilter = "";
+
+function renderPaymentTable(filterType = "") {
+  const tableBody = document.getElementById("tableBody");
+  if (!tableBody) return;
+
+  const filteredData = filterType
+    ? paymentData.filter((item) => item.type === filterType)
+    : paymentData;
+
+  let html = "";
+  filteredData.forEach((item, index) => {
+    html += `
+      <tr data-code="${item.type}" data-name="${item.name}" data-amount="${item.amount}">
+        <td class="text-center">${index + 1}</td>
+        <td class="ps-2 fw-bold">${item.type}</td>
+        <td class="ps-2">${item.name}</td>
+        <td class="text-center">${item.credit ? item.credit : "-"}</td>
+        <td class="text-center">
+          <span class="status-badge ${item.obligate ? "required" : "optional"} ">${item.obligate ? "Bắt buộc" : "Tùy chọn"}</span>
+        </td>
+        <td class="text-end">
+          <span class="amount">${item.amount.toLocaleString("vi-VN")}</span>
+        </td>
+        <td class="action-cell">
+          <button class="select-btn" onclick="toggleSelect(this)">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  tableBody.innerHTML = html;
+}
+
+function renderPaymentTableForService(filterType = "") {
+  const tableBody = document.getElementById("serviceTableBody");
+  if (!tableBody) return;
+
+  const filteredData = filterType
+    ? paymentData2.filter((item) => item.type === filterType)
+    : paymentData2;
+
+  let html = "";
+  filteredData.forEach((item, index) => {
+    const typeClass =
+      item.type === "Lệ phí"
+        ? `<span class="status-badge required">Lệ phí</span>`
+        : `<span class="status-badge optional">... phí</span>`;
+
+    const amount = item.price * item.qty;
+
+    html += `
+      <tr data-code="${item.code}" data-name="${item.name}" data-amount="${amount}">
+        <td class="text-center">${index + 1}</td>
+        <td class="ps-2 fw-bold">${item.code}</td>
+        <td class="ps-2">${item.name}</td>
+        <td class="text-center">
+          ${typeClass}
+        </td>
+        <td class="text-center">${item.qty ? item.qty : 0}</td>
+        <td class="text-end">
+          <span class="amount">${item.price.toLocaleString("vi-VN")}</span>
+        </td>
+        <td class="text-end">
+          <span class="amount">${amount.toLocaleString("vi-VN")}</span>
+        </td>
+        <td class="action-cell">
+          <button class="select-btn" onclick="toggleSelect(this)">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  tableBody.innerHTML = html;
+}
+
 function toggleSelect(button) {
   const row = button.closest("tr");
   const isSelected = row.classList.contains("selected");
@@ -30,11 +172,11 @@ function updateSelectedItems() {
   if (selectedRows.length === allRows.length && allRows.length > 0) {
     selectAllBtn.disabled = true;
     selectAllBtn.classList.add("btn-disabled");
-    selectAllBtn.innerHTML = 'Chọn tất cả <i class="fas fa-arrow-right"></i>';
+    selectAllBtn.innerHTML = "Chọn tất cả";
   } else {
     selectAllBtn.disabled = false;
     selectAllBtn.classList.remove("btn-disabled");
-    selectAllBtn.innerHTML = 'Chọn tất cả <i class="fas fa-arrow-right"></i>';
+    selectAllBtn.innerHTML = "Chọn tất cả";
   }
 
   let total = 0;
@@ -117,6 +259,20 @@ function selectAllItems() {
   updateSelectedItems();
 }
 
+function discardAllItems() {
+  const allRows = document.querySelectorAll("tbody tr");
+
+  allRows.forEach((row) => {
+    const button = row.querySelector(".select-btn");
+
+    row.classList.remove("selected");
+    button.classList.remove("selected");
+    button.innerHTML = '<i class="fas fa-arrow-right"></i>';
+  });
+
+  updateSelectedItems();
+}
+
 function calculateTotal() {
   let total = 0;
   document.querySelectorAll("tbody tr.selected").forEach((row) => {
@@ -126,6 +282,9 @@ function calculateTotal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  renderPaymentTable();
+  renderPaymentTableForService();
+
   document.querySelectorAll("tbody tr.selected").forEach((row) => {
     row.classList.remove("selected");
     const button = row.querySelector(".select-btn");
