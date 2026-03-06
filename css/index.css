@@ -1059,11 +1059,18 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
+  height: 480px;
+}
+
+.section-3 > div {
+  height: 100%;
 }
 .chart-container {
   background: white;
   border-radius: 8px;
-  height: min-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -1110,7 +1117,8 @@ body {
 .chart-wrapper {
   position: relative;
   width: 100%;
-  height: 300px;
+  flex: 1;
+  min-height: 280px;
 }
 
 canvas.gpa-chart {
@@ -1223,7 +1231,9 @@ canvas.gpa-chart {
   background: #fff;
   border-radius: 12px;
   padding: 20px;
-  height: 395px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
 }
 
 .semester-select {
@@ -1280,6 +1290,11 @@ canvas.gpa-chart {
 
   background: #1d84e1;
   border-radius: 8px;
+}
+
+#gpaChart {
+  width: 100%;
+  height: 100%;
 }
 
 .course-title {
@@ -1368,15 +1383,24 @@ canvas.gpa-chart {
   background-color: #2f3ca8;
 }
 .course-list-wrapper {
-  max-height: 86%;
-  overflow-x: auto;
+  flex: 1;
+  overflow-y: auto;
   overflow-x: hidden;
+  min-height: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 1400px) {
   .section-3 {
     grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .section-3 > div {
+    height: auto;
+  }
+  .course-list-wrapper {
+    max-height: 400px;
   }
 
   .dashboard-content {

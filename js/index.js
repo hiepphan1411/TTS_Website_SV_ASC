@@ -32,7 +32,6 @@ btnExpanded.addEventListener("click", function () {
   btnCompact.classList.remove("active");
 });
 $(document).ready(function () {
-  // GPA Data
   const gpaData = {
     grades: [
       "HK1 (2023-2024)",
@@ -50,134 +49,184 @@ $(document).ready(function () {
     averageGPA10: [7.3, 7.7, 7.5, 7.3, 7.8, 7.7, 8.1, 8.4],
   };
 
-  // Initialize chart
-  const ctx = document.getElementById("gpaChart").getContext("2d");
-  const chartConfig = {
-    type: "line",
-    data: {
-      labels: gpaData.grades,
-      datasets: [
+  function buildChartData(scale) {
+    const yourData = scale === "10" ? gpaData.yourGPA10 : gpaData.yourGPA4;
+    const avgData = scale === "10" ? gpaData.averageGPA10 : gpaData.averageGPA4;
+    const maxVal = scale === "10" ? 10 : 4;
+
+    return {
+      seriesData: [
+        { name: "GPA Học kỳ", data: yourData, color: "#6366f1" },
         {
-          label: "GPA Học kỳ",
-          data: gpaData.yourGPA4,
-          borderColor: "#6366f1",
-          backgroundColor: "rgba(99, 102, 241, 0.1)",
-          borderWidth: 3,
-          fill: true, // tô vùng dưới đường
-          tension: 0.4,
-          pointRadius: 5,
-          pointBackgroundColor: "#6366f1",
-          pointBorderColor: "#fff",
-          pointBorderWidth: 2,
-          pointHoverRadius: 7,
-        },
-        {
-          label: "GPA tích lũy",
-          data: gpaData.averageGPA4,
-          borderColor: "#e87aa8",
-          borderDash: [5, 5],
-          backgroundColor: "rgba(232, 122, 168, 0.05)",
-          borderWidth: 2,
-          fill: true,
-          tension: 0.4,
-          pointRadius: 5,
-          pointBackgroundColor: "#e87aa8",
-          pointBorderColor: "#fff",
-          pointBorderWidth: 2,
-          pointHoverRadius: 7,
+          name: "GPA Tích lũy",
+          data: avgData,
+          color: "#e87aa8",
+          dashType: "dash",
         },
       ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: {
-        mode: "index",
-        intersect: false, // hovering over a column will show tooltip for all datasets
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          enabled: true,
-          backgroundColor: "white",
-          borderColor: "#e5eaf1",
-          borderRadius: "12",
-          borderWidth: 1,
-          padding: 16,
-          titleFont: { size: 14, weight: "bold" },
-          bodyFont: { size: 12 },
-          displayColors: true,
-          titleColor: (ctx) => {
-            return ctx.chart.options.scales.y.max === 10
-              ? "#065f46" // hệ 10
-              : "#1e3a8a"; // hệ 4
-          },
-          bodyColor: "#374151",
-          callbacks: {
-            title: function (context) {
-              return context[0].label;
-            },
-            label: function (context) {
-              return context.dataset.label + ": " + context.parsed.y.toFixed(2);
-            },
-            afterLabel: function (context) {
-              return "";
-            },
-          },
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 4.0,
-          ticks: {
-            stepSize: 0.5,
-            callback: function (value) {
-              return value.toFixed(1);
-            },
-          },
-          grid: {
-            color: "rgba(0, 0, 0, 0.05)",
-            drawBorder: false,
-          },
-        },
-        x: {
-          grid: {
-            display: true,
-            color: "rgba(0, 0, 0, 0.05)",
-            drawBorder: false,
-          },
-        },
-      },
-    },
-  };
+      maxVal,
+    };
+  }
 
-  const gpaChart = new Chart(ctx, chartConfig);
+  function createChart(scale) {
+    const { seriesData, maxVal } = buildChartData(scale);
 
-  // Grades dropdown handle
+    // Destroy chart cũ trước khi tạo mới
+    const existing = $("#gpaChart").data("kendoChart");
+    if (existing) existing.destroy();
+
+    $("#gpaChart").kendoChart({
+      dataSource: {
+        data: gpaData.grades.map((label) => ({ label })),
+      },
+
+      categoryAxis: {
+        field: "label",
+        labels: {
+          rotation: -30,
+          font: "12px Inter, sans-serif",
+          color: "#6b7280",
+        },
+        line: { visible: false },
+        majorGridLines: { visible: false },
+        minorGridLines: { visible: false },
+      },
+
+      valueAxis: {
+        min: 0,
+        max: maxVal,
+        majorUnit: scale === "10" ? 1 : 0.5,
+        labels: {
+          font: "12px Inter, sans-serif",
+          color: "#6b7280",
+          template: "#= value #",
+        },
+        line: { visible: false },
+        majorGridLines: {
+          color: "#f0f0f0",
+          dashType: "dash",
+          width: 1,
+        },
+      },
+
+      series: [
+        {
+          type: "line",
+          name: seriesData[0].name,
+          data: seriesData[0].data,
+          color: "#6366f1",
+          width: 3,
+          style: "smooth",
+          markers: {
+            visible: true,
+            size: 9,
+            type: "circle",
+            background: "#6366f1",
+            border: { color: "#fff", width: 2 },
+          },
+          highlight: {
+            markers: {
+              visible: true,
+              size: 12,
+              border: { color: "#6366f1", width: 2 },
+              background: "#fff",
+            },
+          },
+        },
+        {
+          type: "line",
+          name: seriesData[1].name,
+          data: seriesData[1].data,
+          color: "#e87aa8",
+          width: 3,
+          dashType: "dash",
+          style: "smooth",
+          markers: {
+            visible: true,
+            size: 9,
+            type: "circle",
+            background: "#e87aa8",
+            border: { color: "#fff", width: 2 },
+          },
+          highlight: {
+            markers: {
+              visible: true,
+              size: 12,
+              border: { color: "#e87aa8", width: 2 },
+              background: "#fff",
+            },
+          },
+        },
+      ],
+
+      legend: {
+        visible: true,
+        position: "top",
+        align: "end",
+        labels: {
+          font: "13px Inter, sans-serif",
+          color: "#374151",
+        },
+        markers: {
+          type: "circle",
+          width: 10,
+          height: 10,
+        },
+      },
+
+      tooltip: {
+        visible: true,
+        shared: true,
+        sharedTemplate: `
+    <div style="padding:10px 14px; background:\\#1f2937; border-radius:8px; color:\\#fff; font-family:Inter,sans-serif;">
+      
+      <div style="font-size:12px; color:\\#9ca3af; margin-bottom:6px;">
+        #= category #
+      </div>
+
+      # for (var i = 0; i < points.length; i++) { #
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:3px;">
+          
+          <span style="
+            width:10px;
+            height:10px;
+            border-radius:50%;
+            background:#= points[i].series.color #;
+            display:inline-block;
+          "></span>
+
+          <span style="font-size:13px;">
+            #= points[i].series.name #:
+            <b>#= kendo.toString(points[i].value, "n2") #</b>
+          </span>
+
+        </div>
+      # } #
+
+    </div>
+  `,
+        background: "transparent",
+        border: { width: 0 },
+      },
+
+      chartArea: {
+        background: "transparent",
+        margin: { top: 10, bottom: 10 },
+      },
+
+      plotArea: {
+        margin: { top: 20, bottom: 10, left: 10, right: 20 },
+        padding: 0,
+      },
+
+      transitions: true,
+    });
+  }
+
+  createChart("4");
+
   $("#gradesSelect").on("change", function () {
-    const selectedScale = $(this).val(); // lấy giá trị tại dropdown
-
-    if (selectedScale === "10") {
-      gpaChart.data.datasets[0].data = gpaData.yourGPA10;
-      gpaChart.data.datasets[1].data = gpaData.averageGPA10;
-
-      gpaChart.options.scales.y.max = 10;
-      gpaChart.options.scales.y.ticks.stepSize = 1;
-      gpaChart.options.scales.y.ticks.callback = function (value) {
-        return value.toFixed(1);
-      };
-    } else {
-      gpaChart.data.datasets[0].data = gpaData.yourGPA4;
-      gpaChart.data.datasets[1].data = gpaData.averageGPA4;
-
-      gpaChart.options.scales.y.max = 4.0;
-      gpaChart.options.scales.y.ticks.stepSize = 0.5;
-    }
-
-    gpaChart.update();
+    createChart($(this).val());
   });
 });
 
@@ -191,6 +240,22 @@ $(document).ready(function () {
         credits: 4,
         teacher: "ThS. Nguyễn Văn A",
         theory: { done: 8, total: 15 },
+        practice: { done: 6, total: 12 },
+      },
+      {
+        name: "Công nghệ mới trong phát triển ứng dụng",
+        code: "420300314705",
+        credits: 3,
+        teacher: "ThS. Trần Thị B",
+        theory: { done: 6, total: 12 },
+        practice: { done: 6, total: 12 },
+      },
+      {
+        name: "Công nghệ mới trong phát triển ứng dụng",
+        code: "420300314705",
+        credits: 3,
+        teacher: "ThS. Trần Thị B",
+        theory: { done: 6, total: 12 },
         practice: { done: 6, total: 12 },
       },
       {
@@ -291,3 +356,13 @@ $(document).ready(function () {
 
   renderCourses($("#semesterSelect").val());
 });
+
+const resizeObserver = new ResizeObserver(function (entries) {
+  const chart = $("#gpaChart").data("kendoChart");
+  if (chart) {
+    chart.resize();
+  }
+});
+
+// Chỉ theo dõi container của chart
+resizeObserver.observe(document.querySelector(".chart-wrapper"));
