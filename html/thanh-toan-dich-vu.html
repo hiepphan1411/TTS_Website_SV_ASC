@@ -7,9 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="../lib/bootstrap@5.3.8.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/common.css" />
+
+    <link rel="stylesheet" href="../css/curriculum-framework.css" />
     <link rel="stylesheet" href="../css/thanh-toan-truc-tuyen.css" />
     <link rel="stylesheet" href="../css/thanh-toan-dich-vu.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -30,13 +33,13 @@
       <div id="sidebar-container"></div>
 
       <!-- Content Area -->
-      <div class="section-content-main content-area">
+      <div class="container-lg pt-4">
         <!-- Page Header -->
-        <div class="page-header">
-          <h1 class="page-title">Thanh toán dịch vụ</h1>
-          <p class="page-subtitle">
+        <div class="header-section">
+          <div class="header-title">Thanh toán dịch vụ</div>
+          <div class="header-subtitle">
             Quản lý và thực hiện các giao dịch thanh toán dịch vụ
-          </p>
+          </div>
         </div>
 
         <!-- Main Layout -->
@@ -44,7 +47,7 @@
           <div class="payment-section">
             <div class="section-header">
               <div class="section-title">Các khoản thu dịch vụ</div>
-              <div class="d-flex flex-row align-items-center gap-2">
+              <div class="d-flex flex-row align-items-center gap-3">
                 <div class="search-box">
                   <input type="text" placeholder="Nhập mã/Nội dung thu..." />
                 </div>
@@ -66,73 +69,34 @@
                     <th style="width: 30px">STT</th>
                     <th style="width: 80px">Mã</th>
                     <th style="width: auto; min-width: 200px">Nội dung thu</th>
-                    <th style="width: 50px">Loại khoản thu</th>
-                    <th style="width: 120px">Số lượng</th>
+                    <th style="width: 120px" class="text-center">
+                      Loại khoản thu
+                    </th>
+                    <th style="width: 80px" class="text-center">Số lượng</th>
                     <th style="text-align: right; width: auto">
                       Đơn giá (VNĐ)
                     </th>
                     <th style="text-align: right; width: auto">
                       Số tiền (VNĐ)
                     </th>
-                    <th style="min-width: 130px; width: 130px">Chọn</th>
+                    <th style="min-width: 100px; width: 100px">Chọn</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr
-                    data-code="KT2301"
-                    data-amount="24000"
-                    data-name="Thu phí đoàn năm học 2025 - 2026"
-                  >
-                    <td>1</td>
-                    <td><strong>KT2301</strong></td>
-                    <td>Thu phí đoàn năm học 2025 - 2026</td>
-
-                    <td>
-                      <span class="status-badge required"> Lệ phí </span>
-                    </td>
-                    <td style="text-align: center">1</td>
-                    <td style="text-align: right">
-                      <span class="amount">24.000</span>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="amount">24.000</span>
-                    </td>
-                    <td class="action-cell">
-                      <button class="select-btn" onclick="toggleSelect(this)">
-                        <!-- Chọn -->
-                        <i class="fas fa-arrow-right"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr
-                    data-code="KT2001"
-                    data-amount="24000"
-                    data-name="Thu phí hội năm học 2025 - 2026"
-                  >
-                    <td>2</td>
-                    <td><strong>KT2001</strong></td>
-                    <td>Thu phí hội năm học 2025 - 2026</td>
-                    <td>
-                      <span class="status-badge required"> Lệ phí </span>
-                    </td>
-                    <td style="text-align: center">1</td>
-                    <td style="text-align: right">
-                      <span class="amount">24.000</span>
-                    </td>
-                    <td style="text-align: right">
-                      <span class="amount">24.000</span>
-                    </td>
-                    <td class="action-cell">
-                      <button class="select-btn" onclick="toggleSelect(this)">
-                        <!-- Chọn -->
-                        <i class="fas fa-arrow-right"></i>
-                      </button>
-                    </td>
-                  </tr>
+                <tbody id="serviceTableBody">
+                  <!-- Rendered by JavaScript -->
                 </tbody>
               </table>
             </div>
-            <div>
+            <div
+              class="d-flex align-items-center justify-content-end gap-4 p-3"
+            >
+              <button
+                class="refresh-btn"
+                onclick="discardAllItems()"
+                id="discardAll"
+              >
+                Bỏ chọn tất cả
+              </button>
               <button
                 class="select-btn select-all-btn"
                 onclick="selectAllItems()"
@@ -203,6 +167,9 @@
             </div>
           </div>
         </div>
+
+        <!-- Footer -->
+        <div class="footer-section">© 2026</div>
       </div>
 
       <div

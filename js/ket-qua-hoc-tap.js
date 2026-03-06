@@ -442,8 +442,6 @@ const overallInfo = {
   diemRenLuyen: 85,
   diemRenLuyenXepLoai: "Khá",
   diemTrungBinhHe10: 8.4,
-  xepLoaiTichLuyHe10: "Giỏi",
-  xepLoaiTichLuyHe10Sub: "Xuất sắc",
 };
 
 let gradeDistChart = null;
@@ -471,26 +469,28 @@ function renderOverallSummary() {
     `Xếp loại: ${overallInfo.xepLoai}`;
 
   document
-    .querySelectorAll(".summary-card")[1]
-    .querySelector(".card-value").innerHTML =
-    `${overallInfo.tongTinChiHoanThanh}<span class="card-scale">/${overallInfo.tongTinChiYeuCau}</span>`;
-
-  document
-    .querySelectorAll(".summary-card")[2]
-    .querySelector(".card-value").innerHTML =
-    `${overallInfo.diemRenLuyen}<span class="card-scale">/100</span>`;
-  document
-    .querySelectorAll(".summary-card")[2]
-    .querySelector(".card-sub-label").textContent =
-    overallInfo.diemRenLuyenXepLoai;
-
-  document
     .querySelectorAll(".summary-card")[3]
     .querySelector(".card-value").textContent = overallInfo.diemTrungBinhHe10;
 
   document
-    .querySelectorAll(".summary-card")[4]
-    .querySelector(".card-value").textContent = overallInfo.xepLoaiTichLuyHe10;
+    .querySelectorAll(".summary-card")[2]
+    .querySelector(".card-value").innerHTML =
+    `${overallInfo.tongTinChiHoanThanh}<span class="card-scale">/${overallInfo.tongTinChiYeuCau}</span>`;
+
+  document
+    .querySelectorAll(".summary-card")[1]
+    .querySelector(".card-value").innerHTML =
+    `${overallInfo.diemRenLuyen}<span class="card-scale">/100</span>`;
+
+  // document
+  //   .querySelectorAll(".summary-card")[1]
+  //   .querySelector(".card-sub-label").textContent =
+  //   overallInfo.diemRenLuyenXepLoai;
+
+  document
+    .querySelectorAll(".summary-card")[1]
+    .querySelector(".card-badge").innerHTML = `<i class="fas fa-star"></i>
+    <span class="fw-semibold">Xếp loại: ${overallInfo.diemRenLuyenXepLoai}</span>`;
 }
 
 // Render semester tabs
@@ -612,7 +612,7 @@ function renderAllSemesters() {
 
   const tableSection = document.querySelector(".table-section");
   let html = `
-    <div class="table-header" style="margin-bottom: 24px;">
+    <div class="table-header">
       <h3>Bảng điểm chi tiết - Tất cả học kỳ</h3>
       <div class="table-actions">
         <button class="action-btn active" hidden>
@@ -667,12 +667,11 @@ function renderAllSemesters() {
         }
       });
 
-      const totalCols = 11 + maxThuongXuyen + maxThucHanh;
-      html += renderSummaryRow(semester, totalCols);
       html += `
               </tbody>
             </table>
           </div>
+          ${renderSemesterSummary(semester)}
         </div>
       `;
     }
@@ -765,26 +764,22 @@ function renderTable(semester) {
   });
 
   if (visibleCount === 0) {
-    html = `
-    <table class="results-table">
-    <tbody>
+    html += `
       <tr>
         <td colspan="${12 + maxThuongXuyen + maxThucHanh}" style="text-align: center; padding: 40px; color: #666;">
           <i class="fas fa-check-circle" style="font-size: 48px; color: var(--success-color); margin-bottom: 16px;"></i>
           <p style="font-size: 16px; margin: 0;">Không có môn nào cần cải thiện</p>
         </td>
       </tr>
-    </tbody>
-  </table>
     `;
   }
 
-  const totalCols = 11 + maxThuongXuyen + maxThucHanh;
-  html += renderSummaryRow(semester, totalCols);
   html += `
       </tbody>
     </table>
   `;
+
+  html += renderSemesterSummary(semester);
 
   tableContainer.innerHTML = html;
 }
@@ -854,8 +849,8 @@ function renderTableRow(mon, stt, maxThuongXuyen = 3, maxThucHanh = 3) {
   `;
 }
 
-// Render hàng tổng kết
-function renderSummaryRow(semester, totalCols = 17) {
+// Render phần tổng kết học kỳ
+function renderSemesterSummary(semester) {
   const getRankingClass = (xepLoai) => {
     const ranking = xepLoai.toLowerCase();
     if (ranking.includes("xuất sắc")) return "excellent";
@@ -870,71 +865,67 @@ function renderSummaryRow(semester, totalCols = 17) {
   const rankingClass = getRankingClass(semester.tongKetHocKy.xepLoaiHocKy);
 
   return `
-    <tr class="summary-row">
-      <td colspan="${totalCols}" style="width: 100%;">
-        <div class="semester-summary">
-          <div class="semester-summary-title">
-            Tổng kết học kỳ ${semester.hocKy} (${semester.namHoc})
+    <div class="semester-summary">
+      <div class="semester-summary-title">
+        Tổng kết học kỳ ${semester.hocKy} (${semester.namHoc})
+      </div>
+      <div class="summary-stats">
+        <div class="summary-stat">
+          <div class="summary-stat-icon blue">
+            <i class="fas fa-award"></i>
           </div>
-          <div class="summary-stats">
-            <div class="summary-stat">
-              <div class="summary-stat-icon blue">
-                <i class="fas fa-award"></i>
-              </div>
-              <div class="summary-stat-content">
-                <div class="summary-stat-label">ĐIỂM TB HK</div>
-                <div class="summary-stat-value">${semester.tongKetHocKy.diemTrungBinhHocKy}</div>
-              </div>
-            </div>
-            <div class="summary-stat">
-              <div class="summary-stat-icon blue">
-                <i class="fas fa-calendar-alt"></i>
-              </div>
-              <div class="summary-stat-content">
-                <div class="summary-stat-label">ĐTB TÍCH LŨY (HỆ 10)</div>
-                <div class="summary-stat-value">${semester.tongKetHocKy.diemTrungBinhTichLuyHe10}</div>
-              </div>
-            </div>
-            <div class="summary-stat">
-              <div class="summary-stat-icon blue">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <div class="summary-stat-content">
-                <div class="summary-stat-label">ĐTB TÍCH LŨY (HỆ 4)</div>
-                <div class="summary-stat-value">${semester.tongKetHocKy.diemTrungBinhTichLuyHe4}</div>
-              </div>
-            </div>
-            <div class="summary-stat">
-              <div class="summary-stat-icon blue">
-                <i class="fas fa-book"></i>
-              </div>
-              <div class="summary-stat-content">
-                <div class="summary-stat-label">TC ĐÃ ĐĂNG KÝ</div>
-                <div class="summary-stat-value">${semester.tongKetHocKy.tinChiDangKy}</div>
-              </div>
-            </div>
-            <div class="summary-stat">
-              <div class="summary-stat-icon blue">
-                <i class="fas fa-check-circle"></i>
-              </div>
-              <div class="summary-stat-content">
-                <div class="summary-stat-label">TC ĐÃ TÍCH LŨY</div>
-                <div class="summary-stat-value">${semester.tongKetHocKy.tinChiTichLuy}</div>
-              </div>
-            </div>
-            <div class="summary-stat ranking-highlight ${rankingClass}">
-              <div class="summary-stat-icon">
-                <i class="fas fa-award"></i>
-              </div>
-              <div class="summary-stat-content">
-                <div class="summary-stat-label">XẾP LOẠI HK</div>
-                <div class="summary-stat-value">${semester.tongKetHocKy.xepLoaiHocKy}</div>
-              </div>
-            </div>
+          <div class="summary-stat-content">
+            <div class="summary-stat-label">ĐIỂM TB HK</div>
+            <div class="summary-stat-value">${semester.tongKetHocKy.diemTrungBinhHocKy}</div>
           </div>
         </div>
-      </td>
-    </tr>
+        <div class="summary-stat">
+          <div class="summary-stat-icon blue">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="summary-stat-content">
+            <div class="summary-stat-label">ĐTB TÍCH LŨY (HỆ 10)</div>
+            <div class="summary-stat-value">${semester.tongKetHocKy.diemTrungBinhTichLuyHe10}</div>
+          </div>
+        </div>
+        <div class="summary-stat">
+          <div class="summary-stat-icon blue">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="summary-stat-content">
+            <div class="summary-stat-label">ĐTB TÍCH LŨY (HỆ 4)</div>
+            <div class="summary-stat-value">${semester.tongKetHocKy.diemTrungBinhTichLuyHe4}</div>
+          </div>
+        </div>
+        <div class="summary-stat">
+          <div class="summary-stat-icon blue">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="summary-stat-content">
+            <div class="summary-stat-label">TC ĐÃ ĐĂNG KÝ</div>
+            <div class="summary-stat-value">${semester.tongKetHocKy.tinChiDangKy}</div>
+          </div>
+        </div>
+        <div class="summary-stat">
+          <div class="summary-stat-icon blue">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="summary-stat-content">
+            <div class="summary-stat-label">TC ĐÃ TÍCH LŨY</div>
+            <div class="summary-stat-value">${semester.tongKetHocKy.tinChiTichLuy}</div>
+          </div>
+        </div>
+        <div class="summary-stat ranking-highlight ${rankingClass}">
+          <div class="summary-stat-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <div class="summary-stat-content">
+            <div class="summary-stat-label">XẾP LOẠI HK</div>
+            <div class="summary-stat-value">${semester.tongKetHocKy.xepLoaiHocKy}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   `;
 }
 

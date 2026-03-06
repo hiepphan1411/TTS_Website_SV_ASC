@@ -10,45 +10,24 @@
   --text-primary: #505050;
 }
 
-body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  background-color: #f5f7fa;
-  color: var(--text-primary);
+.bybye {
+  display: none;
 }
 
 .container-lg {
   gap: 20px;
   padding: 20px 20px;
 }
+
 .content-area {
   flex: 1;
   max-width: 100%;
-}
-
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.page-subtitle {
-  color: var(--text-muted);
-  font-size: 14px;
-  margin: 0;
 }
 
 /* Summary Cards */
 .summary-cards {
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
 }
 
 .summary-cards > div {
@@ -61,11 +40,31 @@ body {
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .summary-card.primary {
-  background: #e8f4fd;
-  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #5c9ff8 100%);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+  color: white !important;
+}
+
+.summary-card.primary .card-label,
+.summary-card.primary .card-value,
+.summary-card.primary .card-scale {
+  color: white;
+}
+
+.summary-card.primary .card-badge {
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .card-label {
@@ -77,13 +76,10 @@ body {
 }
 
 .card-value {
-  font-size: 64px;
+  font-size: 40px;
   font-weight: 700;
   margin-bottom: 2px;
   color: var(--primary-color);
-}
-.card-value-content {
-  font-size: 30px !important;
 }
 
 .card-scale {
@@ -92,16 +88,17 @@ body {
 }
 
 .card-badge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  background: var(--primary-color);
-  color: white;
+  background: #dbeafe;
+  color: var(--primary-color);
   padding: 8px 14px;
   border-radius: 8px;
-  font-size: 12px;
-  margin-top: 16px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--primary-color);
 }
 
 .card-sub-label {
@@ -121,7 +118,6 @@ body {
 .semester-tabs {
   display: flex;
   gap: 12px;
-  margin-bottom: 18px;
   flex-wrap: wrap;
 }
 
@@ -254,7 +250,6 @@ body {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
   overflow: hidden;
 }
 
@@ -291,10 +286,16 @@ body {
 }
 
 .semester-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 8px;
+
   background-color: white;
+  color: var(--text-primary);
   padding: 16px 24px;
   border-radius: 8px;
-  margin-bottom: 24px;
 }
 
 .action-btn {
@@ -378,7 +379,7 @@ body {
 }
 
 .results-table td {
-  padding: 20px 24px;
+  padding: 10px 8px;
   border-bottom: 1px solid var(--border-color);
   font-size: 12px;
 }
@@ -468,13 +469,21 @@ body {
   color: var(--danger-color);
 }
 
-/* Summary Row */
-.summary-row {
-  background: #f0f4ff !important;
-}
-
+/* Semester Summary Section */
 .semester-summary {
   width: 100%;
+  padding: 20px;
+  background: #f0f4ff;
+  border-radius: 0 0 12px 12px;
+  margin-top: 0;
+}
+
+.semester-table-wrapper .semester-summary {
+  border-radius: 0 0 12px 12px;
+}
+
+.table-container .semester-summary {
+  border-radius: 0 0 12px 12px;
 }
 
 .semester-summary-title {
@@ -549,16 +558,9 @@ body {
 
 /* Ranking Highlight Stat */
 .summary-stat.ranking-highlight {
-  background: linear-gradient(135deg, var(--orange-color) 0%, #f8b84e 100%);
-  box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
   position: relative;
   overflow: hidden;
 }
-
-/* 
-.summary-stat.ranking-highlight .summary-stat-label {
-  text-align: center;
-} */
 
 /* Xếp loại Xuất sắc và Giỏi - Xanh lá/lam */
 .summary-stat.ranking-highlight.excellent,
@@ -625,9 +627,9 @@ body {
   font-size: 22px;
   font-weight: 800;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.15);
   padding: 8px 16px;
   border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.3);
   display: inline-block;
   margin-top: 4px;
@@ -642,7 +644,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 24px;
 }
 
 .chart-card {
@@ -683,6 +684,10 @@ body {
 
 .semester-table-wrapper {
   overflow: hidden;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
 }
 
 /* Responsive */
@@ -751,10 +756,6 @@ body {
     font-size: 48px;
   }
 
-  .card-value-content {
-    font-size: 24px !important;
-  }
-
   .charts-section {
     gap: 16px;
   }
@@ -786,45 +787,63 @@ body {
     width: 100%;
   }
 
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .summary-card {
+    flex-direction: column;
+    justify-content: start;
+    gap: 12px;
+  }
+
+  .summary-card div {
+    width: 100%;
+  }
+
+  .summary-card {
+    padding: 16px;
+  }
+
+  .card-value {
+    font-size: 36px;
+  }
+
+  .card-badge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Stats grid - 2x2 */
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .semester-tabs {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .semester-tabs .semester-tab {
+    width: 100%;
   }
 
   .semester-tab {
     min-width: 100%;
   }
 
-  .page-title {
-    font-size: 24px;
-  }
-
+  /* Semester summary - 2x3 */
   .summary-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .summary-stat {
     padding: 12px;
-  }
-
-  .summary-stat-value {
-    font-size: 20px;
-  }
-
-  .summary-stat.ranking-highlight .summary-stat-value {
-    font-size: 24px;
-    padding: 6px 12px;
-  }
-
-  .summary-stat.ranking-highlight .summary-stat-label {
-    font-size: 10px;
-  }
-
-  .summary-stat.ranking-highlight .summary-stat-content {
-    overflow: hidden;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
   }
 
   .summary-stat-icon {
@@ -832,6 +851,27 @@ body {
     height: 40px;
     min-width: 40px;
     font-size: 18px;
+    margin: 0 auto;
+  }
+
+  .summary-stat-value {
+    font-size: 18px;
+  }
+
+  .summary-stat-label {
+    font-size: 9px;
+  }
+
+  .summary-stat.ranking-highlight .summary-stat-value {
+    font-size: 20px;
+  }
+
+  .summary-stat.ranking-highlight .summary-stat-label {
+    font-size: 9px;
+  }
+
+  .summary-stat.ranking-highlight .summary-stat-content {
+    overflow: hidden;
   }
 
   .table-section {
@@ -884,7 +924,7 @@ body {
   }
 
   .semester-summary {
-    padding: 16px;
+    padding: 16px 12px;
   }
 
   .semester-summary-title {
@@ -932,6 +972,21 @@ body {
   }
 }
 
+@media (max-width: 630px) {
+  .semester-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .semester-tabs .semester-tab {
+    width: 100%;
+  }
+
+  .semester-tab {
+    min-width: 100%;
+  }
+}
+
 @media (max-width: 576px) {
   .header-content {
     flex-direction: column;
@@ -963,10 +1018,6 @@ body {
 
   .card-value {
     font-size: 40px;
-  }
-
-  .card-value-content {
-    font-size: 20px !important;
   }
 
   .card-scale {
@@ -1082,6 +1133,13 @@ body {
 
   .semester-table-wrapper {
     margin-bottom: 24px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .semester-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

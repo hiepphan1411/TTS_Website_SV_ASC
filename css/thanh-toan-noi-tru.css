@@ -1,5 +1,5 @@
 :root {
-  --primary-blue: #56a2e8;
+  --primary-blue: #3a74f0;
   --primary-yellow: #ffb800;
   --success-green: #28a745;
   --light-gray: #f5f5f5;
@@ -15,41 +15,6 @@
   --color-green-completed: #70ad47;
   --color-yellow-active: #ffc107;
   --border-thickness: 5px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #e7ecf0;
-  color: var(--color-text-primary);
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.page-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-}
-
-.page-subtitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: #8e8e8e;
 }
 
 .back-btn {
@@ -123,9 +88,8 @@ body {
 .section-title {
   font-size: 17px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
   gap: 10px;
+  margin: 0;
 }
 
 .filter-dropdown {
@@ -186,7 +150,7 @@ body {
 }
 
 .payment-table tbody tr.selected {
-  background: #e3f2fd;
+  background: var(--light-gray);
 }
 
 .action-cell {
@@ -209,7 +173,7 @@ body {
 }
 
 .search-btn {
-  background: #4a95d9;
+  background: var(--primary-blue);
   color: white;
   border: none;
   padding: 8px 16px;
@@ -230,7 +194,7 @@ body {
   font-weight: 550;
   background-color: white;
   color: var(--color-text-primary);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--border-color);
 }
 
 .refresh-btn:hover {
@@ -242,7 +206,7 @@ body {
 }
 
 .select-btn:hover:not(:disabled) {
-  background: #4a95d9;
+  background: var(--primary-blue);
 }
 
 .select-btn:disabled {
@@ -329,7 +293,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .selected-items-body {
@@ -823,7 +787,7 @@ body {
 
   .payment-table tr.selected {
     border-color: #1976d2;
-    background: #e3f2fd;
+    background: var(--light-gray);
   }
 
   .payment-table td {

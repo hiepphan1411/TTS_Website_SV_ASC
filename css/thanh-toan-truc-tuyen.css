@@ -1,61 +1,32 @@
 :root {
   --primary-color: #3a74f0;
   --secondary-color: #1976d2;
-  --success-color: #2e7d32;
+  --success-color: #4caf50;
   --warning-color: #ff9800;
+
+  --danger-bg: #fff3e0;
   --danger-color: #d32f2f;
-  --light-bg: #f5f7fa;
-  --dark-bg: #1a1a1a;
+  --light-bg: #f5f5f5;
+  --light-white: #fafafa;
+  --lighter-bg: #bdbdbd;
   --text-dark: #505050;
   --text-light: #666;
   --border-color: #e0e0e0;
+
+  --lighter-blue-bg: #f8f9fa;
+  --light-blue-bg: #e3f2fd;
+  --hover-gray-bg: #9e9e9e;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f7fa;
-  padding: 20px;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* Header */
-.page-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-
-.page-subtitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: #8e8e8e;
 }
 
 .back-btn {
   padding: 10px 20px;
-  background: #f5f5f5;
+  background: var(--light-bg);
   border: none;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
-  color: #666;
+  color: var(--text-light);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -82,15 +53,6 @@ body {
   overflow: hidden;
 }
 
-.section-header {
-  background: #f8f9fa;
-  color: var(--text-dark);
-  padding: 18px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .table-wrapper {
   max-height: 500px;
   overflow-y: auto;
@@ -103,25 +65,24 @@ body {
 }
 
 .table-wrapper::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: var(--light-bg);
   border-radius: 10px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
+  background: var(--lighter-bg);
   border-radius: 10px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #9e9e9e;
+  background: var(--hover-gray-bg);
 }
 
 .section-title {
   font-size: 17px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
   gap: 10px;
+  margin: 0;
 }
 
 .filter-dropdown {
@@ -136,7 +97,7 @@ body {
 }
 
 .filter-dropdown option {
-  color: #333;
+  color: var(--text-dark);
 }
 
 /* Payment Table */
@@ -146,7 +107,7 @@ body {
 }
 
 .payment-table thead {
-  background: #fafafa;
+  background: var(--light-white);
   border-bottom: 2px solid var(--border-color);
 }
 
@@ -167,8 +128,8 @@ body {
 
 .payment-table td {
   padding: 14px 18px;
-  border-bottom: 1px solid #f0f0f0;
-  color: #333;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-dark);
   font-size: 14px;
 }
 
@@ -182,7 +143,7 @@ body {
 }
 
 .payment-table tbody tr.selected {
-  background: #e3f2fd;
+  background: var(--lighter-blue-bg);
 }
 
 .action-cell {
@@ -213,10 +174,24 @@ body {
 }
 
 .select-all-btn {
-  float: right;
-  margin: 20px;
+  padding: 6px 16px;
+  font-size: 16px;
+}
+
+.refresh-btn {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
   padding: 6px 18px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 550;
+  background-color: white;
+  color: var(--color-text-primary);
+  border: 1px solid #e4e4e4;
+}
+
+.refresh-btn:hover {
+  background-color: #f5f5f5;
 }
 
 .select-btn i {
@@ -228,12 +203,12 @@ body {
 }
 
 .select-btn:disabled {
-  background: #bdbdbd;
+  background: var(--lighter-bg);
   cursor: not-allowed;
 }
 
 .select-btn.selected {
-  background: #4caf50;
+  background: var(--success-color);
 }
 
 .select-btn.selected:hover {
@@ -251,12 +226,12 @@ body {
 }
 
 .status-badge.required {
-  background: #fff3e0;
-  color: #e65100;
+  background: var(--danger-bg);
+  color: var(--danger-color);
 }
 
 .status-badge.optional {
-  background: #e3f2fd;
+  background: var(--light-blue-bg);
   color: var(--secondary-color);
 }
 
@@ -271,7 +246,7 @@ body {
 
 /* Total Row */
 .total-row {
-  background: #f5f5f5;
+  background: var(--light-bg);
   border-top: 2px solid var(--border-color);
 }
 
@@ -303,7 +278,7 @@ body {
 }
 
 .selected-items-header {
-  background: #f8f9fa;
+  background: var(--lighter-blue-bg);
   color: var(--text-dark);
   padding: 14px 20px;
   font-weight: 700;
@@ -324,23 +299,23 @@ body {
 }
 
 .selected-items-body::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: var(--light-bg);
   border-radius: 10px;
 }
 
 .selected-items-body::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
+  background: var(--lighter-bg);
   border-radius: 10px;
 }
 
 .selected-items-body::-webkit-scrollbar-thumb:hover {
-  background: #9e9e9e;
+  background: var(--hover-gray-bg);
 }
 
 .empty-selection {
   text-align: center;
   padding: 36px 20px;
-  color: #9e9e9e;
+  color: var(--hover-gray-bg);
 }
 
 .empty-selection i {
@@ -354,7 +329,7 @@ body {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: #fafafa;
+  background: var(--light-white);
   border-radius: 8px;
   margin-bottom: 10px;
   border: 1px solid var(--border-color);
@@ -362,8 +337,8 @@ body {
 }
 
 .selected-item:hover {
-  background: #f5f5f5;
-  border-color: #bdbdbd;
+  background: var(--light-bg);
+  border-color: var(--lighter-bg);
 }
 
 .selected-item:last-child {
@@ -398,7 +373,7 @@ body {
 }
 
 .remove-item-btn {
-  background: #f5f5f5;
+  background: var(--light-bg);
   color: var(--danger-color);
   border: 1px solid var(--border-color);
   width: 26px;
@@ -421,7 +396,7 @@ body {
 
 .selected-items-total {
   padding: 14px 20px;
-  background: #f8f9fa;
+  background: var(--lighter-blue-bg);
   border-top: 2px solid var(--border-color);
   display: flex;
   justify-content: space-between;
@@ -449,7 +424,7 @@ body {
 }
 
 .method-header {
-  background: #fafafa;
+  background: var(--light-white);
   padding: 14px 20px;
   border-bottom: 1px solid var(--border-color);
   font-weight: 700;
@@ -483,12 +458,12 @@ body {
 
 .method-option:hover {
   border-color: var(--secondary-color);
-  background: #fafafa;
+  background: var(--light-white);
 }
 
 .method-option.selected {
   border-color: var(--secondary-color);
-  background: #e3f2fd;
+  background: var(--light-blue-bg);
 }
 
 .method-radio {
@@ -555,14 +530,14 @@ body {
 }
 
 .btn-disabled {
-  background: #bdbdbd;
+  background: var(--lighter-bg);
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
 }
 
 .payment-btn:disabled {
-  background: #bdbdbd;
+  background: var(--lighter-bg);
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
@@ -571,10 +546,10 @@ body {
 .payment-note {
   margin-top: 12px;
   padding: 10px;
-  background: #fff3e0;
+  background: var(--danger-bg);
   border-radius: 6px;
   font-size: 11px;
-  color: #e65100;
+  color: var(--danger-color);
   line-height: 1.5;
 }
 
@@ -620,7 +595,7 @@ body {
 
 .countdown {
   font-size: 13px;
-  color: #666;
+  color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -638,11 +613,11 @@ body {
 }
 
 .qr-container {
-  background: #fafafa;
+  background: var(--light-white);
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 20px;
-  border: 2px dashed #bdbdbd;
+  border: 2px dashed var(--lighter-bg);
 }
 
 .qr-code {
@@ -673,7 +648,7 @@ body {
 }
 
 .payment-info {
-  background: #fafafa;
+  background: var(--light-white);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 14px;
@@ -694,7 +669,7 @@ body {
 }
 
 .info-label {
-  color: #666;
+  color: var(--text-light);
   font-size: 13px;
 }
 
@@ -747,8 +722,8 @@ body {
 }
 
 .close-btn {
-  background: #f5f5f5;
-  color: #666;
+  background: var(--light-bg);
+  color: var(--text-light);
 }
 
 .close-btn:hover {
@@ -806,7 +781,7 @@ body {
 
   .payment-table tr.selected {
     border-color: var(--secondary-color);
-    background: #e3f2fd;
+    background: var(--lighter-blue-bg);
   }
 
   .payment-table td {
@@ -840,7 +815,7 @@ body {
   .payment-table td:nth-child(4)::before {
     content: "Tín chỉ: ";
     font-weight: 600;
-    color: #666;
+    color: var(--text-light);
     font-size: 13px;
   }
 
@@ -857,7 +832,7 @@ body {
   .payment-table td:nth-child(6)::before {
     content: "Số tiền: ";
     font-weight: 600;
-    color: #666;
+    color: var(--text-light);
     font-size: 14px;
     margin-right: 8px;
   }

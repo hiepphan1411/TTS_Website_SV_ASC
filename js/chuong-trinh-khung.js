@@ -836,6 +836,7 @@ function hideTooltip() {
 
 function attachTooltipListeners() {
   const rows = document.querySelectorAll("tr[data-tooltip]");
+
   rows.forEach((row) => {
     row.addEventListener("mouseenter", function (e) {
       const encodedData = this.getAttribute("data-tooltip");
