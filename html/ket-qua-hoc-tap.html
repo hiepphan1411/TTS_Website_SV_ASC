@@ -10,8 +10,12 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/curriculum-framework.css" />
+
+    <link href="../lib/kendo-ui@2016.3.1118.common.min.css" rel="stylesheet" />
+    <link href="../lib/kendo@2016.3.1118.default.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="../css/ket-qua-hoc-tap.css" />
+    <link rel="stylesheet" href="../css/curriculum-framework-cleaned.css" />
     <link rel="stylesheet" href="../css/common.css" />
     <script
       src="https://kit.fontawesome.com/6f955e325d.js"
@@ -53,18 +57,10 @@
           </div>
           <div class="summary-card">
             <div>
-              <div class="card-label">Điểm rèn luyện</div>
+              <div class="card-label">Điểm trung bình (Hệ 10)</div>
               <div class="card-value card-value-content">
                 <!-- JS Render -->
-                <span class="card-scale">
-                  <!-- JS Render -->
-                </span>
               </div>
-              <!-- <div class="card-sub-label">Khá</div> -->
-            </div>
-            <div class="card-badge">
-              <i class="fas fa-star"></i>
-              <span>Xếp loại: Khá</span>
             </div>
           </div>
           <div class="summary-card">
@@ -80,10 +76,18 @@
           </div>
           <div class="summary-card">
             <div>
-              <div class="card-label">Điểm trung bình (Hệ 10)</div>
+              <div class="card-label">Điểm rèn luyện</div>
               <div class="card-value card-value-content">
                 <!-- JS Render -->
+                <span class="card-scale">
+                  <!-- JS Render -->
+                </span>
               </div>
+              <!-- <div class="card-sub-label">Khá</div> -->
+            </div>
+            <div class="card-badge">
+              <i class="fas fa-star"></i>
+              <span>Xếp loại: Khá</span>
             </div>
           </div>
         </div>
@@ -158,7 +162,6 @@
             <!-- JS Render Table -->
           </div>
         </div>
-
         <!-- Charts Section -->
         <div class="charts-section">
           <div class="chart-card">
@@ -171,7 +174,7 @@
               ></select>
             </div>
             <div class="chart-body">
-              <canvas id="gradeDistChart"></canvas>
+              <div id="gradeDistChart"></div>
             </div>
           </div>
 
@@ -180,15 +183,17 @@
               <h3>Xu hướng GPA qua các học kỳ</h3>
             </div>
             <div class="chart-body">
-              <canvas id="gpaTrendChart"></canvas>
+              <div id="gpaTrendChart"></div>
             </div>
           </div>
         </div>
       </div>
     </main>
     <script src="../js/common.js"></script>
+    <script src="../lib/jquery@3.7.1.min.js"></script>
+    <script src="../lib/jquery-ui@1.14.1.css"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../lib/chart@3.9.1.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.3.1118/js/kendo.all.min.js"></script>
     <script src="../js/ket-qua-hoc-tap.js"></script>
   </body>
 </html>

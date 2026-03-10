@@ -1,14 +1,59 @@
 :root {
-  --primary-color: #3a74f0;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --orange-color: #ff9800;
-  --danger-color: #f15464;
-  --light-bg: #f8f9fa;
-  --border-color: #dee2e6;
+  --sidebar-width: 260px;
+  --header-height: 60px;
+  /* Primary colors */
+  --primary-blue: #3a74f0;
+  --primary-yellow: #ffb800;
+  --primary-color: #e7ecf0;
+  --secondary-color: #f9b200;
+  /* Status */
+  --success-green: #28a745;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --warning-orange: #ffa500;
+  --danger-color: #f44336;
+  --info-color: #2196f3;
+  /* Progress */
+  --color-completed: #4a90e2;
+  --color-current: #ffc107;
+  --color-remaining: #c5c5c5;
+  --color-green-completed: #70ad47;
+  --color-yellow-active: #ffc107;
+  /* Backgrounds */
+  --light-gray: #f5f7fa;
+  --light-bg: #f4fbff;
+  --white: #ffffff;
+  --table-header-bg: #f9fafb;
+  --blue-bg-light: #e8f4fd;
+  --orange-bg-light: #fff4e6;
+  /* Text */
+  --color-text-primary: #505050;
+  --color-text-secondary: #8e8e8e;
+  --text-dark: #505050;
+  --text-light: #666666;
   --text-muted: #6c757d;
-  --text-primary: #505050;
+  --text-blue: #56a2e8;
+  /* Borders */
+  --border-color: #e0e0e0;
+  --border-gray: #e8edf3;
+  --table-border-color: #f7f7f7;
+  --border-thickness: 5px;
+  /* Shadows */
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Icons */
+  --gray-icon-color: #656565;
+  --primary-color: #3a74f0;
+  --secondary-color: #1976d2;
+  --success-color: #2e7d32;
+  --warning-color: #ff9800;
+  --danger-color: #d32f2f;
+  --dark-bg: #1a1a1a;
+  --success-green: #28a745;
+  --white: #ffffff;
 }
+
+/* Theme chung */
 
 .bybye {
   display: none;
@@ -106,7 +151,7 @@
   align-items: center;
   gap: 6px;
   background: #d4f4dd;
-  color: var(--success-color);
+  color: var(--success-green);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 12px;
@@ -138,7 +183,7 @@
 
 .semester-tab .tab-title,
 .tab-subtitle {
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .semester-tab:hover {
@@ -217,11 +262,11 @@
 }
 
 .stat-icon.orange {
-  color: var(--warning-color);
+  color: var(--color-current);
 }
 
 .stat-icon.green {
-  color: var(--success-color);
+  color: var(--success-green);
 }
 
 .stat-content {
@@ -234,7 +279,7 @@
 .stat-content .stat-number {
   font-size: 24px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   height: fit-content;
   line-height: 1;
 }
@@ -276,7 +321,7 @@
 }
 
 .table-actions button {
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .semester-sections-table {
@@ -293,7 +338,7 @@
   gap: 8px;
 
   background-color: white;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   padding: 16px 24px;
   border-radius: 8px;
 }
@@ -366,7 +411,7 @@
 
 .results-table thead {
   background: #f4fbff;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   border-bottom: 2px solid var(--border-color);
 }
 
@@ -394,7 +439,7 @@
 
 .subject-name {
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .grade-badge {
@@ -407,7 +452,7 @@
 }
 
 .grade-badge.excellent {
-  background: var(--success-color);
+  background: var(--success-green);
 }
 
 .grade-badge.good {
@@ -415,11 +460,11 @@
 }
 
 .grade-badge.average {
-  background: var(--warning-color);
+  background: var(--color-current);
 }
 
 .grade-badge.below-average {
-  background: var(--orange-color);
+  background: var(--warning-color);
 }
 
 .grade-badge.poor {
@@ -432,7 +477,7 @@
 }
 
 .ranking-badge.excellent {
-  color: var(--success-color);
+  color: var(--success-green);
 }
 
 .ranking-badge.good {
@@ -440,11 +485,11 @@
 }
 
 .ranking-badge.average {
-  color: var(--warning-color);
+  color: var(--color-current);
 }
 
 .ranking-badge.below-average {
-  color: var(--orange-color);
+  color: var(--warning-color);
 }
 
 .ranking-badge.poor {
@@ -461,7 +506,7 @@
 
 .status-badge.passed {
   background: #d4edda;
-  color: var(--success-color);
+  color: var(--success-green);
 }
 
 .status-badge.failed {
@@ -489,7 +534,7 @@
 .semester-summary-title {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin-bottom: 10px;
 }
 
@@ -528,11 +573,11 @@
 }
 
 .summary-stat-icon.orange {
-  color: var(--orange-color);
+  color: var(--warning-color);
 }
 
 .summary-stat-icon.green {
-  color: var(--success-color);
+  color: var(--success-green);
 }
 
 .summary-stat-content {
@@ -565,7 +610,7 @@
 /* Xếp loại Xuất sắc và Giỏi - Xanh lá/lam */
 .summary-stat.ranking-highlight.excellent,
 .summary-stat.ranking-highlight.good {
-  background: linear-gradient(135deg, var(--success-color) 0%, #4caf50 100%);
+  background: linear-gradient(135deg, var(--success-green) 0%, #4caf50 100%);
   box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
@@ -577,13 +622,13 @@
 
 /* Xếp loại Trung bình - Vàng */
 .summary-stat.ranking-highlight.average {
-  background: linear-gradient(135deg, var(--warning-color) 0%, #ffd54f 100%);
+  background: linear-gradient(135deg, var(--color-current) 0%, #ffd54f 100%);
   box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
 }
 
 /* Xếp loại Trung bình yếu - Cam */
 .summary-stat.ranking-highlight.below-average {
-  background: linear-gradient(135deg, var(--orange-color) 0%, #ffa726 100%);
+  background: linear-gradient(135deg, var(--warning-color) 0%, #ffa726 100%);
   box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
 
@@ -633,10 +678,11 @@
   border: 2px solid rgba(255, 255, 255, 0.3);
   display: inline-block;
   margin-top: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
   max-width: 100%;
+  text-align: center;
+  line-height: 1.3;
 }
 
 /* Charts Section */
@@ -674,8 +720,24 @@
   position: relative;
 }
 
-.chart-body canvas {
-  max-width: 100%;
+#gradeDistChart,
+#gpaTrendChart {
+  width: 100%;
+  height: 100%;
+}
+
+/* Kendo chart overrides */
+#gradeDistChart .k-chart,
+#gpaTrendChart .k-chart {
+  width: 100%;
+  height: 100%;
+}
+
+/* Remove default Kendo border */
+#gradeDistChart .k-widget,
+#gpaTrendChart .k-widget {
+  border: none;
+  background: transparent;
 }
 
 .improvement-row td {
@@ -685,13 +747,11 @@
 .semester-table-wrapper {
   overflow: hidden;
   background: white;
-  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
+/* @media (max-width: 1100px) {
   .summary-cards {
     flex-direction: column;
   }
@@ -735,9 +795,9 @@
     width: 100%;
     justify-content: flex-start;
   }
-}
+} */
 
-@media (max-width: 992px) {
+@media (max-width: 1000px) {
   .header-left {
     flex-direction: column;
     align-items: flex-start;
@@ -758,6 +818,12 @@
 
   .charts-section {
     gap: 16px;
+  }
+
+  .summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .chart-header {
@@ -1144,7 +1210,7 @@
 }
 
 /* Landscape phone */
-@media (max-width: 896px) and (orientation: landscape) {
+@media (max-width: 900px) and (orientation: landscape) {
   .charts-section {
     grid-template-columns: 1fr 1fr;
     gap: 12px;

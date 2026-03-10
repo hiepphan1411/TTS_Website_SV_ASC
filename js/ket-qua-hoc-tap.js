@@ -246,7 +246,7 @@ const academicResultsData = [
       diemTrungBinhTichLuyHe4: 3.82,
       tinChiDangKy: 17,
       tinChiTichLuy: 66,
-      xepLoaiHocKy: "TB",
+      xepLoaiHocKy: "Trung bình",
     },
   },
   {
@@ -444,8 +444,6 @@ const overallInfo = {
   diemTrungBinhHe10: 8.4,
 };
 
-let gradeDistChart = null;
-let gpaTrendChart = null;
 let currentView = "current";
 let isInitialLoad = true;
 let currentFilter = "all";
@@ -469,7 +467,7 @@ function renderOverallSummary() {
     `Xếp loại: ${overallInfo.xepLoai}`;
 
   document
-    .querySelectorAll(".summary-card")[3]
+    .querySelectorAll(".summary-card")[1]
     .querySelector(".card-value").textContent = overallInfo.diemTrungBinhHe10;
 
   document
@@ -478,7 +476,7 @@ function renderOverallSummary() {
     `${overallInfo.tongTinChiHoanThanh}<span class="card-scale">/${overallInfo.tongTinChiYeuCau}</span>`;
 
   document
-    .querySelectorAll(".summary-card")[1]
+    .querySelectorAll(".summary-card")[3]
     .querySelector(".card-value").innerHTML =
     `${overallInfo.diemRenLuyen}<span class="card-scale">/100</span>`;
 
@@ -488,7 +486,7 @@ function renderOverallSummary() {
   //   overallInfo.diemRenLuyenXepLoai;
 
   document
-    .querySelectorAll(".summary-card")[1]
+    .querySelectorAll(".summary-card")[3]
     .querySelector(".card-badge").innerHTML = `<i class="fas fa-star"></i>
     <span class="fw-semibold">Xếp loại: ${overallInfo.diemRenLuyenXepLoai}</span>`;
 }
@@ -642,7 +640,7 @@ function renderAllSemesters() {
     if (hasVisibleSubjects) {
       html += `
         <div class="semester-table-wrapper">
-          <div style="background-color: var(--primary-color); padding: 16px 24px; width: 100%;">
+          <div style="background-color: var(--primary-color); padding: 16px 24px; min-width: 100%;">
             <h4 style="color: white; margin: 0; font-size: 18px; font-weight: 600;">
               ${semester.hocKy} (${semester.namHoc})
             </h4>
@@ -744,7 +742,7 @@ function renderTable(semester) {
   const { maxThuongXuyen, maxThucHanh } = getMaxColumns(semester);
 
   let html = `
-    <div style="background-color: var(--primary-color); padding: 16px 24px;">
+    <div style="background-color: var(--primary-color); padding: 16px 24px; min-width: 1100px;">
       <h4 style="color: white; margin: 0; font-size: 18px; font-weight: 600;">
         ${semester.hocKy} (${semester.namHoc})
       </h4>
@@ -966,13 +964,13 @@ function populateSemesterSelect() {
 }
 
 function createGradeComparisonChart(semesterIndex = null) {
-  const canvas = document.getElementById("gradeDistChart");
-  if (!canvas) return;
+  var $container = $("#gradeDistChart");
+  if (!$container.length) return;
 
-  const ctx = canvas.getContext("2d");
-
-  if (gradeDistChart) {
-    gradeDistChart.destroy();
+  var existingChart = $container.data("kendoChart");
+  if (existingChart) {
+    existingChart.destroy();
+    $container.empty();
   }
 
   if (semesterIndex === null) {
@@ -982,155 +980,139 @@ function createGradeComparisonChart(semesterIndex = null) {
         : academicResultsData.length - 1;
   }
 
-  const semester = academicResultsData[semesterIndex];
+  var semester = academicResultsData[semesterIndex];
 
-  const select = document.getElementById("semesterChartSelect");
+  var select = document.getElementById("semesterChartSelect");
   if (select) {
     select.value = semesterIndex;
   }
 
-  const labels = semester.monHoc.map((mon) => {
-    const maxLength = 20;
-    if (mon.tenMonHoc.length > maxLength) {
-      return mon.tenMonHoc.substring(0, maxLength) + "...";
-    }
-    return mon.tenMonHoc;
+  var labels = semester.monHoc.map(function (mon) {
+    var maxLength = 20;
+    return mon.tenMonHoc.length > maxLength
+      ? mon.tenMonHoc.substring(0, maxLength) + "..."
+      : mon.tenMonHoc;
   });
 
-  const studentGrades = semester.monHoc.map((mon) => mon.diem.diemTK);
-  const classAverages = semester.monHoc.map((mon) => mon.diemTBLop);
+  var studentGrades = semester.monHoc.map(function (mon) {
+    return mon.diem.diemTK;
+  });
+  var classAverages = semester.monHoc.map(function (mon) {
+    return mon.diemTBLop;
+  });
 
-  gradeDistChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          type: "line",
-          label: "Điểm TB lớp",
-          data: classAverages,
-          borderColor: "#FF9800",
-          backgroundColor: "rgba(255, 152, 0, 0.1)",
-          borderWidth: 3,
-          pointRadius: 5,
-          pointHoverRadius: 7,
-          pointBackgroundColor: "rgba(255, 152, 0, 1)",
-          pointBorderColor: "#fff",
-          pointBorderWidth: 2,
-          tension: 0.3,
-          fill: false,
-        },
-        {
-          type: "bar",
-          label: "Điểm của bạn",
-          data: studentGrades,
-          backgroundColor: "#3a74f0",
-          borderColor: "#3a74f0",
-          borderWidth: 0,
-          borderRadius: 6,
-          maxBarThickness: 40,
-        },
-      ],
+  $container.kendoChart({
+    legend: {
+      position: "top",
+      labels: {
+        font: "12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      },
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: {
-        mode: "index",
-        intersect: false,
+    chartArea: {
+      background: "transparent",
+    },
+    seriesDefaults: {
+      overlay: { gradient: "none" },
+    },
+    series: [
+      {
+        type: "column",
+        name: "Điểm của bạn",
+        data: studentGrades,
+        color: "#3a74f0",
+        border: { width: 0 },
       },
-      plugins: {
-        legend: {
-          display: true,
-          position: "top",
-          labels: {
-            usePointStyle: true,
-            padding: 15,
-            font: {
-              size: window.innerWidth < 768 ? 10 : 12,
-              family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto",
-            },
-          },
-        },
-        tooltip: {
-          enabled: true,
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          titleFont: {
-            size: window.innerWidth < 768 ? 11 : 13,
-            weight: "bold",
-          },
-          bodyFont: {
-            size: window.innerWidth < 768 ? 10 : 12,
-          },
-          padding: 12,
-          cornerRadius: 8,
-          callbacks: {
-            title: function (context) {
-              const index = context[0].dataIndex;
-              return semester.monHoc[index].tenMonHoc;
-            },
-            label: function (context) {
-              const label = context.dataset.label || "";
-              const value = context.parsed.y;
-              return label + ": " + value.toFixed(2);
-            },
-            afterLabel: function (context) {
-              if (context.datasetIndex === 0) {
-                const index = context.dataIndex;
-                const diff = (
-                  studentGrades[index] - classAverages[index]
-                ).toFixed(2);
-                const sign = diff >= 0 ? "+" : "";
-                return `Chênh lệch: ${sign}${diff}`;
-              }
-              return "";
-            },
-          },
+      {
+        type: "line",
+        name: "Điểm TB lớp",
+        data: classAverages,
+        color: "#FF9800",
+        width: 3,
+        style: "smooth",
+        markers: {
+          visible: true,
+          size: 8,
+          background: "#FF9800",
+          border: { color: "#fff", width: 2 },
         },
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 10,
-          ticks: {
-            stepSize: 1,
-            font: {
-              size: window.innerWidth < 768 ? 9 : 11,
-            },
-          },
-          grid: {
-            color: "rgba(0, 0, 0, 0.05)",
-          },
-          title: {
-            display: true,
-            text: "Điểm",
-            font: {
-              size: window.innerWidth < 768 ? 10 : 12,
-              weight: "bold",
-            },
-          },
-        },
-        x: {
-          ticks: {
-            font: {
-              size: window.innerWidth < 768 ? 8 : 10,
-            },
-            maxRotation: window.innerWidth < 768 ? 90 : 45,
-            minRotation: window.innerWidth < 768 ? 90 : 45,
-            autoSkip: false,
-          },
-          grid: {
-            display: false,
-          },
-          title: {
-            display: true,
-            text: "Môn học",
-            font: {
-              size: window.innerWidth < 768 ? 10 : 12,
-              weight: "bold",
-            },
-          },
-        },
+    ],
+    categoryAxis: {
+      categories: labels,
+      labels: {
+        rotation: -45,
+        font: "10px sans-serif",
+      },
+      title: {
+        text: "Môn học",
+        font: "bold 12px sans-serif",
+        margin: { top: 8 },
+      },
+      majorGridLines: { visible: false },
+      line: { visible: false },
+    },
+    valueAxis: {
+      min: 0,
+      max: 10,
+      majorUnit: 1,
+      title: {
+        text: "Điểm",
+        font: "bold 12px sans-serif",
+      },
+      majorGridLines: {
+        color: "#f0f0f0",
+        visible: true,
+      },
+    },
+    tooltip: {
+      visible: true,
+      shared: true,
+      background: "white",
+      border: { color: "#dee2e6", width: 1 },
+      sharedTemplate: function (data) {
+        var studentVal = null,
+          classVal = null;
+        data.points.forEach(function (p) {
+          if (p.series.name === "Điểm của bạn") studentVal = p.value;
+          if (p.series.name === "Điểm TB lớp") classVal = p.value;
+        });
+        var idx = data.points[0].categoryIx;
+        var fullName = semester.monHoc[idx]
+          ? semester.monHoc[idx].tenMonHoc
+          : data.points[0].category;
+        var html =
+          '<div style="padding:6px 10px;background:white;color:#505050;border-radius:8px;font-size:12px;min-width:160px;">';
+        html +=
+          '<div style="font-weight:700;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:4px;">' +
+          fullName +
+          "</div>";
+        data.points.forEach(function (p) {
+          var dot =
+            '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' +
+            p.series.color +
+            ';margin-right:5px;"></span>';
+          html +=
+            '<div style="margin:2px 0;">' +
+            dot +
+            p.series.name +
+            ": <strong>" +
+            p.value.toFixed(2) +
+            "</strong></div>";
+        });
+        if (studentVal !== null && classVal !== null) {
+          var diff = (studentVal - classVal).toFixed(2);
+          var sign = diff >= 0 ? "+" : "";
+          var color = diff >= 0 ? "#4caf50" : "#f15464";
+          html +=
+            '<div style="margin-top:6px;border-top:1px solid rgba(255,255,255,0.2);padding-top:4px;color:' +
+            color +
+            ';font-weight:600;">Chênh lệch: ' +
+            sign +
+            diff +
+            "</div>";
+        }
+        html += "</div>";
+        return html;
       },
     },
   });
@@ -1173,133 +1155,142 @@ function getGradeColor(grade) {
 
 // Tạo biểu đồ xu hướng GPA
 function createGpaTrendChart() {
-  const gpaCtx = document.getElementById("gpaTrendChart");
-  if (!gpaCtx) return;
+  var $container = $("#gpaTrendChart");
+  if (!$container.length) return;
 
-  const labels = academicResultsData.map(
-    (s) => `${s.hocKy}/${s.namHoc.split("-")[0].slice(-2)}`,
-  );
-  const gpaHocKy = academicResultsData.map(
-    (s) => s.tongKetHocKy.diemTrungBinhHe4,
-  );
-  const gpaTichLuy = academicResultsData.map(
-    (s) => s.tongKetHocKy.diemTrungBinhTichLuyHe4,
-  );
-
-  if (gpaTrendChart) {
-    gpaTrendChart.destroy();
+  var existingChart = $container.data("kendoChart");
+  if (existingChart) {
+    existingChart.destroy();
+    $container.empty();
   }
 
-  gpaTrendChart = new Chart(gpaCtx, {
-    type: "line",
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: "GPA Học kỳ",
-          data: gpaHocKy,
-          borderColor: "#3a74f0",
-          backgroundColor: "rgba(21, 56, 152, 0.1)",
-          tension: 0.4,
-          fill: true,
-          pointRadius: window.innerWidth < 768 ? 4 : 6,
-          pointHoverRadius: window.innerWidth < 768 ? 6 : 8,
-          pointBackgroundColor: "#3a74f0",
-          pointBorderColor: "#fff",
-          pointBorderWidth: 2,
-        },
-        {
-          label: "GPA Tích lũy",
-          data: gpaTichLuy,
-          borderColor: "#4caf50",
-          backgroundColor: "rgba(76, 175, 80, 0.1)",
-          tension: 0.4,
-          fill: true,
-          pointRadius: window.innerWidth < 768 ? 4 : 6,
-          pointHoverRadius: window.innerWidth < 768 ? 6 : 8,
-          pointBackgroundColor: "#4caf50",
-          pointBorderColor: "#fff",
-          pointBorderWidth: 2,
-        },
-      ],
+  var labels = academicResultsData.map(function (s) {
+    return s.hocKy + "/" + s.namHoc.split("-")[0].slice(-2);
+  });
+  var gpaHocKy = academicResultsData.map(function (s) {
+    return s.tongKetHocKy.diemTrungBinhHe4;
+  });
+  var gpaTichLuy = academicResultsData.map(function (s) {
+    return s.tongKetHocKy.diemTrungBinhTichLuyHe4;
+  });
+
+  $container.kendoChart({
+    legend: {
+      position: "top",
+      labels: {
+        font: "13px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      },
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          position: "top",
-          labels: {
-            padding: window.innerWidth < 768 ? 10 : 15,
-            usePointStyle: true,
-            font: {
-              size: window.innerWidth < 768 ? 11 : 13,
-              weight: "500",
-            },
-          },
+    chartArea: {
+      background: "transparent",
+    },
+    seriesDefaults: {
+      overlay: { gradient: "none" },
+    },
+    series: [
+      {
+        type: "area",
+        name: "GPA Học kỳ",
+        data: gpaHocKy,
+        color: "#3a74f0",
+        opacity: 0.15,
+        line: {
+          color: "#3a74f0",
+          width: 2,
+          style: "smooth",
         },
-        tooltip: {
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          padding: 12,
-          titleFont: {
-            size: window.innerWidth < 768 ? 12 : 14,
-            weight: "bold",
-          },
-          bodyFont: {
-            size: window.innerWidth < 768 ? 11 : 13,
-          },
-          callbacks: {
-            title: function (context) {
-              const index = context[0].dataIndex;
-              const semester = academicResultsData[index];
-              return `${semester.hocKy} (${semester.namHoc})`;
-            },
-            label: function (context) {
-              return context.dataset.label + ": " + context.parsed.y.toFixed(2);
-            },
-            afterLabel: function (context) {
-              const value = context.parsed.y;
-              if (value >= 3.6) return "Xuất sắc";
-              if (value >= 3.2) return "Giỏi";
-              if (value >= 2.5) return "Khá";
-              if (value >= 2.0) return "Trung bình";
-              return "Yếu";
-            },
-          },
+        markers: {
+          visible: true,
+          size: 8,
+          background: "#3a74f0",
+          border: { color: "#fff", width: 2 },
         },
       },
-      scales: {
-        y: {
-          min: 3.0,
-          max: 4.0,
-          ticks: {
-            stepSize: 0.2,
-            callback: function (value) {
-              return value.toFixed(1);
-            },
-            font: {
-              size: window.innerWidth < 768 ? 10 : 12,
-            },
-          },
-          grid: {
-            color: "rgba(0, 0, 0, 0.05)",
-          },
+      {
+        type: "area",
+        name: "GPA Tích lũy",
+        data: gpaTichLuy,
+        color: "#4caf50",
+        opacity: 0.15,
+        line: {
+          color: "#4caf50",
+          width: 2,
+          style: "smooth",
         },
-        x: {
-          grid: {
-            display: false,
-          },
-          ticks: {
-            font: {
-              size: window.innerWidth < 768 ? 10 : 12,
-            },
-          },
+        markers: {
+          visible: true,
+          size: 8,
+          background: "#4caf50",
+          border: { color: "#fff", width: 2 },
         },
       },
-      interaction: {
-        mode: "index",
-        intersect: false,
+    ],
+    categoryAxis: {
+      categories: labels,
+      majorGridLines: { visible: false },
+      labels: {
+        font: "12px sans-serif",
+      },
+      line: { visible: false },
+    },
+    valueAxis: {
+      min: 3.0,
+      max: 4.0,
+      majorUnit: 0.2,
+      labels: {
+        format: "{0:N1}",
+        font: "12px sans-serif",
+      },
+      majorGridLines: {
+        color: "#f0f0f0",
+        visible: true,
+      },
+    },
+    tooltip: {
+      visible: true,
+      shared: true,
+      background: "white",
+      border: { color: "#3a74f0", width: 1 },
+      sharedTemplate: function (data) {
+        var idx = data.points[0].categoryIx;
+        var sem = academicResultsData[idx];
+        var semLabel = sem
+          ? sem.hocKy + " (" + sem.namHoc + ")"
+          : data.points[0].category;
+        var html =
+          '<div style="padding:6px 10px;background:white;color:#505050;border-radius:8px;font-size:13px;min-width:180px;">';
+        html +=
+          '<div style="font-weight:700;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:4px;">' +
+          semLabel +
+          "</div>";
+        data.points.forEach(function (p) {
+          var v = p.value;
+          var rank =
+            v >= 3.6
+              ? "Xuất sắc"
+              : v >= 3.2
+                ? "Giỏi"
+                : v >= 2.5
+                  ? "Khá"
+                  : v >= 2.0
+                    ? "Trung bình"
+                    : "Yếu";
+          var dot =
+            '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' +
+            p.series.color +
+            ';margin-right:5px;"></span>';
+          html +=
+            '<div style="margin:2px 0;">' +
+            dot +
+            p.series.name +
+            ": <strong>" +
+            v.toFixed(2) +
+            '</strong> <span style="opacity:0.75;font-size:11px;">(' +
+            rank +
+            ")</span></div>";
+        });
+        html += "</div>";
+        return html;
       },
     },
   });
@@ -1333,13 +1324,9 @@ let resizeTimer;
 window.addEventListener("resize", function () {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function () {
-    if (gradeDistChart) {
-      gradeDistChart.destroy();
-      createGradeComparisonChart(currentSelectedSemesterIndex);
-    }
-    if (gpaTrendChart) {
-      gpaTrendChart.destroy();
-      createGpaTrendChart();
-    }
+    var gradeChart = $("#gradeDistChart").data("kendoChart");
+    if (gradeChart) gradeChart.resize(true);
+    var gpaChart = $("#gpaTrendChart").data("kendoChart");
+    if (gpaChart) gpaChart.resize(true);
   }, 250);
 });
